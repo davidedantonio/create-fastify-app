@@ -1,0 +1,34 @@
+{
+  "name": "generator-fastify",
+  "version": "0.1.0",
+  "description": "Fastify's generator application",
+  "main": "generators/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "fastify",
+    "yeoman-generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidedantonio/fastify-generator.git"
+  },
+  "author": "Davide D'Antonio <davide.dantonio@webeetle.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidedantonio/fastify-generator/issues"
+  },
+  "homepage": "https://github.com/davidedantonio/fastify-generator#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "command-exists": "^1.2.8",
+    "commist": "^1.0.0",
+    "inquirer": "^6.2.2",
+    "nodegit": "^0.24.0",
+    "yeoman-generator": "^3.2.0"
+  }
+}
