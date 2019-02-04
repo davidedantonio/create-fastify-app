@@ -23,6 +23,24 @@ module.exports = class extends Generator {
     })
   }
 
+  _beforeInstall (destination) {
+    let packageJson = JSON.parse(fs.readFileSync(path.join(destination, 'package.json'), 'utf8'))
+
+    packageJson = Object.assign(packageJson, {
+      name: this.props.projectName,
+      version: this.props.version,
+      author: `${this.props.author} <${this.props.email}>`,
+      keywords: this.props.keywords ? this.props.keywords.split(',') : []
+    })
+
+    fs.writeFileSync(
+      destination,
+      JSON.stringify(packageJson, null, 2),
+      'utf8'
+    )
+    this.log(`${chalk.green('package.json updated')}`)
+  }
+
   writing () {
     if (!fs.existsSync(this.props.projectDestination)) {
       this.log(`The directory ${chalk.red(this.props.projectDestination)} does not exist!`)
@@ -35,29 +53,11 @@ module.exports = class extends Generator {
       this.destinationPath(destination)
     )
 
+    this._beforeInstall(destination)
     this.destinationRoot(destination)
   }
 
-  beforeInstall () {
-    let packageJson = JSON.parse(fs.readFileSync(path.join(this.templatePath('fastify-template-app'), 'package.json'), 'utf8'))
-
-    packageJson = Object.assign(packageJson, {
-      name: this.props.projectName,
-      version: this.props.version,
-      author: `${this.props.author} <${this.props.email}>`,
-      keywords: this.props.keywords ? this.props.keywords.split(',') : []
-    })
-
-    fs.writeFileSync(
-      path.join(this.templatePath('fastify-template-app'), 'package.json'),
-      JSON.stringify(packageJson, null, 2),
-      'utf8'
-    )
-    this.log(`${chalk.green('package.json updated')}`)
-  }
-
   install () {
-    this.beforeInstall()
     this.npmInstall()
   }
 

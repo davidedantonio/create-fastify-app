@@ -6,10 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "test"
-  ],
-  "author": "davidedantonio <davide.dantonio@webeetle.com>",
+  "keywords": [],
+  "author": "author <author@email.com>",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^6.2.0",
