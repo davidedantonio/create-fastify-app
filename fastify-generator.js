@@ -7,10 +7,15 @@ const app = require('./generators/fastify')
 
 commander
   .version(require('./package.json').version)
-  .command('<project-name>', 'The name of the project to be generated')
-  .parse(process.argv)
+  .command('generate <project>')
+  .description('Generate a new empty Fastify project')
+  .action(function(project) {
+    app.generate(project)
+  })
 
-if (commander.args.length === 0) {
+commander.parse(process.argv)
+
+if (process.argv.length === 2) {
   commander.help()
   process.exit(1)
 }
