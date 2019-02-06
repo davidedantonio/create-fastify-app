@@ -26,6 +26,7 @@
     "commander": "^2.19.0",
     "commist": "^1.0.0",
     "generify": "^3.0.2",
-    "inquirer": "^6.2.2"
+    "inquirer": "^6.2.2",
+    "node-emoji": "^1.8.1"
   }
 }
