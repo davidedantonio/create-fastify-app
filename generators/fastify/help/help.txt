@@ -1,0 +1,4 @@
+Usage: fastify-generator generate:project <project-name>
+
+  -h, --help
+      Show this help message

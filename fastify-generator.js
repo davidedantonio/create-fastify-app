@@ -2,44 +2,16 @@
 
 'use strict'
 
-const commander = require('commander')
-const app = require('./generators/fastify')
-const fs = require('fs')
-const chalk = require('chalk')
+const appGenerator = require('./generators/fastify')
+const serviceGenerator = require('./generators/service')
+const commist = require('commist')()
 
-function stop (err) {
-  if (err) {
-    console.error(chalk.bold.red(err))
-    process.exit(1)
-  }
-  process.exit(0)
-}
+commist.register('generate:project', appGenerator.cli)
+commist.register('generate:service', serviceGenerator.generate)
 
-function cli () {
-  commander
-  .version(require('./package.json').version)
-  .command('generate <project>')
-  .description('Generate a new empty Fastify project')
-  .action(function(project) {
-    if (fs.existsSync(project)) {
-      module.exports.stop('Project folder already exist')
-    }
+const res = commist.parse(process.argv.splice(2))
 
-    app.generate(project, err => {
-      module.exports.stop(err)
-    })
-  })
-
-  commander.parse(process.argv)
-
-  if (process.argv.length === 2) {
-    commander.help()
-    module.exports.stop()
-  }
-}
-
-module.exports = { cli, stop }
-
-if (require.main === module) {
-  cli()
+if (res) {
+  // no command was recognized
+  console.log('mammt')
 }
