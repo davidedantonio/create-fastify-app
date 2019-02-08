@@ -4,7 +4,6 @@
   "description": "Create a ready to use fastify project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "author <author@email.com>",

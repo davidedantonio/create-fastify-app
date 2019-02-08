@@ -12,10 +12,6 @@ Usage: node server.js [opts]
   [env: FASTIFY_ADDRESS]
       Address to listen on
 
-  -s, --socket
-  [env: FASTIFY_SOCKET]
-      Socket to listen on
-
   -l, --log-level
   [env: FASTIFY_LOG_LEVEL]
       Log level (default to fatal)
@@ -27,10 +23,6 @@ Usage: node server.js [opts]
   -o, --options
   [env: FASTIFY_OPTIONS]
       Use custom options
-
-  -w, --watch
-  [env: FASTIFY_WATCH]
-      Watch process.cwd() directory for changes, recursively; when that happens, the process will auto reload.
 
   -r, --prefix
   [env: FASTIFY_PREFIX]

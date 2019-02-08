@@ -64,7 +64,12 @@ async function generate (args, cb) {
       version: answers.version,
       author: `${answers.author} <${answers.email}>`,
       keywords: answers.keywords ? answers.keywords.split(',') : [],
-      license: answers.license
+      license: answers.license,
+      scripts: {
+        'test': 'tap test/**/*.test.js',
+        'start': 'node server.js -l info',
+        'dev': 'node server.js -l info -P'
+      }
     })
 
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))

@@ -5,8 +5,8 @@ const argv = require('yargs-parser')
 module.exports = function parseArgs (args) {
   const parsedArgs = argv(args, {
     number: ['port', 'body-limit', 'plugin-timeout'],
-    boolean: ['pretty-logs', 'options', 'watch'],
-    string: ['log-level', 'address', 'prefix', 'ignore-watch', 'file'],
+    boolean: ['pretty-logs', 'options'],
+    string: ['log-level', 'address', 'prefix', 'file'],
     envPrefix: 'FASTIFY_',
     alias: {
       address: ['a'],
@@ -21,8 +21,6 @@ module.exports = function parseArgs (args) {
     default: {
       'log-level': 'error',
       'pretty-logs': true,
-      'watch': false,
-      'ignore-watch': 'node_modules build dist .gitignore .idea .bower_components logs',
       'options': false,
       'plugin-timeout': 10 * 1000,
       'file': 'app/app.js'
