@@ -83,7 +83,7 @@ function generate (args, cb) {
     let readmeContent = undefined
 
     try {
-      serviceTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', 'service.js'), 'utf8'))
+      serviceTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', 'service.hbs'), 'utf8'))
       serviceContent = serviceTemplate(data)
       readmeTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', 'README.md'), 'utf8'))
       readmeContent = readmeTemplate(data)
