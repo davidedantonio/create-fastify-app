@@ -35,7 +35,7 @@ async function generate (args, cb) {
 
   const prompt = inquirer.createPromptModule()
   const answers = await prompt([
-    { type: 'input', name: 'name', message: 'Application name', default: opts._[0] },
+    { type: 'input', name: 'name', message: 'Application name', default: 'fastify-app' },
     { type: 'input', name: 'author', message: 'Author' },
     { type: 'input', name: 'email', message: 'Email' },
     { type: 'input', name: 'version', message: 'Version', default: '1.0.0' },

@@ -1,6 +1,6 @@
-# Documentation for service {{#if routePrefix}}{{routePrefix}}{{/if}}/{{serviceName}}
+# Documentation for service {{#if autoPrefix}}{{autoPrefix}}{{/if}}/{{serviceName}}
 
 {{#each methods}}
-## {{this}} {{#if routePrefix}}{{routePrefix}}{{/if}}/{{../serviceName}}
+## {{this}} {{#if autoPrefix}}{{autoPrefix}}{{/if}}/{{../serviceName}}
 
 {{/each}}

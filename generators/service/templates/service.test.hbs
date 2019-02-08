@@ -1,0 +1,21 @@
+'use strict'
+
+const { test } = require('tap')
+const { build } = require('../helper')
+
+{{#each methods}}
+test('Test for {{this}} {{#if ../autoPrefix}}{{../autoPrefix}}{{/if}}/{{../serviceName}}', async (t) => {
+  t.plan(2)
+  const app = build(t)
+
+  const res = await app.inject({
+    method: '{{this}}',
+    url: '{{#if ../autoPrefix}}{{../autoPrefix}}{{/if}}/{{../serviceName}}'
+  })
+
+  t.deepEqual(JSON.parse(res.payload), { data: '{{this}} ok!' })
+  t.equal(res.statusCode, 200)
+})
+
+{{/each}}
+

@@ -18,6 +18,11 @@ function showHelp () {
   module.exports.stop()
 }
 
+function createTemplate (template, data) {
+  const serviceTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', template), 'utf8'))
+  return serviceTemplate(data)
+}
+
 function generate (args, cb) {
   let opts = parseArgs(args)
   if (opts.help) {
@@ -70,36 +75,34 @@ function generate (args, cb) {
           return true;
         }
       },
-      { type: 'input', name: 'routePrefix', message: 'Route Prefix', default: '/api' }
+      { type: 'input', name: 'autoPrefix', message: 'Route Prefix', default: '/api' }
     ])
 
     let data = Object.assign(answers, {
       serviceName: serviceName
     })
 
-    let serviceTemplate = undefined
-    let serviceContent = undefined
-    let readmeTemplate = undefined
-    let readmeContent = undefined
+    const servicesPath = path.join(dir, 'app', 'services')
+    const testPath = path.join(dir, 'test', 'services')
+    fs.mkdirSync(path.join(servicesPath, serviceName))
 
     try {
-      serviceTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', 'service.hbs'), 'utf8'))
-      serviceContent = serviceTemplate(data)
-      readmeTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', 'README.md'), 'utf8'))
-      readmeContent = readmeTemplate(data)
+      let content = createTemplate('service.hbs', data)
+      fs.writeFileSync(path.join(servicesPath, serviceName, 'index.js'), content, 'utf8')
+      log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'index.js'))} generated successfully with ${data.methods.join(', ')} methods`)
+
+      content = createTemplate('README.md', data)
+      fs.writeFileSync(path.join(servicesPath, serviceName, 'README.md'), content, 'utf8')
+      log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'README.md'))} generated successfully`)
+
+      content = createTemplate('service.test.hbs', data)
+      fs.writeFileSync(path.join(testPath, `${serviceName}.test.js`), content, 'utf8')
+      log('success', `File ${chalk.bold(path.join(testPath, `${serviceName}.test.js`))} generated successfully`)
     } catch (err) {
       cb(err)
     }
 
-    const servicesPath = path.join(dir, 'app', 'services')
-
-    fs.mkdirSync(path.join(servicesPath, serviceName))
-    fs.writeFileSync(path.join(servicesPath, serviceName, 'index.js'), serviceContent, 'utf8')
-    fs.writeFileSync(path.join(servicesPath, serviceName, 'README.md'), readmeContent, 'utf8')
-
-    log('success', `Folder ${chalk.bold(path.join(servicesPath, serviceName))} created successfully`)
-    log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'index.js'))} generated successfully with ${data.methods.join(', ')} methods`)
-    log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'README.md'))} generated successfully`)
+    log('success', `Service ${chalk.bold(serviceName)} generated successfully`)
     cb()
   })
 }
@@ -108,7 +111,7 @@ function cli (args) {
   generate(args, module.exports.stop)
 }
 
-module.exports = { cli, stop }
+module.exports = { cli, stop, generate }
 
 if (require.main === module) {
   cli(process.argv.slice(2))
