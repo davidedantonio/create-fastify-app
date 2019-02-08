@@ -3,24 +3,17 @@
 'use strict'
 
 const fs = require('fs')
-const log = require('./../../log')
+const log = require('../../lib/log')
 const path = require('path')
 const generify = require('generify')
 const inquirer = require('inquirer')
 const { execSync } = require('child_process')
 const chalk = require('chalk')
 const parseArgs = require('./args')
-
-function stop (err) {
-  if (err) {
-    log('error', err)
-    process.exit(1)
-  }
-  process.exit(0)
-}
+const stop = require('../../lib/utils').stop
 
 function showHelp () {
-  log('info', fs.readFileSync(path.join(__dirname, 'help', 'help.txt'), 'utf8'))
+  log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8'))
   return module.exports.stop()
 }
 
@@ -75,7 +68,7 @@ async function generate (args, cb) {
     })
 
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
-    execSync('npm install', {stdio: 'inherit'})
+    execSync('npm install', { stdio: 'inherit' })
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)

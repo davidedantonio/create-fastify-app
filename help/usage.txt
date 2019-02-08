@@ -1,0 +1,7 @@
+Generate Fastify projects and utilities:
+
+  fastify-generator [command] <name>
+
+Command
+  generate:project              Generate a ready to use Fastify project
+  generate:service              Generate a new Service in a Fastify project

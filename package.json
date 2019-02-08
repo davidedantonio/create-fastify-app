@@ -25,7 +25,9 @@
     "command-exists": "^1.2.8",
     "commist": "^1.0.0",
     "generify": "^3.0.2",
+    "handlebars": "^4.1.0",
     "inquirer": "^6.2.2",
+    "lodash": "^4.17.11",
     "yargs-parser": "^13.0.0"
   }
 }
