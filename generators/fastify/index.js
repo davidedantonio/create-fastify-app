@@ -36,6 +36,7 @@ async function generate (args, cb) {
   const prompt = inquirer.createPromptModule()
   const answers = await prompt([
     { type: 'input', name: 'name', message: 'Application name', default: 'fastify-app' },
+    { type: 'input', name: 'description', message: 'Description', default: 'A beautiful fastify app' },
     { type: 'input', name: 'author', message: 'Author' },
     { type: 'input', name: 'email', message: 'Email' },
     { type: 'input', name: 'version', message: 'Version', default: '1.0.0' },
@@ -51,7 +52,7 @@ async function generate (args, cb) {
     }
 
     process.chdir(opts._[0])
-    let pkg = fs.readFileSync('package.json','utf8')
+    let pkg = fs.readFileSync('package.json', 'utf8')
 
     try {
       pkg = JSON.parse(pkg)
@@ -61,13 +62,14 @@ async function generate (args, cb) {
 
     Object.assign(pkg, {
       name: answers.name,
+      description: answers.description,
       version: answers.version,
       author: `${answers.author} <${answers.email}>`,
       keywords: answers.keywords ? answers.keywords.split(',') : [],
       license: answers.license,
       scripts: {
         'test': 'tap test/**/*.test.js',
-        'start': 'node server.js -l info',
+        'start': 'node server.js',
         'dev': 'node server.js -l info -P'
       }
     })
@@ -83,11 +85,11 @@ async function generate (args, cb) {
   })
 }
 
-function cli(args) {
+function cli (args) {
   generate(args, module.exports.stop)
 }
 
-module.exports = { cli, stop }
+module.exports = { cli, stop, generate }
 
 if (require.main === module) {
   cli(process.argv.slice(2))

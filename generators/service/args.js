@@ -7,7 +7,7 @@ module.exports = function parseArgs (args) {
     string: ['directory'],
     alias: {
       help: ['h'],
-      directory: ['d'],
+      directory: ['d']
     }
   })
 

@@ -39,7 +39,7 @@ function start (args, cb) {
   let opts = parseArgs(args)
 
   if (!fs.existsSync(opts.file)) {
-    console.error("Missing the required file app.js\n")
+    console.error('Missing the required file app.js\n')
     return showHelp()
   }
 

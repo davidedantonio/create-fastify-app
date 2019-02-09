@@ -4,7 +4,9 @@
   "description": "Fastify's generator application",
   "main": "fastify-generator.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard",
+    "unit": "tap test/*.test.js",
+    "test": "npm run lint && npm run unit"
   },
   "keywords": [
     "fastify",
@@ -29,5 +31,13 @@
     "inquirer": "^6.2.2",
     "lodash": "^4.17.11",
     "yargs-parser": "^13.0.0"
+  },
+  "devDependencies": {
+    "concat-stream": "^2.0.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.3",
+    "standard": "^12.0.1",
+    "tap": "^12.5.2",
+    "walker": "^1.0.7"
   }
 }

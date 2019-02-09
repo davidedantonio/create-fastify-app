@@ -1,0 +1,7 @@
+module.exports.APPLICATION_NAME = 'my-beautiful-app'
+module.exports.APPLICATION_DESCRIPTION = 'Application description'
+module.exports.APPLICATION_AUTHOR = 'Davide D\'Antonio'
+module.exports.APPLICATION_EMAIL = 'davide.dantonio@webeetle.com'
+module.exports.APPLICATION_VERSION = '0.1.0'
+module.exports.APPLICATION_KEYWORDS = 'fastify,webeetle'
+module.exports.APPLICATION_LICENSE = 'MIT'
