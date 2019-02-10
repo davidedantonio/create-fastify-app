@@ -1,0 +1,16 @@
+'use strict'
+
+const fp = require('fastify-plugin')
+const swagger = require('fastify-swagger')
+
+module.exports = fp(async (fastify, opts) => {
+  const swaggerOptions = Object.assign ({}, {
+    routePrefix: '/documentation',
+    swagger: {
+      {{#each @root}}{{#ifInMainInfo @key}}{{@key}}:{{{json this}}},{{/ifInMainInfo}}{{/each}}
+    },
+    exposeRoute: true
+  }, opts.swagger)
+
+  fastify.register(swagger, swaggerOptions)
+})

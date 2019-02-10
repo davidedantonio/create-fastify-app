@@ -11,6 +11,7 @@ const { execSync } = require('child_process')
 const chalk = require('chalk')
 const parseArgs = require('./args')
 const stop = require('../../lib/utils').stop
+const generateServices = require('./generator')
 
 function showHelp () {
   log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8'))
@@ -35,18 +36,19 @@ async function generate (args, cb) {
 
   const prompt = inquirer.createPromptModule()
   const answers = await prompt([
-    { type: 'input', name: 'name', message: 'Application name', default: 'fastify-app' },
-    { type: 'input', name: 'description', message: 'Description', default: 'A beautiful fastify app' },
-    { type: 'input', name: 'author', message: 'Author' },
-    { type: 'input', name: 'email', message: 'Email' },
-    { type: 'input', name: 'version', message: 'Version', default: '1.0.0' },
-    { type: 'input', name: 'keywords', message: 'Keywords', default: 'fastify,nodejs' },
-    { type: 'input', name: 'license', message: 'License', default: 'MIT' }
+    { type: 'input', name: 'name', message: 'Application name: ', default: 'fastify-app' },
+    { type: 'input', name: 'description', message: 'Description: ', default: 'A beautiful fastify app' },
+    { type: 'input', name: 'author', message: 'Author: ' },
+    { type: 'input', name: 'email', message: 'Email: ' },
+    { type: 'input', name: 'version', message: 'Version: ', default: '1.0.0' },
+    { type: 'input', name: 'keywords', message: 'Keywords: ', default: 'fastify,nodejs' },
+    { type: 'input', name: 'license', message: 'License: ', default: 'MIT' },
+    { type: 'input', name: 'swagger', message: 'Swagger File: ' }
   ])
 
   generify(path.join(__dirname, 'templates', 'fastify-template-app'), opts._[0], {}, function (file) {
     log('debug', `generated ${file}`)
-  }, function (err) {
+  }, async function (err) {
     if (err) {
       return cb(err)
     }
@@ -73,6 +75,20 @@ async function generate (args, cb) {
         'dev': 'node server.js -l info -P'
       }
     })
+
+    if (answers.swagger) {
+      Object.assign(pkg.dependencies, {
+        'fastify-swagger': '^2.3.0'
+      })
+
+      try {
+        await generateServices(answers.swagger, opts._[0])
+      } catch (err) {
+        module.exports.stop(err)
+      }
+
+      process.exit(1)
+    }
 
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
     execSync('npm install', { stdio: 'inherit' })
