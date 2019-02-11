@@ -14,7 +14,7 @@ function createTemplate (template, data) {
 
 async function generatePlugin (filePath, projectFolder)  {
   let fileContent = await swagger(path.resolve(__dirname, filePath))
-  let content = createTemplate('plugins/swagger.hbs', fileContent)
+  let content = createTemplate(path.join('plugins', 'swagger.hbs'), fileContent)
   fs.writeFileSync(path.join(projectFolder, 'app', 'plugins', 'swagger.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
 }
 
@@ -30,13 +30,19 @@ async function generateServices (filePath, projectFolder) {
 
     let realPathName = pathName.replace(/}/g, '').replace(/{/g, ':')
     files[endpointName].push({
-      endpointName: realPathName,
+      endpointName: (realPathName.substring(endpointName.length+1) || '/').replace(/}/g, '').replace(/{/g, ':'),
       path: fileContent.paths[pathName]
     })
   }
 
-  for (let endpointName in files) {
+  const servicesPath = path.join(projectFolder, 'app', 'services')
+  const testPath = path.join(projectFolder, 'test', 'services')
 
+  for (let prefix in files) {
+    let content = createTemplate(path.join('services', 'service.hbs'), { prefix: prefix, data: files[prefix] })
+
+    fs.mkdirSync(path.join(servicesPath, prefix))
+    fs.writeFileSync(path.join(servicesPath, prefix, `${prefix}.js`), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
   }
 }
 

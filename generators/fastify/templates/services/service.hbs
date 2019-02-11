@@ -1,0 +1,16 @@
+'use strict'
+
+module.exports = async function(fastify, opts) {
+
+{{#each data}}
+  {{#each this.path as |value key|}}
+    {{#validMethod key}}
+  fastify.{{key}}('{{../../endpointName}}', {{{json value}}}, async function (request, reply) {
+  })
+
+    {{/validMethod}}
+  {{/each}}
+{{/each}}
+}
+
+module.exports.autoPrefix = '/{{prefix}}'
