@@ -5,6 +5,7 @@ const Handlebars = require('../../lib/handlebars')
 const path = require('path')
 const fs = require('fs')
 const beautify = require('js-beautify').js
+const _ = require('lodash')
 
 function createTemplate (template, data) {
   const generateTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', template), 'utf8'))
@@ -18,7 +19,25 @@ async function generatePlugin (filePath, projectFolder)  {
 }
 
 async function generateServices (filePath, projectFolder) {
+  let fileContent = await swagger(path.resolve(__dirname, filePath))
+  const files = {};
 
+  for (let pathName in fileContent.paths) {
+    let endpointName = fileContent.paths[pathName].endpointName
+    if (files[endpointName] === undefined) {
+      files[endpointName] = []
+    }
+
+    let realPathName = pathName.replace(/}/g, '').replace(/{/g, ':')
+    files[endpointName].push({
+      endpointName: realPathName,
+      path: fileContent.paths[pathName]
+    })
+  }
+
+  for (let endpointName in files) {
+
+  }
 }
 
 module.exports = { generatePlugin, generateServices }

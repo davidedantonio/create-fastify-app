@@ -82,8 +82,9 @@ async function generate (args, cb) {
       })
 
       try {
-        await generatePlugin(answers.swagger, opts._[0])
+        //await generatePlugin(answers.swagger, opts._[0])
         await generateServices(answers.swagger, opts._[0])
+        process.exit(1)
       } catch (err) {
         module.exports.stop(err)
       }
