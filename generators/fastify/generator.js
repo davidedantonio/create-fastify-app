@@ -11,10 +11,14 @@ function createTemplate (template, data) {
   return generateTemplate(data)
 }
 
-async function generate(filePath, projectFolder)  {
+async function generatePlugin (filePath, projectFolder)  {
   let fileContent = await swagger(path.resolve(__dirname, filePath))
   let content = createTemplate('plugins/swagger.hbs', fileContent)
   fs.writeFileSync(path.join(projectFolder, 'app', 'plugins', 'swagger.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
 }
 
-module.exports = generate
+async function generateServices (filePath, projectFolder) {
+
+}
+
+module.exports = { generatePlugin, generateServices }
