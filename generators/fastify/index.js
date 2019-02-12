@@ -46,7 +46,7 @@ async function generate (args, cb) {
     { type: 'input', name: 'swagger', message: 'Swagger File: ' }
   ])
 
-  generify(path.join(__dirname, 'templates', 'fastify-template-app'), opts._[0], {}, function (file) {
+  generify(path.join(__dirname, 'templates', 'fastify-app'), opts._[0], {}, function (file) {
     log('debug', `generated ${file}`)
   }, async function (err) {
     if (err) {
