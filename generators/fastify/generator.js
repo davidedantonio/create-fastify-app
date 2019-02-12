@@ -42,7 +42,7 @@ async function generateServices (filePath, projectFolder) {
     let content = createTemplate(path.join('services', 'service.hbs'), { prefix: prefix, data: files[prefix] })
 
     fs.mkdirSync(path.join(servicesPath, prefix))
-    fs.writeFileSync(path.join(servicesPath, prefix, `${prefix}.js`), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
+    fs.writeFileSync(path.join(servicesPath, prefix, 'index.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
   }
 }
 

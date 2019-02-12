@@ -87,8 +87,6 @@ async function generate (args, cb) {
       } catch (err) {
         module.exports.stop(err)
       }
-
-      process.exit(1)
     }
 
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
