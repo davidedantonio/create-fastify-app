@@ -1,0 +1,8 @@
+{{#each data}}
+  {{#each this.path as |value key|}}
+    {{#validMethod key}}
+module.exports.{{camelCase (concat key ../../endpointName)}} = {{{json value}}}
+
+    {{/validMethod}}
+  {{/each}}
+{{/each}}

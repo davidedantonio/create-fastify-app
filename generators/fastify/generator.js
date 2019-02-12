@@ -39,10 +39,12 @@ async function generateServices (filePath, projectFolder) {
   const testPath = path.join(projectFolder, 'test', 'services')
 
   for (let prefix in files) {
-    let content = createTemplate(path.join('services', 'service.hbs'), { prefix: prefix, data: files[prefix] })
+    let serviceContent = createTemplate(path.join('services', 'service.hbs'), { prefix: prefix, data: files[prefix] })
+    let schemaContent = createTemplate(path.join('services', 'schema.hbs'), { prefix: prefix, data: files[prefix] })
 
     fs.mkdirSync(path.join(servicesPath, prefix))
-    fs.writeFileSync(path.join(servicesPath, prefix, 'index.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
+    fs.writeFileSync(path.join(servicesPath, prefix, 'routes.schema.js'), beautify(schemaContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
+    fs.writeFileSync(path.join(servicesPath, prefix, 'index.js'), beautify(serviceContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
   }
 }
 
