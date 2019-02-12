@@ -4,7 +4,7 @@
   "description": "Fastify's generator application",
   "main": "fastify-generator.js",
   "scripts": {
-    "lint": "standard",
+    "lint": "standard --verbose",
     "unit": "tap test/*.test.js",
     "test": "npm run lint && npm run unit"
   },
