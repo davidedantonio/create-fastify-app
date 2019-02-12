@@ -5,7 +5,7 @@ module.exports = async function(fastify, opts) {
 {{#each data}}
   {{#each this.path as |value key|}}
     {{#validMethod key}}
-  fastify.{{key}}('{{../../endpointName}}', {{{json value}}}, async function (request, reply) {
+  fastify.{{key}}('{{../../endpointName}}', { schema: {{{json value}}} }, async function (request, reply) {
   })
 
     {{/validMethod}}
