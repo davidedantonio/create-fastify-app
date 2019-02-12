@@ -33,7 +33,6 @@
     "js-yaml": "^3.12.1",
     "json-schema-ref-parser": "^4.0.4",
     "lodash": "^4.17.11",
-    "word-wrap": "^1.2.3",
     "yargs-parser": "^13.0.0"
   },
   "devDependencies": {
