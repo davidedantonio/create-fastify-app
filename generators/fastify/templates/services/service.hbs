@@ -1,6 +1,6 @@
 'use strict'
 
-const schema = require('./schema')
+const schema = require('./routes.schema')
 
 module.exports = async function(fastify, opts) {
 
@@ -8,6 +8,11 @@ module.exports = async function(fastify, opts) {
   {{#each this.path as |value key|}}
     {{#validMethod key}}
   fastify.{{key}}('{{../../endpointName}}', { schema: schema.{{camelCase (concat key ../../endpointName)}} }, async function (request, reply) {
+    {{#checkSuccessResponses ../responses}}
+    return reply
+      .code({{code}})
+      .send('{{data}}')
+    {{/checkSuccessResponses}}
   })
 
     {{/validMethod}}
