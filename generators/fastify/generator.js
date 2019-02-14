@@ -35,9 +35,10 @@ async function generateServices (filePath, projectFolder) {
   }
 
   const servicesPath = path.join(projectFolder, 'app', 'services')
+  const basePath = fileContent.basePath || 'api'
 
   for (let prefix in files) {
-    let serviceContent = createTemplate(path.join('services', 'service.hbs'), { prefix: prefix, data: files[prefix] })
+    let serviceContent = createTemplate(path.join('services', 'service.hbs'), { basePath: basePath, prefix: prefix, data: files[prefix] })
     let schemaContent = createTemplate(path.join('services', 'schema.hbs'), { prefix: prefix, data: files[prefix] })
 
     fs.mkdirSync(path.join(servicesPath, prefix))

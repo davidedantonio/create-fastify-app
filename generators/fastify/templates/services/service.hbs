@@ -8,11 +8,19 @@ module.exports = async function(fastify, opts) {
   {{#each this.path as |value key|}}
     {{#validMethod key}}
   fastify.{{key}}('{{../../endpointName}}', { schema: schema.{{camelCase (concat key ../../endpointName)}} }, async function (request, reply) {
+    try {
     {{#checkSuccessResponses ../responses}}
-    return reply
-      .code({{code}})
-      .send('{{data}}')
+      return reply
+        .code({{code}})
+        .send('{{data}}')
     {{/checkSuccessResponses}}
+    } catch (e) {
+    {{#checkErrorResponses ../responses}}
+      return reply
+        .code({{code}})
+        .send('{{data}}')
+    {{/checkErrorResponses}}
+    }
   })
 
     {{/validMethod}}
@@ -20,4 +28,4 @@ module.exports = async function(fastify, opts) {
 {{/each}}
 }
 
-module.exports.autoPrefix = '/{{prefix}}'
+module.exports.autoPrefix = '{{basePath}}/{{prefix}}'
