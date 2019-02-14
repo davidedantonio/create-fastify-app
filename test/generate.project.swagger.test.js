@@ -6,7 +6,7 @@ const walker = require('walker')
 const { readFileSync, readFile } = require('fs')
 const appTemplateDir = path.join(__dirname, '..', 'generators', 'fastify', 'templates', 'fastify-app')
 const expected = {}
-const workdir = path.join(__dirname, 'workdir')
+const workdir = path.join(__dirname, 'workdirSwagger')
 const { exec } = require('child_process')
 const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
@@ -19,7 +19,7 @@ const {
   APPLICATION_VERSION,
   APPLICATION_KEYWORDS,
   APPLICATION_LICENSE,
-  SWAGGER_FILE_EMPTY
+  SWAGGER_FILE
 } = require('./helpers/constants')
 
 ;(function (cb) {
@@ -64,16 +64,16 @@ function define (t) {
   test('errors if project folder already exist', (t) => {
     t.plan(2)
 
-    exec('node fastify-generator.js generate:project ./test/workdir', (err, stdout) => {
+    exec('node fastify-generator.js generate:project ./test/workdirSwagger', (err, stdout) => {
       t.error(err)
       t.is('Project folder already exist', stdout.toString().trim())
     })
   })
 
-  test('should create project succesfully', async (t) => {
+  test('should create project succesfully swagger', async (t) => {
     rimraf(workdir, _ => {})
     await run(
-      ['fastify-generator.js', 'generate:project', './test/workdir'],
+      ['fastify-generator.js', 'generate:project', './test/workdirSwagger'],
       [
         `${APPLICATION_NAME}${ENTER}`,
         `${APPLICATION_DESCRIPTION}${ENTER}`,
@@ -82,7 +82,7 @@ function define (t) {
         `${APPLICATION_VERSION}${ENTER}`,
         `${APPLICATION_KEYWORDS}${ENTER}`,
         `${APPLICATION_LICENSE}${ENTER}`,
-        `${SWAGGER_FILE_EMPTY}${ENTER}`
+        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`
       ]
     )
 
