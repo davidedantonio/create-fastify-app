@@ -19,7 +19,8 @@ const {
   APPLICATION_VERSION,
   APPLICATION_KEYWORDS,
   APPLICATION_LICENSE,
-  SWAGGER_FILE_EMPTY
+  SWAGGER_FILE_EMPTY,
+  SWAGGER_FILE
 } = require('./helpers/constants')
 
 ;(function (cb) {
@@ -83,6 +84,25 @@ function define (t) {
         `${APPLICATION_KEYWORDS}${ENTER}`,
         `${APPLICATION_LICENSE}${ENTER}`,
         `${SWAGGER_FILE_EMPTY}${ENTER}`
+      ]
+    )
+
+    verifyPkgJson(t)
+  })
+
+  test('should create project succesfully swagger', async (t) => {
+    rimraf(workdir, _ => {})
+    await run(
+      ['fastify-generator.js', 'generate:project', './test/workdir'],
+      [
+        `${APPLICATION_NAME}${ENTER}`,
+        `${APPLICATION_DESCRIPTION}${ENTER}`,
+        `${APPLICATION_AUTHOR}${ENTER}`,
+        `${APPLICATION_EMAIL}${ENTER}`,
+        `${APPLICATION_VERSION}${ENTER}`,
+        `${APPLICATION_KEYWORDS}${ENTER}`,
+        `${APPLICATION_LICENSE}${ENTER}`,
+        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`
       ]
     )
 

@@ -10,7 +10,7 @@ const inquirer = require('inquirer')
 const { execSync } = require('child_process')
 const chalk = require('chalk')
 const parseArgs = require('./args')
-const stop = require('../../lib/utils').stop
+const { stop, getAbsolutePath } = require('../../lib/utils')
 const { generateServices, generatePlugin } = require('./generator')
 
 function showHelp () {
@@ -82,8 +82,11 @@ async function generate (args, cb) {
       })
 
       try {
-        await generatePlugin(answers.swagger, opts._[0])
-        await generateServices(answers.swagger, opts._[0])
+        let swaggerPath = getAbsolutePath(answers.swagger)
+        let projectPath = getAbsolutePath(opts._[0])
+
+        await generatePlugin(swaggerPath, projectPath)
+        await generateServices(swaggerPath, projectPath)
       } catch (err) {
         module.exports.stop(err)
       }
