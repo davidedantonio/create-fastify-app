@@ -21,17 +21,12 @@ async function generateServices (filePath, projectFolder) {
   let fileContent = await swagger(filePath)
   const files = {}
 
-  for (let pathName in fileContent.paths) {
-    let endpointName = fileContent.paths[pathName].endpointName
-    if (files[endpointName] === undefined) {
-      files[endpointName] = []
+  for (let i in fileContent.routes) {
+    let prefix = fileContent.routes[i].routePrefix
+    if (files[prefix] === undefined) {
+      files[prefix] = []
     }
-
-    let realPathName = pathName.replace(/}/g, '').replace(/{/g, ':')
-    files[endpointName].push({
-      endpointName: (realPathName.substring(endpointName.length + 1) || '/').replace(/}/g, '').replace(/{/g, ':'),
-      path: fileContent.paths[pathName]
-    })
+    files[prefix].push(fileContent.routes[i])
   }
 
   const servicesPath = path.join(projectFolder, 'app', 'services')

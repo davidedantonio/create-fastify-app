@@ -7,13 +7,13 @@ module.exports = fp(async (fastify, opts) => {
   const swaggerOptions = Object.assign ({}, {
     routePrefix: '/documentation',
     swagger: {
-      info: {{{json info}}},
-      host: {{{json host}}},
-      tags: {{{json tags}}},
-      schemes: {{{json schemes}}},
-      securityDefinitions: {{{json securityDefinitions}}},
-      externalDocs: {{{json externalDocs}}},
-      endpoints: {{{json endpoints}}}
+      info: {{{json generic.info}}},
+      host: {{{json generic.host}}},
+      tags: {{{json generic.tags}}},
+      schemes: {{{json generic.schemes}}},
+      securityDefinitions: {{{json generic.securityDefinitions}}},
+      externalDocs: {{{json generic.externalDocs}}},
+      endpoints: {{{json generic.endpoints}}}
     },
     exposeRoute: true
   }, opts.swagger)
