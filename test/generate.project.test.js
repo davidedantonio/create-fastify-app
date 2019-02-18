@@ -3,7 +3,8 @@
 const t = require('tap')
 const path = require('path')
 const walker = require('walker')
-const { readFileSync, readFile } = require('fs')
+const { build } = require('./helpers')
+const { readFileSync, readFile, existsSync } = require('fs')
 const appTemplateDir = path.join(__dirname, '..', 'generators', 'fastify', 'templates', 'fastify-app')
 const expected = {}
 const workdir = path.join(__dirname, 'workdir')
@@ -88,6 +89,8 @@ function define (t) {
     )
 
     verifyPkgJson(t)
+    verifyProjectFolder(t)
+    await checkHelloWorld(t)
   })
 
   test('should create project succesfully swagger', async (t) => {
@@ -108,6 +111,26 @@ function define (t) {
 
     verifyPkgJson(t)
   })
+
+  async function checkHelloWorld (t) {
+    const app = build(t)
+
+    const res = await app.inject({
+      url: '/hello'
+    })
+    t.equal(res.payload, 'hello, world!')
+  }
+
+  function verifyProjectFolder (t) {
+    t.ok(existsSync(path.join(workdir, 'app')))
+    t.ok(existsSync(path.join(workdir, 'app', 'plugins')))
+    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'support.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services')))
+    t.ok(existsSync(path.join(workdir, 'app', 'app.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'root.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello', 'index.js')))
+  }
 
   function verifyPkgJson (t) {
     const pkgFile = readFileSync(path.join(workdir, 'package.json'), 'utf8')
