@@ -5,17 +5,16 @@ const schema = require('./routes.schema')
 module.exports = async function(fastify, opts) {
 
 {{#each data}}
-  {{#each this.path as |value key|}}
-    {{#validMethod key}}
-  fastify.{{key}}('{{../../endpointName}}', { schema: schema.{{camelCase (concat key ../../endpointName)}} }, async function (request, reply) {
+  {{#validMethod this.method}}
+  fastify.{{toLowerCase ../method}}('{{../url}}', { schema: schema.{{../operationId}} }, async function (request, reply) {
     try {
-    {{#checkSuccessResponses ../responses}}
+    {{#checkSuccessResponses ../schema.response}}
       return reply
         .code({{code}})
         .send('{{data}}')
     {{/checkSuccessResponses}}
     } catch (e) {
-    {{#checkErrorResponses ../responses}}
+    {{#checkErrorResponses ../schema.response}}
       return reply
         .code({{code}})
         .send('{{data}}')
@@ -23,8 +22,7 @@ module.exports = async function(fastify, opts) {
     }
   })
 
-    {{/validMethod}}
-  {{/each}}
+  {{/validMethod}}
 {{/each}}
 }
 
