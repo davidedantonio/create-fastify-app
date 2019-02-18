@@ -95,8 +95,9 @@ async function generate (args, cb) {
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
-    log('success', `dependencies installed successfully`)
-    log('success', `run 'cd ${chalk.bold(opts._[0])}' and '${chalk.bold('node server.js')}' to start the application`)
+    log('success', `run 'cd ${chalk.bold(opts._[0])}'`)
+    log('success', `run '${chalk.bold('npm install')}'`)
+    log('success', `run '${chalk.bold('node server.js')}' to start the application`)
     cb()
   })
 }
