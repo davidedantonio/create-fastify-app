@@ -7,7 +7,6 @@ const log = require('../../lib/log')
 const path = require('path')
 const generify = require('generify')
 const inquirer = require('inquirer')
-const { execSync } = require('child_process')
 const chalk = require('chalk')
 const parseArgs = require('./args')
 const { stop, getAbsolutePath } = require('../../lib/utils')
@@ -93,7 +92,6 @@ async function generate (args, cb) {
     }
 
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
-    execSync('npm install', { stdio: 'inherit' })
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
