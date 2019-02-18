@@ -1,6 +1,6 @@
 {{#each data}}
   {{#validMethod this.method}}
-module.exports.{{camelCase (concat ../method ../operationId)}} = {{{json ../schema}}}
+module.exports.{{../operationId}} = {{{json ../schema}}}
 
   {{/validMethod}}
 {{/each}}
