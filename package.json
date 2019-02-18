@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "concat-stream": "^2.0.0",
+    "fastify-autoload": "^0.6.0",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.3",
     "standard": "^12.0.1",
