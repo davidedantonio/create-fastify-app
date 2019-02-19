@@ -91,18 +91,22 @@ async function generate (args, cb) {
       }
     }
 
+    fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
+
     const other = await prompt([{
       type: 'checkbox',
       name: 'methods',
       message: 'Add other plugin to your application',
       choices: [
+        { name: 'CORS' },
         { name: 'MongoDB' },
         { name: 'NextJS' },
-        { name: 'NATS' }
+        { name: 'NATS' },
+        { name: 'Point-Of-View' },
+        { name: 'Redis' },
+        { name: 'Static' }
       ]
     }])
-
-    fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
