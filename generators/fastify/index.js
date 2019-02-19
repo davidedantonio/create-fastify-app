@@ -91,6 +91,17 @@ async function generate (args, cb) {
       }
     }
 
+    const other = await prompt([{
+      type: 'checkbox',
+      name: 'methods',
+      message: 'Add other plugin to your application',
+      choices: [
+        { name: 'MongoDB' },
+        { name: 'NextJS' },
+        { name: 'NATS' }
+      ]
+    }])
+
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
