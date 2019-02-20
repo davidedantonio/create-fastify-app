@@ -2,16 +2,18 @@
 
 'use strict'
 
-const { stop } = require('../../lib/utils')
-const parseArgs = require('./args')
 const log = require('../../lib/log')
 const fs = require('fs')
 const path = require('path')
-const { isValidFastifyProject } = require('../../lib/utils')
 const inquirer = require('inquirer')
 const Handlebars = require('./../../lib/handlebars')
 const _ = require('lodash')
 const chalk = require('chalk')
+const {
+  stop,
+  parseArgs,
+  isValidFastifyProject
+} = require('../../lib/utils')
 
 function showHelp () {
   log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'service.txt'), 'utf8'))
@@ -100,7 +102,7 @@ function generate (args, cb) {
       fs.writeFileSync(path.join(testPath, `${serviceName}.test.js`), content, 'utf8')
       log('success', `File ${chalk.bold(path.join(testPath, `${serviceName}.test.js`))} generated successfully`)
     } catch (err) {
-      cb(err)
+      return cb(err)
     }
 
     log('success', `Service ${chalk.bold(serviceName)} generated successfully`)
