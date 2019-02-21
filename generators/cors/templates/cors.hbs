@@ -1,0 +1,13 @@
+'use strict'
+
+const fp = require('fastify-plugin')
+const cors = require('fastify-cors')
+
+module.exports = fp(async (fastify, opts) => {
+  const corsOpts = Object.assign ({}, {
+    origin: true,
+    methods: [{{{transformToArray @root}}}]
+  }, opts.cors)
+
+  fastify.register(cors, corsOpts)
+})
