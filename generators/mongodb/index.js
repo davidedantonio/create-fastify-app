@@ -5,7 +5,6 @@
 const fs = require('fs')
 const log = require('../../lib/log')
 const path = require('path')
-const generify = require('generify')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const { generatePlugin } = require('./generator')
@@ -23,11 +22,6 @@ function showHelp () {
 async function generate (args, cb) {
   let opts = parseArgs(args)
   if (opts.help) {
-    return showHelp()
-  }
-
-  if (opts._.length !== 1) {
-    log('error', 'Missing required <project-name> parameter\n')
     return showHelp()
   }
 

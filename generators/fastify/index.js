@@ -9,8 +9,9 @@ const generify = require('generify')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const parseArgs = require('./args')
-const { stop, getAbsolutePath } = require('../../lib/utils')
+const { stop, getAbsolutePath, readPkg, writePkg } = require('../../lib/utils')
 const { generateServices, generatePlugin } = require('./generator')
+const dependencies = require('./../../lib/dependencies')
 
 function showHelp () {
   log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8'))
@@ -51,14 +52,14 @@ async function generate (args, cb) {
     if (err) {
       return cb(err)
     }
-
-    process.chdir(opts._[0])
-    let pkg = fs.readFileSync('package.json', 'utf8')
+    let swaggerPath = getAbsolutePath(answers.swagger)
+    let projectPath = getAbsolutePath(opts._[0])
+    let pkg
 
     try {
-      pkg = JSON.parse(pkg)
+      pkg = readPkg(projectPath)
     } catch (err) {
-      cb(err)
+      return cb(err)
     }
 
     Object.assign(pkg, {
@@ -77,21 +78,17 @@ async function generate (args, cb) {
 
     if (answers.swagger) {
       Object.assign(pkg.dependencies, {
-        'fastify-swagger': '^2.3.0'
+        'fastify-swagger': dependencies['fastify-swagger']
       })
 
       try {
-        let swaggerPath = getAbsolutePath(answers.swagger)
-        let projectPath = getAbsolutePath(opts._[0])
-
         await generatePlugin(swaggerPath, projectPath)
         await generateServices(swaggerPath, projectPath)
+        writePkg(projectPath, pkg)
       } catch (err) {
-        module.exports.stop(err)
+        return cb(err)
       }
     }
-
-    fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2))
 
     const other = await prompt([{
       type: 'checkbox',
