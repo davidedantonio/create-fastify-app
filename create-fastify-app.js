@@ -6,6 +6,7 @@ const appGenerator = require('./generators/fastify')
 const serviceGenerator = require('./generators/service')
 const mongoGenerator = require('./generators/mongodb')
 const corsGenerator = require('./generators/cors')
+const povGenerator = require('./generators/point-of-view')
 const commist = require('commist')()
 const utils = require('./lib/utils')
 
@@ -13,6 +14,7 @@ commist.register('generate:project', appGenerator.cli)
 commist.register('generate:service', serviceGenerator.cli)
 commist.register('add:mongo', mongoGenerator.cli)
 commist.register('add:cors', corsGenerator.cli)
+commist.register('add:pov', povGenerator.cli)
 
 const res = commist.parse(process.argv.splice(2))
 

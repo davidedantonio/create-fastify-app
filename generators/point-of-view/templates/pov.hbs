@@ -1,0 +1,14 @@
+'use strict'
+
+const fp = require('fastify-plugin')
+const pov = require('point-of-view')
+
+module.exports = fp(async (fastify, opts) => {
+  const povOpts = Object.assign ({}, {
+    engine: {
+      '{{engine}}': require('{{engine}}')
+    }
+  })
+
+  fastify.register(pov, povOpts)
+})

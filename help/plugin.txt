@@ -1,4 +1,8 @@
-Usage: fastify-generator generate:service <service-name>
+Usage:
+
+    fastify-generator add:mongo <options>
+    fastify-generator add:cors <options>
+    fastify-generator add:pov <options>
 
   -d, --directory
       Fastify project folder
