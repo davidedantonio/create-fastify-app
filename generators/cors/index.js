@@ -6,7 +6,6 @@ const fs = require('fs')
 const log = require('../../lib/log')
 const path = require('path')
 const inquirer = require('inquirer')
-const chalk = require('chalk')
 const { generatePlugin } = require('./generator')
 const {
   stop,
@@ -63,7 +62,6 @@ async function generate (args, cb) {
         if (answers.length < 1) {
           return 'You must choose at least one method.'
         }
-
         return true
       }
     }])

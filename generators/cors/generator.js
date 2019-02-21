@@ -18,7 +18,7 @@ async function generatePlugin (pluginPath, answers) {
     throw new Error('CORS plugin already configured')
   }
 
-  let content = createTemplate('cors.db.hbs', answers.methods)
+  let content = createTemplate('cors.hbs', answers.methods)
   fs.writeFileSync(path.join(pluginPath, 'cors.js'), content, 'utf8')
 
   try {
