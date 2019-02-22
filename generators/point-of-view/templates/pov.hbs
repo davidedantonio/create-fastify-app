@@ -2,12 +2,15 @@
 
 const fp = require('fastify-plugin')
 const pov = require('point-of-view')
+const path = require('path')
 
 module.exports = fp(async (fastify, opts) => {
   const povOpts = Object.assign ({}, {
     engine: {
       '{{engine}}': require('{{engine}}')
-    }
+    },
+    includeViewExtension: true,
+    templates: path.join(__dirname, '..', 'templates'),
   })
 
   fastify.register(pov, povOpts)

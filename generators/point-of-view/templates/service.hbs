@@ -1,0 +1,11 @@
+'use strict'
+
+module.exports = function (fastify, opts) {
+  fastify.get('/template', async function (request, reply) {
+    reply
+      .header('Content-Type', 'text/html; charset=utf-8')
+
+    const content = fastify.view('example', {text: 'Hello, Fastify'})
+    return content
+  })
+}
