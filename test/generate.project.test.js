@@ -92,7 +92,7 @@ function define (t) {
     await checkHelloWorld(t)
   })
 
-  test('should create project succesfully swagger', async (t) => {
+  test('should create project succesfully with given swagger file', async (t) => {
     rimraf.sync(workdir)
 
     await run(
@@ -110,6 +110,7 @@ function define (t) {
     )
 
     verifyPkgJson(t)
+    verifyProjectSwaggerFolder(t)
   })
 
   async function checkHelloWorld (t) {
@@ -130,6 +131,27 @@ function define (t) {
     t.ok(existsSync(path.join(workdir, 'app', 'services', 'root.js')))
     t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello')))
     t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello', 'index.js')))
+  }
+
+  function verifyProjectSwaggerFolder (t) {
+    t.ok(existsSync(path.join(workdir, 'app')))
+    t.ok(existsSync(path.join(workdir, 'app', 'plugins')))
+    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'support.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'swagger.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services')))
+    t.ok(existsSync(path.join(workdir, 'app', 'app.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'root.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user', 'routes.schema.js')))
   }
 
   function verifyPkgJson (t) {
