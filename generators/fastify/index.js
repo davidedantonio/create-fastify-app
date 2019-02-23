@@ -90,21 +90,6 @@ async function generate (args, cb) {
       }
     }
 
-    const other = await prompt([{
-      type: 'checkbox',
-      name: 'methods',
-      message: 'Add other plugin to your application',
-      choices: [
-        { name: 'CORS' },
-        { name: 'MongoDB' },
-        { name: 'NextJS' },
-        { name: 'NATS' },
-        { name: 'Point-Of-View' },
-        { name: 'Redis' },
-        { name: 'Static' }
-      ]
-    }])
-
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
     log('success', `run 'cd ${chalk.bold(opts._[0])}'`)
