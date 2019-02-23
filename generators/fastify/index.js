@@ -84,17 +84,22 @@ async function generate (args, cb) {
       try {
         await generatePlugin(swaggerPath, projectPath)
         await generateServices(swaggerPath, projectPath)
-        writePkg(projectPath, pkg)
       } catch (err) {
         return cb(err)
       }
+    }
+
+    try {
+      writePkg(projectPath, pkg)
+    } catch (err) {
+      return cb(err)
     }
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
     log('success', `run 'cd ${chalk.bold(opts._[0])}'`)
     log('success', `run '${chalk.bold('npm install')}'`)
-    log('success', `run '${chalk.bold('node server.js')}' to start the application`)
+    log('success', `run '${chalk.bold('npm run dev')}' to start the application`)
     cb()
   })
 }

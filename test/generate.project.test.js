@@ -57,25 +57,24 @@ function define (t) {
   const { beforeEach, test } = t
 
   beforeEach((cb) => {
-    rimraf(workdir, () => {
-      // skip any errors
-      mkdirp(workdir, cb)
-    })
+    rimraf.sync(workdir)
+    mkdirp(workdir, cb)
   })
 
   test('errors if project folder already exist', (t) => {
     t.plan(2)
 
-    exec('node fastify-generator.js generate:project ./test/workdir', (err, stdout) => {
+    exec('node create-fastify-app.js generate:project ./test/workdir', (err, stdout) => {
       t.error(err)
       t.is('Project folder already exist', stdout.toString().trim())
     })
   })
 
   test('should create project succesfully', async (t) => {
-    rimraf(workdir, _ => {})
+    rimraf.sync(workdir)
+
     await run(
-      ['fastify-generator.js', 'generate:project', './test/workdir'],
+      ['create-fastify-app.js', 'generate:project', './test/workdir'],
       [
         `${APPLICATION_NAME}${ENTER}`,
         `${APPLICATION_DESCRIPTION}${ENTER}`,
@@ -94,9 +93,10 @@ function define (t) {
   })
 
   test('should create project succesfully swagger', async (t) => {
-    rimraf(workdir, _ => {})
+    rimraf.sync(workdir)
+
     await run(
-      ['fastify-generator.js', 'generate:project', './test/workdir'],
+      ['create-fastify-app.js', 'generate:project', './test/workdir'],
       [
         `${APPLICATION_NAME}${ENTER}`,
         `${APPLICATION_DESCRIPTION}${ENTER}`,

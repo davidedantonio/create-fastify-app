@@ -33,13 +33,38 @@ async function generate (args, cb) {
     }
 
     const prompt = inquirer.createPromptModule()
-    const answers = await prompt([
-      { type: 'input', name: 'mongodb_host', message: 'Host: ', default: 'localhost' },
-      { type: 'input', name: 'mongodb_port', message: 'Port: ', default: '27017' },
-      { type: 'input', name: 'mongodb_collection', message: 'Collection: ' },
-      { type: 'input', name: 'mongodb_user', message: 'User: ' },
-      { type: 'input', name: 'mongodb_password', message: 'Password: ' }
-    ])
+    const answers = await prompt([{
+      type: 'checkbox',
+      name: 'methods',
+      message: 'What methods do you want to enable for cors',
+      choices: [
+        {
+          name: 'DELETE',
+          checked: true
+        },
+        {
+          name: 'GET',
+          checked: true
+        },
+        'HEAD',
+        'PATCH',
+        {
+          name: 'POST',
+          checked: true
+        },
+        {
+          name: 'PUT',
+          checked: true
+        },
+        'OPTIONS'
+      ],
+      validate: answers => {
+        if (answers.length < 1) {
+          return 'You must choose at least one method.'
+        }
+        return true
+      }
+    }])
 
     try {
       await generatePlugin(pluginPath, answers)
@@ -47,7 +72,7 @@ async function generate (args, cb) {
       return cb(err)
     }
 
-    log('success', 'MongoDB plugin correctly configured with given information')
+    log('success', 'CORS plugin correctly configured with given information')
   })
 }
 
