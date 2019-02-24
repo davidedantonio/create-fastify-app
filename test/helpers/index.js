@@ -8,10 +8,9 @@ function config () {
 }
 
 function build (t) {
-  const App = require('../workdir/app/app')
   const app = Fastify()
 
-  app.register(fp(App), config())
+  app.register(fp(require('../workdir/app/app.js')), config())
   t.tearDown(app.close.bind(app))
 
   return app

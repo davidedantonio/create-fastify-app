@@ -9,6 +9,7 @@ module.exports = function parseArgs (args) {
     string: ['log-level', 'address', 'prefix', 'file'],
     envPrefix: 'FASTIFY_',
     alias: {
+      file: ['f'],
       address: ['a'],
       port: ['p'],
       options: ['o'],

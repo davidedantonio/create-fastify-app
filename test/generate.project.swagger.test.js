@@ -3,12 +3,11 @@
 const t = require('tap')
 const path = require('path')
 const walker = require('walker')
-const { build } = require('./helpers')
-const { execSync } = require('child_process')
 const { readFileSync, readFile, existsSync } = require('fs')
+const { execSync } = require('child_process')
 const appTemplateDir = path.join(__dirname, '..', 'generators', 'fastify', 'templates', 'fastify-app')
 const expected = {}
-const workdir = path.join(__dirname, 'workdir')
+const workdir = path.join(__dirname, 'workdirSwagger')
 const { run, ENTER } = require('./helpers/inputify')
 const {
   APPLICATION_NAME,
@@ -18,7 +17,7 @@ const {
   APPLICATION_VERSION,
   APPLICATION_KEYWORDS,
   APPLICATION_LICENSE,
-  SWAGGER_FILE_EMPTY,
+  SWAGGER_FILE
 } = require('./helpers/constants')
 
 ;(function (cb) {
@@ -53,14 +52,13 @@ const {
 function define (t) {
   const { test } = t
 
-  test('should create project succesfully', async (t) => {
+  test('should create project succesfully with given swagger file', async t => {
     if (existsSync(workdir)) {
       execSync(`rm -R ${workdir}`)
     }
 
-    t.plan(18)
     await run(
-      ['create-fastify-app.js', 'generate:project', './test/workdir'],
+      ['create-fastify-app.js', 'generate:project', `./test/workdirSwagger`],
       [
         `${APPLICATION_NAME}${ENTER}`,
         `${APPLICATION_DESCRIPTION}${ENTER}`,
@@ -69,32 +67,34 @@ function define (t) {
         `${APPLICATION_VERSION}${ENTER}`,
         `${APPLICATION_KEYWORDS}${ENTER}`,
         `${APPLICATION_LICENSE}${ENTER}`,
-        `${SWAGGER_FILE_EMPTY}${ENTER}`
+        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`
       ]
-    ).then( _ => {
-      verifyPkgJson(t)
-      verifyProjectFolder(t)
-    })
+    )
+
+    await verifyPkgJson(t)
+    await verifyProjectSwaggerFolder(t)
+
   })
 
-  async function checkHelloWorld (t) {
-    const app = build(t)
-    const res = await app.inject({
-      url: '/hello'
-    })
-    t.equal(res.payload, 'hello, world!')
-    t.end()
-  }
-
-  function verifyProjectFolder (t) {
+  function verifyProjectSwaggerFolder (t) {
     t.ok(existsSync(path.join(workdir, 'app')))
     t.ok(existsSync(path.join(workdir, 'app', 'plugins')))
     t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'support.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'swagger.js')))
     t.ok(existsSync(path.join(workdir, 'app', 'services')))
     t.ok(existsSync(path.join(workdir, 'app', 'app.js')))
     t.ok(existsSync(path.join(workdir, 'app', 'services', 'root.js')))
     t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello')))
     t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user', 'routes.schema.js')))
   }
 
   function verifyPkgJson (t) {
