@@ -27,3 +27,32 @@ test('start project succesfully', (t) => {
     })
   })
 })
+
+test('start project succesfully on given parameters', (t) => {
+  t.plan(4)
+
+  server.start(['-p', '3040', '-a', '127.0.0.1', '-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
+    t.error(err)
+    t.deepEqual(fastify.server.address().port, '3040')
+    t.deepEqual(fastify.server.address().address, '127.0.0.1')
+    fastify.close(() => {
+      t.pass('server closed')
+    })
+  })
+})
+
+test('start project succesfully on given .env parameters', (t) => {
+  t.plan(4)
+
+  process.env.FASTIFY_PORT = '3040'
+  process.env.FASTIFY_ADDRESS = '127.0.0.1'
+
+  server.start(['-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
+    t.error(err)
+    t.deepEqual(fastify.server.address().port, '3040')
+    t.deepEqual(fastify.server.address().address, '127.0.0.1')
+    fastify.close(() => {
+      t.pass('server closed')
+    })
+  })
+})
