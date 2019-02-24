@@ -5,7 +5,7 @@ const cors = require('fastify-cors')
 
 module.exports = fp(async (fastify, opts) => {
   const corsOpts = Object.assign ({}, {
-    origin: true,
+    origin: '*',
     methods: [{{{transformToArray @root}}}]
   }, opts.cors)
 
