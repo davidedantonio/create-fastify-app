@@ -63,3 +63,4 @@ typings/
 .DS_Store
 
 test/workdir
+test/workdirSwagger
