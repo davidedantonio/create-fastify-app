@@ -73,7 +73,6 @@ function define (t) {
 
     await verifyPkgJson(t)
     await verifyProjectSwaggerFolder(t)
-
   })
 
   function verifyProjectSwaggerFolder (t) {
