@@ -1,12 +1,12 @@
 # create-fastify-app
 
-Create Fastify App is an utility that help you to start and add plugin to your Fastify projects. This mean that you can easily:
-- Generate a Fastify Project
-- Generate a Fastify Project from a given swagger file
-- Generate a service skeleton in existing Fastify Project
-- Add Cors plugin in existing Fastify Project
-- Add MongoDB plugin in existing Fastify Project
-- Add Redis plugin in existing Fastify Project
+Create Fastify App is an utility that help you to generate or add plugin to your Fastify project. This mean that you can easily:
+
+- Generate a Fastify Project, also from a given swagger file.
+- Generate a service skeleton in existing Fastify Project.
+- Add Cors plugin in existing Fastify Project.
+- Add MongoDB plugin in existing Fastify Project.
+- Add Redis plugin in existing Fastify Project.
 
 ## Install
 
@@ -38,6 +38,8 @@ Options
   -h, --help
       Show this help message
 ```
+
+Except for `generate:project` command the others work on an existent project created with `create-fastify-app`.
 
 ### `generate:project`
 
