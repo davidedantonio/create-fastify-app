@@ -48,6 +48,7 @@
     "fastify-cors": "^2.1.1",
     "fastify-redis": "^3.0.0",
     "point-of-view": "^3.0.1",
+    "ejs": "^2.6.1",
     "is-docker": "^1.1.0",
     "dotenv": "^6.2.0",
     "pino-colada": "^1.4.4",
