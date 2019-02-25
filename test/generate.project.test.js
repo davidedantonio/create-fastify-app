@@ -60,7 +60,7 @@ function define (t) {
 
     t.plan(18)
     await run(
-      ['create-fastify-app.js', 'generate:project', './test/workdir'],
+      ['create-fastify-app.js', 'generate:project', '-d', './test/workdir'],
       [
         `${APPLICATION_NAME}${ENTER}`,
         `${APPLICATION_DESCRIPTION}${ENTER}`,

@@ -7,12 +7,13 @@ const path = require('path')
 const { run, ENTER } = require('./helpers/inputify')
 const { existsSync } = require('fs')
 
-test('generate service deid and start server', (t) => {
+test('generate service and start server', (t) => {
   t.plan(14)
 
   run(
-    ['create-fastify-app.js', 'generate:service', 'deid', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'generate:service', '-d', `./test/workdir`],
     [
+      `${ENTER}`,
       `${ENTER}`,
       `${ENTER}`
     ]
@@ -22,7 +23,7 @@ test('generate service deid and start server', (t) => {
 
       fastify.inject({
         method: 'POST',
-        url: '/api/deid'
+        url: '/api/serviceName'
       }, (err, res) => {
         t.error(err)
         t.strictEqual(res.statusCode, 200)
@@ -31,7 +32,7 @@ test('generate service deid and start server', (t) => {
 
       fastify.inject({
         method: 'DELETE',
-        url: '/api/deid'
+        url: '/api/serviceName'
       }, (err, res) => {
         t.error(err)
         t.strictEqual(res.statusCode, 200)
@@ -40,7 +41,7 @@ test('generate service deid and start server', (t) => {
 
       fastify.inject({
         method: 'PUT',
-        url: '/api/deid'
+        url: '/api/serviceName'
       }, (err, res) => {
         t.error(err)
         t.strictEqual(res.statusCode, 200)
@@ -49,7 +50,7 @@ test('generate service deid and start server', (t) => {
 
       fastify.inject({
         method: 'GET',
-        url: '/api/deid'
+        url: '/api/serviceName'
       }, (err, res) => {
         t.error(err)
         t.strictEqual(res.statusCode, 200)
@@ -66,8 +67,8 @@ test('generate service deid and start server', (t) => {
 test('check generated service files', (t) => {
   t.plan(4)
 
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'deid')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'deid', 'index.js')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'deid', 'README.md')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'test', 'services', 'deid.test.js')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'serviceName')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'serviceName', 'index.js')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'serviceName', 'README.md')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'test', 'services', 'serviceName.test.js')))
 })
