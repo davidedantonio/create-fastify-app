@@ -2,7 +2,6 @@ Usage:
 
     fastify-generator add:mongo <options>
     fastify-generator add:cors <options>
-    fastify-generator add:pov <options>
     fastify-generator add:redis <options>
 
   -d, --directory

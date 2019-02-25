@@ -56,7 +56,3 @@ function cli (args) {
 }
 
 module.exports = { cli, stop, generate }
-
-if (require.main === module) {
-  cli(process.argv.slice(2))
-}
