@@ -56,10 +56,8 @@ test('generate service deid and start server', (t) => {
         t.deepEqual(JSON.parse(res.payload), { data: 'GET ok!' })
       })
 
-      fastify.redis.flushall(() => {
-        fastify.close(() => {
-          t.pass('server closed')
-        })
+      fastify.close(() => {
+        t.pass('server closed')
       })
     })
   })
