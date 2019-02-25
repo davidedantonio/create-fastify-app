@@ -38,42 +38,42 @@ function generate (args, cb) {
 
     const prompt = inquirer.createPromptModule()
     const answers = await prompt([
-    { type: 'input', name: 'serviceName', message: 'Service Name', default: 'serviceName' },
-    {
-      type: 'checkbox',
-      name: 'methods',
-      message: 'What methods do you want to generate',
-      choices: [
-        {
-          name: 'DELETE',
-          checked: true
-        },
-        {
-          name: 'GET',
-          checked: true
-        },
-        'HEAD',
-        'PATCH',
-        {
-          name: 'POST',
-          checked: true
-        },
-        {
-          name: 'PUT',
-          checked: true
-        },
-        'OPTIONS'
-      ],
-      validate: answers => {
-        if (answers.length < 1) {
-          return 'You must choose at least one method.'
-        }
+      { type: 'input', name: 'serviceName', message: 'Service Name', default: 'serviceName' },
+      {
+        type: 'checkbox',
+        name: 'methods',
+        message: 'What methods do you want to generate',
+        choices: [
+          {
+            name: 'DELETE',
+            checked: true
+          },
+          {
+            name: 'GET',
+            checked: true
+          },
+          'HEAD',
+          'PATCH',
+          {
+            name: 'POST',
+            checked: true
+          },
+          {
+            name: 'PUT',
+            checked: true
+          },
+          'OPTIONS'
+        ],
+        validate: answers => {
+          if (answers.length < 1) {
+            return 'You must choose at least one method.'
+          }
 
-        return true
-      }
-    },
-    { type: 'input', name: 'autoPrefix', message: 'Route Prefix', default: '/api' }
-  ])
+          return true
+        }
+      },
+      { type: 'input', name: 'autoPrefix', message: 'Route Prefix', default: '/api' }
+    ])
 
     const serviceName = _.camelCase(answers.serviceName)
 

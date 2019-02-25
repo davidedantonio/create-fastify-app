@@ -3,7 +3,6 @@
 const t = require('tap')
 const path = require('path')
 const walker = require('walker')
-const { build } = require('./helpers')
 const { execSync } = require('child_process')
 const { readFileSync, readFile, existsSync } = require('fs')
 const appTemplateDir = path.join(__dirname, '..', 'generators', 'fastify', 'templates', 'fastify-app')
@@ -18,7 +17,7 @@ const {
   APPLICATION_VERSION,
   APPLICATION_KEYWORDS,
   APPLICATION_LICENSE,
-  SWAGGER_FILE_EMPTY,
+  SWAGGER_FILE_EMPTY
 } = require('./helpers/constants')
 
 ;(function (cb) {
@@ -71,20 +70,11 @@ function define (t) {
         `${APPLICATION_LICENSE}${ENTER}`,
         `${SWAGGER_FILE_EMPTY}${ENTER}`
       ]
-    ).then( _ => {
+    ).then(_ => {
       verifyPkgJson(t)
       verifyProjectFolder(t)
     })
   })
-
-  async function checkHelloWorld (t) {
-    const app = build(t)
-    const res = await app.inject({
-      url: '/hello'
-    })
-    t.equal(res.payload, 'hello, world!')
-    t.end()
-  }
 
   function verifyProjectFolder (t) {
     t.ok(existsSync(path.join(workdir, 'app')))

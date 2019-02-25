@@ -7,7 +7,7 @@
     "lint": "standard --verbose",
     "unit": "tap test/*.test.js --coverage",
     "posttest": "tap --coverage-report=html && codecov",
-    "test": "npm run unit"
+    "test": "npm run lint && npm run unit"
   },
   "keywords": [
     "fastify",

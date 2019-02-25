@@ -15,7 +15,7 @@ test('add cors plugin and start server', (t) => {
     [
       `a${ENTER}`
     ]
-  ).then( _ => {
+  ).then(_ => {
     server.start(['-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
       t.error(err)
 

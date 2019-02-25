@@ -19,7 +19,7 @@ test('add mongo plugin and start server', (t) => {
       `${ENTER}`,
       `${ENTER}`
     ]
-  ).then( _ => {
+  ).then(_ => {
     server.start(['-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
       t.error(err)
       t.ok(fastify.mongo)
