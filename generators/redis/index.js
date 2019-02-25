@@ -12,7 +12,7 @@ const {
 } = require('../../lib/utils')
 
 function showHelp () {
-  log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'plugin.txt'), 'utf8'))
+  log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8'))
   return module.exports.stop()
 }
 

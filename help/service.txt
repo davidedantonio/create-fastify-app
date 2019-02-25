@@ -1,7 +1,0 @@
-Usage: fastify-generator generate:service <service-name>
-
-  -d, --directory
-      Fastify project folder
-
-  -h, --help
-      Show this help message
