@@ -1,6 +1,6 @@
 # create-fastify-app
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Coverage Status](https://coveralls.io/repos/github/davidedantonio/create-fastify-app/badge.svg?branch=master)](https://coveralls.io/github/davidedantonio/create-fastify-app?branch=master)
 
 Create Fastify App is an utility that help you to generate or add plugin to your [Fastify](https://github.com/fastify/fastify) project. This mean that you can easily:
 
@@ -128,3 +128,11 @@ And give some information such as:
 - **Method**: at least one of DELETE, PATCH, POST, PUT, HEAD, OPTIONS
 
 exactly as the `fastify-mongodb` command `fastify-redis` add the plugin into your application and create or update an `.env` file with the given information for your [Redis](https://redis.io) connection.
+
+## Acknowledgements
+
+This project is kindly sponsored by [Webeetle s.r.l.](http://webeetle.com)
+
+## License
+
+Licensed under [MIT](./LICENSE).
