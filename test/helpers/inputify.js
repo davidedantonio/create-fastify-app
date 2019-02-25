@@ -34,3 +34,4 @@ module.exports.run = function (args, combo, timeout) {
 module.exports.DOWN = '\x1B\x5B\x42'
 module.exports.UP = '\x1B\x5B\x41'
 module.exports.ENTER = '\x0D'
+module.exports.SPACE = '\x20'
