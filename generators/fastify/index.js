@@ -24,12 +24,8 @@ async function generate (args, cb) {
     return showHelp()
   }
 
-  if (opts._.length !== 1) {
-    log('error', 'Missing required <project-name> parameter\n')
-    return showHelp()
-  }
-
-  if (fs.existsSync(opts._[0])) {
+  const dir = opts.directory || process.cwd()
+  if (fs.existsSync(dir)) {
     log('error', 'Project folder already exist\n')
     module.exports.stop()
   }
@@ -46,14 +42,14 @@ async function generate (args, cb) {
     { type: 'input', name: 'swagger', message: 'Swagger File: ' }
   ])
 
-  generify(path.join(__dirname, 'templates', 'fastify-app'), opts._[0], {}, function (file) {
+  generify(path.join(__dirname, 'templates', 'fastify-app'), dir, {}, function (file) {
     log('debug', `generated ${file}`)
   }, async function (err) {
     if (err) {
       return cb(err)
     }
     let swaggerPath = getAbsolutePath(answers.swagger)
-    let projectPath = getAbsolutePath(opts._[0])
+    let projectPath = getAbsolutePath(dir)
     let pkg
 
     try {
@@ -97,7 +93,7 @@ async function generate (args, cb) {
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
-    log('success', `run 'cd ${chalk.bold(opts._[0])}'`)
+    log('success', `run 'cd ${chalk.bold(dir)}'`)
     log('success', `run '${chalk.bold('npm install')}'`)
     log('success', `run '${chalk.bold('npm run dev')}' to start the application`)
     cb()
