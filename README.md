@@ -2,7 +2,7 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
-Create Fastify App is an utility that help you to generate or add plugin to your Fastify project. This mean that you can easily:
+Create Fastify App is an utility that help you to generate or add plugin to your [Fastify](https://github.com/fastify/fastify) project. This mean that you can easily:
 
 - Generate a Fastify Project, also from a given swagger file.
 - Generate a service skeleton in existing Fastify Project.
