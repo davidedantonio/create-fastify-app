@@ -1,1 +1,1 @@
-# fastify-boilerplate
+# fastify-app

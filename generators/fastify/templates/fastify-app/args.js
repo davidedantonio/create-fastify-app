@@ -13,7 +13,6 @@ module.exports = function parseArgs (args) {
       address: ['a'],
       port: ['p'],
       options: ['o'],
-      watch: ['W'],
       prefix: ['r'],
       'log-level': ['l'],
       'pretty-logs': ['P'],
@@ -33,14 +32,11 @@ module.exports = function parseArgs (args) {
     address: parsedArgs.address,
     bodyLimit: parsedArgs.bodyLimit,
     file: parsedArgs.file,
-    ignoreWatch: parsedArgs.ignoreWatch,
     logLevel: parsedArgs.logLevel,
     options: parsedArgs.options,
     pluginTimeout: parsedArgs.pluginTimeout,
     port: parsedArgs.port,
     prefix: parsedArgs.prefix,
-    prettyLogs: parsedArgs.prettyLogs,
-    socket: parsedArgs.socket,
-    watch: parsedArgs.watch
+    prettyLogs: parsedArgs.prettyLogs
   })
 }
