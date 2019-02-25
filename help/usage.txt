@@ -1,7 +1,18 @@
 Generate Fastify projects and utilities:
 
-  fastify-generator [command] <name>
+  create-fastify-app [command] <options>
 
 Command
   generate:project              Generate a ready to use Fastify project
-  generate:service              Generate a new Service in a Fastify project
+  generate:service              Generate service skeleton source in given project
+  add:mongo                     Add MongoDB plugin in given project folder
+  add:cors                      Add CORS plugin in given project folder
+  add:redis                     Add Redis plugin in given project folder
+
+Options
+
+  -d, --directory
+      Fastify project folder
+
+  -h, --help
+      Show this help message
