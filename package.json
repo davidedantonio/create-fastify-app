@@ -1,7 +1,7 @@
 {
   "name": "generator-fastify",
   "version": "0.1.0",
-  "description": "Fastify's generator application",
+  "description": "A Fastify application generator",
   "main": "fastify-generator.js",
   "scripts": {
     "lint": "standard --verbose",
@@ -11,7 +11,13 @@
   },
   "keywords": [
     "fastify",
-    "yeoman-generator"
+    "fastify-swagger",
+    "fastify-plugin",
+    "nodejs",
+    "nodejs-library",
+    "redis",
+    "cors",
+    "mongodb"
   ],
   "repository": {
     "type": "git",
