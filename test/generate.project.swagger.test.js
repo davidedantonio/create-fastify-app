@@ -71,8 +71,10 @@ function define (t) {
       ]
     )
 
-    await verifyPkgJson(t)
-    await verifyProjectSwaggerFolder(t)
+    setTimeout(async _ => {
+      await verifyPkgJson(t)
+      await verifyProjectSwaggerFolder(t)
+    })
   })
 
   function verifyProjectSwaggerFolder (t) {
