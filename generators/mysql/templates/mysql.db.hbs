@@ -1,0 +1,16 @@
+'use strict'
+
+const fp = require('fastify-plugin')
+const mysql = require('fastify-mysql')
+
+module.exports = fp(async (fastify, opts) => {
+  const mysqlOpts = Object.assign({}, {
+    host: '{{mysql_host}}',
+    port: '{{mysql_port}}',
+    database: '{{mysql_database}}',
+    user: '{{mysql_user}}',
+    password: '{{mysql_password}}'
+  }, opts.mysql)
+
+  fastify.register(mysql, mysqlOpts)
+})
