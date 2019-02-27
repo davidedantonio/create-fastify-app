@@ -98,6 +98,24 @@ And give some information such as:
 
 At this point the command add the `fastify-mongodb` to you application and create or update an `.env` file with the given information for your [MongoDB](https://www.mongodb.com) connection.
 
+### `add:mysql`
+
+If you want to easily add the [`fastify-mysql`](https://github.com/fastify/fastify-mysql) plugin to your application this command is all you need. Just simply run
+
+```
+create-fastify-app add:mysql -d <project-folder>
+```
+
+And give some information such as:
+
+- **MySQL Host**: your MySQL host.
+- **MySQL Port**: your MySQL port.
+- **MySQL Database**: your default database.
+- **MySQL User**: your MySQL user.
+- **Mysql Password**: your MySQL password.
+
+At this point the command add the `fastify-mysql` to you application and create or update an `.env` file with the given information for your [MySQL](https://www.mysql.com) connection.
+
 ### `add:redis`
 
 If you want to easily add the [`fastify-redis`](https://github.com/fastify/fastify-redis) plugin just simply run
