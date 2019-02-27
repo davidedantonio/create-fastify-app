@@ -131,7 +131,7 @@ And give some information such as:
 - **Redis Password**: your redis password, if you have one.
 - **Redis Index**: your redis index
 
-exactly as the `add:mongo` command `add:redis` add the plugin into your application and create or update an `.env` file with the given information for your [Redis](https://redis.io) connection.
+exactly as the `add:mongo` and `add:mysql` command `add:redis` add the plugin into your application and create or update an `.env` file with the given information for your [Redis](https://redis.io) connection.
 
 ### `add:cors`
 
