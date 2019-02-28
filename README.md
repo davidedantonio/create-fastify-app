@@ -29,6 +29,7 @@ Command
   generate:project      Generate a ready to use Fastify project
   generate:service      Generate service skeleton source in given project
   add:mongo             Add MongoDB plugin in given project folder
+  add:mysql             Add MySQL plugin in given project folder
   add:cors              Add CORS plugin in given project folder
   add:redis             Add Redis plugin in given project folder
 
