@@ -148,10 +148,6 @@ And give some information such as:
 
 exactly as the `fastify-mongodb` command `fastify-redis` add the plugin into your application and create or update an `.env` file with the given information for your [Redis](https://redis.io) connection.
 
-## Acknowledgements
-
-This project is kindly sponsored by [Webeetle s.r.l.](http://webeetle.com)
-
 ## License
 
 Licensed under [MIT](./LICENSE).
