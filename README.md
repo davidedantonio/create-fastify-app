@@ -148,6 +148,12 @@ And give some information such as:
 
 after the choises `fastify-cors` plugin will be added in your application.
 
+## Acknowledgements
+
+It is inspired by the [fastify-cli](https://github.com/fastify/fastify-cli) project. Some part have been extracted from it.
+
+This project is kindly sponsored by [Webeetle s.r.l.](http://webeetle.com)
+
 ## License
 
 Licensed under [MIT](./LICENSE).
