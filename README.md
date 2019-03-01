@@ -146,7 +146,7 @@ And give some information such as:
 
 - **Method**: at least one of DELETE, PATCH, POST, PUT, HEAD, OPTIONS
 
-exactly as the `fastify-mongodb` command `fastify-redis` add the plugin into your application and create or update an `.env` file with the given information for your [Redis](https://redis.io) connection.
+after the choises `fastify-cors` plugin will be added in your application.
 
 ## License
 
