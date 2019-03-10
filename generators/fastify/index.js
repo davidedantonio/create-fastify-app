@@ -9,7 +9,7 @@ const generify = require('generify')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const parseArgs = require('./args')
-const { stop, getAbsolutePath, readPkg, writePkg } = require('../../lib/utils')
+const { stop, getAbsolutePath, readPkg, writePkg, fileExists } = require('../../lib/utils')
 const { generateServices, generatePlugin } = require('./generator')
 const dependencies = require('./../../lib/dependencies')
 
@@ -25,8 +25,15 @@ async function generate (args, cb) {
   }
 
   const dir = opts.directory || process.cwd()
-  if (fs.existsSync(dir)) {
-    log('error', 'Project folder already exist\n')
+  try {
+    console.log(dir)
+    let dirExist = await fileExists(dir)
+    if (dirExist) {
+      log('error', 'Project folder already exist\n')
+      module.exports.stop()
+    }
+  } catch (err) {
+    log('error', err)
     module.exports.stop()
   }
 

@@ -8,7 +8,8 @@ const {
   readPkg,
   writePkg,
   getAbsolutePath,
-  generateENV
+  generateENV,
+  fileExists
 } = require('./../../lib/utils')
 
 function createTemplate (template, data) {
@@ -19,7 +20,8 @@ function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  if (fs.existsSync(path.join(pluginPath, 'redis.js'))) {
+  let redisExist = await fileExists(path.join(pluginPath, 'redis.js'))
+  if (redisExist) {
     throw new Error('Redis plugin already configured')
   }
 

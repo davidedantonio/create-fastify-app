@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { generateENV, readPkg, writePkg, getAbsolutePath } = require('./../../lib/utils')
+const { generateENV, readPkg, writePkg, getAbsolutePath, fileExists } = require('./../../lib/utils')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 
@@ -14,7 +14,8 @@ function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  if (fs.existsSync(path.join(pluginPath, 'mongo.db.js'))) {
+  let mongoDBExist = await fileExists(path.join(pluginPath, 'mongo.db.js'))
+  if (mongoDBExist) {
     throw new Error('MongoDB plugin already configured')
   }
 

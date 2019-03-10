@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { readPkg, writePkg, getAbsolutePath } = require('./../../lib/utils')
+const { readPkg, writePkg, getAbsolutePath, fileExists } = require('./../../lib/utils')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 
@@ -14,7 +14,8 @@ function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  if (fs.existsSync(path.join(pluginPath, 'cors.js'))) {
+  let corsExist = await fileExists(path.join(pluginPath, 'cors.js'))
+  if (corsExist) {
     throw new Error('CORS plugin already configured')
   }
 
