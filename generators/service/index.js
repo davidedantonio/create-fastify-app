@@ -10,7 +10,8 @@ const chalk = require('chalk')
 const {
   stop,
   parseArgs,
-  isValidFastifyProject
+  isValidFastifyProject,
+  writeFile
 } = require('../../lib/utils')
 
 function showHelp () {
@@ -87,15 +88,15 @@ function generate (args, cb) {
 
     try {
       let content = createTemplate('service.hbs', data)
-      fs.writeFileSync(path.join(servicesPath, serviceName, 'index.js'), content, 'utf8')
+      await writeFile(path.join(servicesPath, serviceName, 'index.js'), content, 'utf8')
       log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'index.js'))} generated successfully with ${data.methods.join(', ')} methods`)
 
       content = createTemplate('README.md', data)
-      fs.writeFileSync(path.join(servicesPath, serviceName, 'README.md'), content, 'utf8')
+      await writeFile(path.join(servicesPath, serviceName, 'README.md'), content, 'utf8')
       log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'README.md'))} generated successfully`)
 
       content = createTemplate('service.test.hbs', data)
-      fs.writeFileSync(path.join(testPath, `${serviceName}.test.js`), content, 'utf8')
+      await writeFile(path.join(testPath, `${serviceName}.test.js`), content, 'utf8')
       log('success', `File ${chalk.bold(path.join(testPath, `${serviceName}.test.js`))} generated successfully`)
     } catch (err) {
       return cb(err)

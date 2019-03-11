@@ -9,7 +9,7 @@ const generify = require('generify')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const parseArgs = require('./args')
-const { stop, getAbsolutePath, readPkg, writePkg, fileExists } = require('../../lib/utils')
+const { stop, getAbsolutePath, readPkg, fileExists, writeFile } = require('../../lib/utils')
 const { generateServices, generatePlugin } = require('./generator')
 const dependencies = require('./../../lib/dependencies')
 
@@ -93,7 +93,7 @@ async function generate (args, cb) {
     }
 
     try {
-      writePkg(projectPath, pkg)
+      await writeFile(path.join(projectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
     } catch (err) {
       return cb(err)
     }

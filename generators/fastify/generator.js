@@ -5,6 +5,7 @@ const fs = require('fs')
 const Handlebars = require('../../lib/handlebars')
 const path = require('path')
 const swagger = require('../../lib/swagger')
+const { writeFile } = require('../../lib/utils')
 
 function createTemplate (template, data) {
   const generateTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', template), 'utf8'))
@@ -14,7 +15,7 @@ function createTemplate (template, data) {
 async function generatePlugin (filePath, projectFolder) {
   let fileContent = await swagger(filePath)
   let content = createTemplate(path.join('plugins', 'swagger.hbs'), fileContent)
-  fs.writeFileSync(path.join(projectFolder, 'app', 'plugins', 'swagger.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
+  await writeFile(path.join(projectFolder, 'app', 'plugins', 'swagger.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
 }
 
 async function generateServices (filePath, projectFolder) {
@@ -37,8 +38,8 @@ async function generateServices (filePath, projectFolder) {
     let schemaContent = createTemplate(path.join('services', 'schema.hbs'), { prefix: prefix, data: files[prefix] })
 
     fs.mkdirSync(path.join(servicesPath, prefix))
-    fs.writeFileSync(path.join(servicesPath, prefix, 'routes.schema.js'), beautify(schemaContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
-    fs.writeFileSync(path.join(servicesPath, prefix, 'index.js'), beautify(serviceContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
+    await writeFile(path.join(servicesPath, prefix, 'routes.schema.js'), beautify(schemaContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
+    await writeFile(path.join(servicesPath, prefix, 'index.js'), beautify(serviceContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
   }
 }
 

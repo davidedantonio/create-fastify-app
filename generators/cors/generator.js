@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { readPkg, writePkg, getAbsolutePath, fileExists } = require('./../../lib/utils')
+const { readPkg, getAbsolutePath, fileExists, writeFile } = require('./../../lib/utils')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 
@@ -20,16 +20,17 @@ async function generatePlugin (pluginPath, answers) {
   }
 
   let content = createTemplate('cors.hbs', answers.methods)
-  fs.writeFileSync(path.join(pluginPath, 'cors.js'), content, 'utf8')
 
   try {
+    await writeFile(path.join(pluginPath, 'cors.js'), content, 'utf8')
+
     const pkg = readPkg(rootProjectPath)
 
     Object.assign(pkg.dependencies, {
       'fastify-cors': dependencies['fastify-cors']
     })
 
-    writePkg(rootProjectPath, pkg)
+    await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
   } catch (err) {
     throw new Error(err)
   }

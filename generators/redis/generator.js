@@ -6,10 +6,10 @@ const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 const {
   readPkg,
-  writePkg,
   getAbsolutePath,
   generateENV,
-  fileExists
+  fileExists,
+  writeFile
 } = require('./../../lib/utils')
 
 function createTemplate (template, data) {
@@ -26,7 +26,11 @@ async function generatePlugin (pluginPath, answers) {
   }
 
   let content = createTemplate('redis.hbs', answers)
-  fs.writeFileSync(path.join(pluginPath, 'redis.js'), content, 'utf8')
+  try {
+    await writeFile(path.join(pluginPath, 'redis.js'), content, 'utf8')
+  } catch (e) {
+    throw new Error(e)
+  }
 
   generateENV(rootProjectPath)
   fs.appendFileSync(path.join(rootProjectPath, '.env'), '# Redis configuration properties\n\n', 'utf8')
@@ -42,7 +46,7 @@ async function generatePlugin (pluginPath, answers) {
       'fastify-redis': dependencies['fastify-redis']
     })
 
-    writePkg(rootProjectPath, pkg)
+    await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
   } catch (err) {
     throw new Error(err)
   }

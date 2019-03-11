@@ -2,9 +2,10 @@
 
 const fs = require('fs')
 const path = require('path')
-const { generateENV, readPkg, writePkg, getAbsolutePath, fileExists } = require('./../../lib/utils')
+const { generateENV, readPkg, getAbsolutePath, fileExists } = require('./../../lib/utils')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
+const { writeFile } = require('./../../lib/utils')
 
 function createTemplate (template, data) {
   const pluginTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', template), 'utf8'))
@@ -27,16 +28,16 @@ async function generatePlugin (pluginPath, answers) {
   }
 
   let content = createTemplate('mongo.db.hbs', answers)
-  fs.writeFileSync(path.join(pluginPath, 'mongo.db.js'), content, 'utf8')
 
   try {
+    await writeFile(path.join(pluginPath, 'mongo.db.js'), content, 'utf8')
     const pkg = readPkg(rootProjectPath)
 
     Object.assign(pkg.dependencies, {
       'fastify-mongodb': dependencies['fastify-mongodb']
     })
 
-    writePkg(rootProjectPath, pkg)
+    await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
   } catch (err) {
     throw new Error(err)
   }
