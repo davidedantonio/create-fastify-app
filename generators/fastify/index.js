@@ -2,19 +2,25 @@
 
 'use strict'
 
-const fs = require('fs')
 const log = require('../../lib/log')
 const path = require('path')
 const generify = require('generify')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const parseArgs = require('./args')
-const { stop, getAbsolutePath, readPkg, fileExists, writeFile } = require('../../lib/utils')
 const { generateServices, generatePlugin } = require('./generator')
 const dependencies = require('./../../lib/dependencies')
+const {
+  readFile,
+  stop,
+  getAbsolutePath,
+  fileExists,
+  writeFile
+} = require('../../lib/utils')
 
-function showHelp () {
-  log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8'))
+async function showHelp () {
+  const file = await readFile(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8')
+  log('info', file)
   return module.exports.stop()
 }
 
@@ -26,7 +32,6 @@ async function generate (args, cb) {
 
   const dir = opts.directory || process.cwd()
   try {
-    console.log(dir)
     let dirExist = await fileExists(dir)
     if (dirExist) {
       log('error', 'Project folder already exist\n')
@@ -60,7 +65,8 @@ async function generate (args, cb) {
     let pkg
 
     try {
-      pkg = readPkg(projectPath)
+      pkg = await readFile(path.join(projectPath, 'package.json'), 'utf8')
+      pkg = JSON.parse(pkg)
     } catch (err) {
       return cb(err)
     }

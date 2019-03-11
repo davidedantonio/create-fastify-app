@@ -1,13 +1,13 @@
 'use strict'
 
-const fs = require('fs')
 const path = require('path')
-const { readPkg, getAbsolutePath, fileExists, writeFile } = require('./../../lib/utils')
+const { getAbsolutePath, fileExists, writeFile, readFile } = require('./../../lib/utils')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 
-function createTemplate (template, data) {
-  const pluginTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', template), 'utf8'))
+async function createTemplate (template, data) {
+  const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
+  const pluginTemplate = Handlebars.compile(file)
   return pluginTemplate(data)
 }
 
@@ -19,12 +19,12 @@ async function generatePlugin (pluginPath, answers) {
     throw new Error('CORS plugin already configured')
   }
 
-  let content = createTemplate('cors.hbs', answers.methods)
-
   try {
+    let content = await createTemplate('cors.hbs', answers.methods)
     await writeFile(path.join(pluginPath, 'cors.js'), content, 'utf8')
 
-    const pkg = readPkg(rootProjectPath)
+    let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
+    pkg = JSON.parse(pkg)
 
     Object.assign(pkg.dependencies, {
       'fastify-cors': dependencies['fastify-cors']

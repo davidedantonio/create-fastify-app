@@ -11,16 +11,25 @@ const {
   stop,
   parseArgs,
   isValidFastifyProject,
-  writeFile
+  writeFile,
+  readFile,
+  createDir
 } = require('../../lib/utils')
 
 function showHelp () {
-  log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8'))
-  module.exports.stop()
+  fs.readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8', (err, data) => {
+    if (err) {
+      module.exports.stop(err)
+    }
+
+    log('info', data)
+    module.exports.stop()
+  })
 }
 
-function createTemplate (template, data) {
-  const serviceTemplate = Handlebars.compile(fs.readFileSync(path.join(__dirname, 'templates', template), 'utf8'))
+async function createTemplate (template, data) {
+  const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
+  const serviceTemplate = Handlebars.compile(file)
   return serviceTemplate(data)
 }
 
@@ -84,18 +93,19 @@ function generate (args, cb) {
 
     const servicesPath = path.join(dir, 'app', 'services')
     const testPath = path.join(dir, 'test', 'services')
-    fs.mkdirSync(path.join(servicesPath, serviceName))
 
     try {
-      let content = createTemplate('service.hbs', data)
+      await createDir(path.join(servicesPath, serviceName))
+
+      let content = await createTemplate('service.hbs', data)
       await writeFile(path.join(servicesPath, serviceName, 'index.js'), content, 'utf8')
       log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'index.js'))} generated successfully with ${data.methods.join(', ')} methods`)
 
-      content = createTemplate('README.md', data)
+      content = await createTemplate('README.md', data)
       await writeFile(path.join(servicesPath, serviceName, 'README.md'), content, 'utf8')
       log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'README.md'))} generated successfully`)
 
-      content = createTemplate('service.test.hbs', data)
+      content = await createTemplate('service.test.hbs', data)
       await writeFile(path.join(testPath, `${serviceName}.test.js`), content, 'utf8')
       log('success', `File ${chalk.bold(path.join(testPath, `${serviceName}.test.js`))} generated successfully`)
     } catch (err) {

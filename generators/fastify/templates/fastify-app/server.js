@@ -13,8 +13,14 @@ const pump = require('pump')
 let Fastify = null
 
 function showHelp () {
-  console.log(fs.readFileSync(path.join(__dirname, 'help', 'start.txt'), 'utf8'))
-  return module.exports.stop()
+  fs.readFile(path.join(__dirname, 'help', 'start.txt'), 'utf8', (err, data) => {
+    if (err) {
+      module.exports.stop(err)
+    }
+
+    console.log(data)
+    module.exports.stop()
+  })
 }
 
 function stop (error) {

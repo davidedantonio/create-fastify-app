@@ -1,10 +1,10 @@
 'use strict'
 
-const fs = require('fs')
 const log = require('../../lib/log')
 const path = require('path')
 const inquirer = require('inquirer')
 const { generatePlugin } = require('./generator')
+const fs = require('fs')
 const {
   stop,
   parseArgs,
@@ -12,8 +12,14 @@ const {
 } = require('../../lib/utils')
 
 function showHelp () {
-  log('info', fs.readFileSync(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8'))
-  return module.exports.stop()
+  fs.readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8', (err, data) => {
+    if (err) {
+      module.exports.stop(err)
+    }
+
+    log('info', data)
+    return module.exports.stop()
+  })
 }
 
 async function generate (args, cb) {
