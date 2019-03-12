@@ -10,6 +10,7 @@ const corsGenerator = require('./generators/cors')
 const redisGenerator = require('./generators/redis')
 const commist = require('commist')()
 const utils = require('./lib/utils')
+require('make-promises-safe')
 
 commist.register('generate:project', appGenerator.cli)
 commist.register('generate:service', serviceGenerator.cli)

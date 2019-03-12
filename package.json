@@ -43,6 +43,7 @@
     "js-yaml": "^3.12.1",
     "json-schema-ref-parser": "^4.0.4",
     "lodash": "^4.17.11",
+    "make-promises-safe": "^4.0.0",
     "swagger-parser": "^6.0.5",
     "yargs-parser": "^13.0.0"
   },
