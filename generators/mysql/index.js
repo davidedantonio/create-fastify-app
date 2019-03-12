@@ -5,11 +5,7 @@ const log = require('../../lib/log')
 const path = require('path')
 const inquirer = require('inquirer')
 const { generatePlugin } = require('./generator')
-const {
-  stop,
-  parseArgs,
-  isValidFastifyProject
-} = require('../../lib/utils')
+const { stop, parseArgs, isValidFastifyProject } = require('../../lib/utils')
 
 function showHelp () {
   fs.readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8', (err, data) => {

@@ -7,14 +7,8 @@ const inquirer = require('inquirer')
 const Handlebars = require('./../../lib/handlebars')
 const _ = require('lodash')
 const chalk = require('chalk')
-const {
-  stop,
-  parseArgs,
-  isValidFastifyProject,
-  writeFile,
-  readFile,
-  createDir
-} = require('../../lib/utils')
+const { stop, parseArgs, isValidFastifyProject } = require('../../lib/utils')
+const { writeFile, readFile, createDir } = require('../../lib/fs')
 
 function showHelp () {
   fs.readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8', (err, data) => {

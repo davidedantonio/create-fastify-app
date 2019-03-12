@@ -3,14 +3,8 @@
 const path = require('path')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
-const {
-  readFile,
-  getAbsolutePath,
-  generateENV,
-  fileExists,
-  writeFile,
-  appendFile
-} = require('./../../lib/utils')
+const { getAbsolutePath, generateENV } = require('./../../lib/utils')
+const { fileExists, writeFile, readFile, appendFile } = require('./../../lib/fs')
 
 async function createTemplate (template, data) {
   const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')

@@ -1,7 +1,8 @@
 'use strict'
 
 const path = require('path')
-const { getAbsolutePath, fileExists, writeFile, readFile } = require('./../../lib/utils')
+const { getAbsolutePath } = require('./../../lib/utils')
+const { fileExists, writeFile, readFile } = require('./../../lib/fs')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 

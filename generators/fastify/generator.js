@@ -4,11 +4,7 @@ const beautify = require('js-beautify').js
 const Handlebars = require('../../lib/handlebars')
 const path = require('path')
 const swagger = require('../../lib/swagger')
-const {
-  writeFile,
-  readFile,
-  createDir
-} = require('../../lib/utils')
+const { writeFile, readFile, createDir } = require('../../lib/fs')
 
 async function createTemplate (template, data) {
   const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
