@@ -1,25 +1,27 @@
 'use strict'
 
-const fs = require('fs')
 const log = require('../../lib/log')
 const path = require('path')
 const inquirer = require('inquirer')
 const { generatePlugin } = require('./generator')
 const {
-  stop,
   parseArgs,
-  isValidFastifyProject
+  isValidFastifyProject,
+  readFile
 } = require('../../lib/utils')
 
-function showHelp () {
-  fs.readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8', (err, data) => {
-    if (err) {
-      module.exports.stop(err)
-    }
+function stop (err) {
+  if (err) {
+    log('error', err)
+    process.exit(1)
+  }
+  process.exit(0)
+}
 
-    log('info', data)
-    module.exports.stop()
-  })
+async function showHelp () {
+  const file = await readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8')
+  log('info', file)
+  return module.exports.stop()
 }
 
 async function generate (args, cb) {
@@ -31,27 +33,27 @@ async function generate (args, cb) {
   const dir = opts.directory || process.cwd()
   const pluginPath = path.join(dir, 'app', 'plugins')
 
-  isValidFastifyProject(dir, null, async err => {
-    if (err) {
-      return cb(err)
-    }
+  try {
+    await isValidFastifyProject(dir, null)
+  } catch (e) {
+    return cb(e)
+  }
 
-    const prompt = inquirer.createPromptModule()
-    const answers = await prompt([
-      { type: 'input', name: 'redis_host', message: 'Host', default: '127.0.0.1' },
-      { type: 'input', name: 'redis_port', message: 'Port', default: '6379' },
-      { type: 'input', name: 'redis_password', message: 'Password' },
-      { type: 'input', name: 'redis_db', message: 'Database index', default: '0' }
-    ])
+  const prompt = inquirer.createPromptModule()
+  const answers = await prompt([
+    { type: 'input', name: 'redis_host', message: 'Host', default: '127.0.0.1' },
+    { type: 'input', name: 'redis_port', message: 'Port', default: '6379' },
+    { type: 'input', name: 'redis_password', message: 'Password' },
+    { type: 'input', name: 'redis_db', message: 'Database index', default: '0' }
+  ])
 
-    try {
-      await generatePlugin(pluginPath, answers)
-    } catch (err) {
-      return cb(err)
-    }
+  try {
+    await generatePlugin(pluginPath, answers)
+  } catch (e) {
+    return cb(e)
+  }
 
-    log('success', 'Redis plugin correctly configured with given information')
-  })
+  log('success', 'Redis plugin correctly configured with given information')
 }
 
 function cli (args) {

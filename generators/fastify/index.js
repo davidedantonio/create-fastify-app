@@ -10,8 +10,16 @@ const chalk = require('chalk')
 const parseArgs = require('./args')
 const { generateServices, generatePlugin } = require('./generator')
 const dependencies = require('./../../lib/dependencies')
-const { stop, getAbsolutePath } = require('../../lib/utils')
+const { getAbsolutePath } = require('../../lib/utils')
 const { fileExists, writeFile, readFile } = require('../../lib/fs')
+
+function stop (err) {
+  if (err) {
+    log('error', err)
+    process.exit(1)
+  }
+  process.exit(0)
+}
 
 async function showHelp () {
   const file = await readFile(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8')
