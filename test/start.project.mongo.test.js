@@ -15,7 +15,7 @@ test('add mongo plugin and start server', (t) => {
     [
       `localhost${ENTER}`,
       `27017${ENTER}`,
-      `test${ENTER}`,
+      `config${ENTER}`,
       `${ENTER}`,
       `${ENTER}`
     ]

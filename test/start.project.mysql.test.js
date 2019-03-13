@@ -17,7 +17,7 @@ test('add mysql plugin and start server', (t) => {
       `3306${ENTER}`,
       `test${ENTER}`,
       `root${ENTER}`,
-      `fr4g0l4${ENTER}`
+      `${ENTER}`
     ]
   ).then(_ => {
     server.start(['-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
