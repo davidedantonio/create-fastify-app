@@ -5,11 +5,18 @@ const path = require('path')
 const inquirer = require('inquirer')
 const { generatePlugin } = require('./generator')
 const {
-  stop,
   parseArgs,
   isValidFastifyProject,
   readFile
 } = require('../../lib/utils')
+
+function stop (err) {
+  if (err) {
+    log('error', err)
+    process.exit(1)
+  }
+  process.exit(0)
+}
 
 async function showHelp () {
   const file = await readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8')
