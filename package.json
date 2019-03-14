@@ -1,12 +1,12 @@
 {
   "name": "generator-fastify",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A Fastify application generator",
   "main": "fastify-generator.js",
   "scripts": {
     "lint": "standard --verbose",
-    "unit": "tap test/*.test.js --coverage",
-    "posttest": "tap --coverage-report=text-lcov | coveralls",
+    "unit": "tap test/*.test.js",
+    "coverage": "tap test/*.test.js --coverage && tap --coverage-report=text-lcov | coveralls",
     "test": "npm run lint && npm run unit"
   },
   "keywords": [
