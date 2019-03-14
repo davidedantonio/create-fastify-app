@@ -6,15 +6,15 @@ const MongoDB = require('fastify-mongodb')
 module.exports = fp(async (fastify, opts) => {
   let mongoOpts = Object.assign({}, {
     useNewUrlParser: true,
-    url: 'mongodb://{{mongodb_host}}:{{mongodb_port}}/{{mongodb_collection}}',
+    url: process.env.MONGODB_URL || 'mongodb://{{mongodb_host}}:{{mongodb_port}}/{{mongodb_collection}}',
   }, opts.mongodb)
 
   {{#if mongodb_user}}
   if (process.env.MONGODB_USER) {
     mongoOpts = Object.assign(mongoOpts, {
       auth: {
-        user: '{{mongodb_user}}',
-        password: '{{mongodb_password}}'
+        user: process.env.MONGODB_USER || '{{mongodb_user}}',
+        password: process.env.MONGODB_PASSWORD || '{{mongodb_password}}'
       }
     })
   }

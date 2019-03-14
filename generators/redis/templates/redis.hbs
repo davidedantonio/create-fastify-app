@@ -8,10 +8,10 @@ module.exports = fp(async (fastify, opts) => {
 
   let redisOpts = Object.assign({}, {
     options: {
-      host: process.env.REDIS_HOST || 'localhost',
-      port: process.env.REDIS_PORT || 6379,
-      password: process.env.REDIS_PASSWORD || '',
-      db: process.env.REDIS_DB || 0
+      host: process.env.REDIS_HOST || '{{redis_host}}',
+      port: process.env.REDIS_PORT || '{{redis_port}}',
+      password: process.env.REDIS_PASSWORD || '{{redis_password}}',
+      db: process.env.REDIS_DB || {{redis_db}}
     }
   }, opts.redis)
 

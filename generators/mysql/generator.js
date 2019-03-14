@@ -5,10 +5,9 @@ const { promisify } = require('util')
 const path = require('path')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
-const { generateENV, getAbsolutePath, fileExists } = require('./../../lib/utils')
+const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
-const appendFile = promisify(fs.appendFile)
 
 async function createTemplate (template, data) {
   let file
@@ -30,14 +29,7 @@ async function generatePlugin (pluginPath, answers) {
     throw new Error('MySQL plugin already configured')
   }
 
-  generateENV(rootProjectPath)
-
   try {
-    await appendFile(path.join(rootProjectPath, '.env'), '\n# MySQL configuration properties\n\n', 'utf8')
-    for (var property in answers) {
-      await appendFile(path.join(rootProjectPath, '.env'), `${property.toUpperCase()}=${answers[property]}\n`, 'utf8')
-    }
-
     let content = await createTemplate('mysql.db.hbs', answers)
     await writeFile(path.join(pluginPath, 'mysql.db.js'), content, 'utf8')
     let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')

@@ -5,10 +5,9 @@ const { promisify } = require('util')
 const path = require('path')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
-const { generateENV, getAbsolutePath, fileExists } = require('./../../lib/utils')
+const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
-const appendFile = promisify(fs.appendFile)
 
 async function createTemplate (template, data) {
   const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
@@ -24,15 +23,7 @@ async function generatePlugin (pluginPath, answers) {
     throw new Error('MongoDB plugin already configured')
   }
 
-  generateENV(rootProjectPath)
-
   try {
-    await appendFile(path.join(rootProjectPath, '.env'), '# MongoDB configuration properties\n\n', 'utf8')
-
-    for (var property in answers) {
-      await appendFile(path.join(rootProjectPath, '.env'), `${property.toUpperCase()}=${answers[property]}\n`, 'utf8')
-    }
-
     let content = await createTemplate('mongo.db.hbs', answers)
     await writeFile(path.join(pluginPath, 'mongo.db.js'), content, 'utf8')
     let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')

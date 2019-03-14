@@ -5,11 +5,11 @@ const mysql = require('fastify-mysql')
 
 module.exports = fp(async (fastify, opts) => {
   const mysqlOpts = Object.assign({}, {
-    host: '{{mysql_host}}',
-    port: '{{mysql_port}}',
-    database: '{{mysql_database}}',
-    user: '{{mysql_user}}',
-    password: '{{mysql_password}}'
+    host: process.env.MYSQL_HOST || '{{mysql_host}}',
+    port: process.env.MYSQL_PORT || '{{mysql_port}}',
+    database: process.env.MYSQL_DATABASE || '{{mysql_database}}',
+    user: process.env.MYSQL_USER || '{{mysql_user}}',
+    password: process.env.MYSQL_PASSWORD || '{{mysql_password}}'
   }, opts.mysql)
 
   fastify.register(mysql, mysqlOpts)

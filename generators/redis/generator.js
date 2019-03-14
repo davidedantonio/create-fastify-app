@@ -5,8 +5,7 @@ const { promisify } = require('util')
 const path = require('path')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
-const { getAbsolutePath, generateENV, fileExists } = require('./../../lib/utils')
-const appendFile = promisify(fs.appendFile)
+const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const writeFile = promisify(fs.writeFile)
 const readFile = promisify(fs.readFile)
 
@@ -31,14 +30,7 @@ async function generatePlugin (pluginPath, answers) {
     throw new Error(e)
   }
 
-  generateENV(rootProjectPath)
-
   try {
-    await appendFile(path.join(rootProjectPath, '.env'), '# Redis configuration properties\n\n', 'utf8')
-    for (var property in answers) {
-      await appendFile(path.join(rootProjectPath, '.env'), `${property.toUpperCase()}=${answers[property]}\n`, 'utf8')
-    }
-
     let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
     pkg = JSON.parse(pkg)
 
