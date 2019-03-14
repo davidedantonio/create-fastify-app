@@ -70,10 +70,10 @@ function define (t) {
         `${APPLICATION_LICENSE}${ENTER}`,
         `${SWAGGER_FILE_EMPTY}${ENTER}`
       ]
-    ).then(_ => {
-      verifyPkgJson(t)
-      verifyProjectFolder(t)
-    })
+    )
+
+    verifyPkgJson(t)
+    verifyProjectFolder(t)
   })
 
   function verifyProjectFolder (t) {
