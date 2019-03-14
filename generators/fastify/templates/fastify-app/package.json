@@ -9,15 +9,15 @@
   "author": "author <author@email.com>",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^6.2.0",
-    "fastify": "^2.0.0",
+    "dotenv": "^7.0.0",
+    "fastify": "2.0.1",
     "fastify-autoload": "^0.6.0",
     "fastify-plugin": "^1.5.0",
     "is-docker": "^1.1.0",
     "pino-colada": "^1.4.4",
     "pump": "^3.0.0",
     "resolve-from": "^4.0.0",
-    "yargs-parser": "^12.0.0"
+    "yargs-parser": "^13.0.0"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2",

@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "generators/fastify/templates/fastify-app/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
