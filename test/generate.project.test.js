@@ -72,8 +72,8 @@ function define (t) {
       ]
     )
 
-    verifyPkgJson(t)
     verifyProjectFolder(t)
+    verifyPkgJson(t)
   })
 
   function verifyProjectFolder (t) {
