@@ -5,7 +5,7 @@ var concat = require('concat-stream')
 
 module.exports.run = function (args, combo, timeout) {
   if (!timeout) {
-    timeout = 500
+    timeout = 300
   }
 
   var proc = spawn('node', args, { stdio: [null, null, null] })
