@@ -2,6 +2,8 @@
 
 'use strict'
 
+const fs = require('fs')
+const { promisify } = require('util')
 const log = require('../../lib/log')
 const path = require('path')
 const generify = require('generify')
@@ -10,8 +12,9 @@ const chalk = require('chalk')
 const parseArgs = require('./args')
 const { generateServices, generatePlugin } = require('./generator')
 const dependencies = require('./../../lib/dependencies')
-const { getAbsolutePath } = require('../../lib/utils')
-const { fileExists, writeFile, readFile } = require('../../lib/fs')
+const { getAbsolutePath, fileExists } = require('../../lib/utils')
+const readFile = promisify(fs.readFile)
+const writeFile = promisify(fs.writeFile)
 
 function stop (err) {
   if (err) {
@@ -22,8 +25,12 @@ function stop (err) {
 }
 
 async function showHelp () {
-  const file = await readFile(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8')
-  log('info', file)
+  try {
+    const file = await readFile(path.join(__dirname, '..', '..', 'help', 'fastify.txt'), 'utf8')
+    log('info', file)
+  } catch (e) {
+    return module.exports.stop(e)
+  }
   return module.exports.stop()
 }
 

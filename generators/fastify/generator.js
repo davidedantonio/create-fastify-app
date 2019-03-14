@@ -1,10 +1,14 @@
 'use strict'
 
+const fs = require('fs')
+const { promisify } = require('util')
 const beautify = require('js-beautify').js
 const Handlebars = require('../../lib/handlebars')
 const path = require('path')
 const swagger = require('../../lib/swagger')
-const { writeFile, readFile, createDir } = require('../../lib/fs')
+const readFile = promisify(fs.readFile)
+const writeFile = promisify(fs.writeFile)
+const mkdir = promisify(fs.mkdir)
 
 async function createTemplate (template, data) {
   const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
@@ -37,7 +41,7 @@ async function generateServices (filePath, projectFolder) {
     let serviceContent = await createTemplate(path.join('services', 'service.hbs'), { basePath: basePath, prefix: prefix, data: files[prefix] })
     let schemaContent = await createTemplate(path.join('services', 'schema.hbs'), { prefix: prefix, data: files[prefix] })
 
-    await createDir(path.join(servicesPath, prefix))
+    await mkdir(path.join(servicesPath, prefix))
     await writeFile(path.join(servicesPath, prefix, 'routes.schema.js'), beautify(schemaContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
     await writeFile(path.join(servicesPath, prefix, 'index.js'), beautify(serviceContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
   }

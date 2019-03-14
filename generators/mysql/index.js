@@ -1,14 +1,13 @@
 'use strict'
 
+const fs = require('fs')
+const { promisify } = require('util')
 const log = require('../../lib/log')
 const path = require('path')
 const inquirer = require('inquirer')
 const { generatePlugin } = require('./generator')
-const {
-  parseArgs,
-  isValidFastifyProject,
-  readFile
-} = require('../../lib/utils')
+const { parseArgs, isValidFastifyProject } = require('../../lib/utils')
+const readFile = promisify(fs.readFile)
 
 function stop (err) {
   if (err) {
@@ -19,8 +18,12 @@ function stop (err) {
 }
 
 async function showHelp () {
-  const file = await readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8')
-  log('info', file)
+  try {
+    const file = await readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8')
+    log('info', file)
+  } catch (e) {
+    return module.exports.stop(e)
+  }
   return module.exports.stop()
 }
 

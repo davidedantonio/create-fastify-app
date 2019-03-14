@@ -1,10 +1,13 @@
 'use strict'
 
+const fs = require('fs')
+const { promisify } = require('util')
 const path = require('path')
-const { getAbsolutePath } = require('./../../lib/utils')
-const { fileExists, writeFile, readFile } = require('./../../lib/fs')
+const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
+const readFile = promisify(fs.readFile)
+const writeFile = promisify(fs.writeFile)
 
 async function createTemplate (template, data) {
   const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')

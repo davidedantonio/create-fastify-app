@@ -1,5 +1,7 @@
 'use strict'
 
+const fs = require('fs')
+const { promisify } = require('util')
 const log = require('../../lib/log')
 const path = require('path')
 const inquirer = require('inquirer')
@@ -7,7 +9,9 @@ const Handlebars = require('./../../lib/handlebars')
 const _ = require('lodash')
 const chalk = require('chalk')
 const { parseArgs, isValidFastifyProject } = require('../../lib/utils')
-const { writeFile, readFile, createDir } = require('../../lib/fs')
+const readFile = promisify(fs.readFile)
+const writeFile = promisify(fs.writeFile)
+const mkdir = promisify(fs.mkdir)
 
 function stop (err) {
   if (err) {
@@ -18,13 +22,23 @@ function stop (err) {
 }
 
 async function showHelp () {
-  const file = await readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8')
-  log('info', file)
+  try {
+    const file = await readFile(path.join(__dirname, '..', '..', 'help', 'usage.txt'), 'utf8')
+    log('info', file)
+  } catch (e) {
+    return module.exports.stop(e)
+  }
   return module.exports.stop()
 }
 
 async function createTemplate (template, data) {
-  const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
+  let file
+  try {
+    file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
+  } catch (e) {
+    module.exports.stop(e)
+  }
+
   const serviceTemplate = Handlebars.compile(file)
   return serviceTemplate(data)
 }
@@ -92,7 +106,7 @@ async function generate (args, cb) {
   const testPath = path.join(dir, 'test', 'services')
 
   try {
-    await createDir(path.join(servicesPath, serviceName))
+    await mkdir(path.join(servicesPath, serviceName))
 
     let content = await createTemplate('service.hbs', data)
     await writeFile(path.join(servicesPath, serviceName, 'index.js'), content, 'utf8')

@@ -1,10 +1,14 @@
 'use strict'
 
+const fs = require('fs')
+const { promisify } = require('util')
 const path = require('path')
 const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
-const { getAbsolutePath, generateENV } = require('./../../lib/utils')
-const { fileExists, writeFile, readFile, appendFile } = require('./../../lib/fs')
+const { getAbsolutePath, generateENV, fileExists } = require('./../../lib/utils')
+const appendFile = promisify(fs.appendFile)
+const writeFile = promisify(fs.writeFile)
+const readFile = promisify(fs.readFile)
 
 async function createTemplate (template, data) {
   const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
@@ -15,7 +19,7 @@ async function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  let redisExist = await fileExists(path.join(pluginPath, 'redis.js'))
+  let redisExist = await fileExists(path.join(pluginPath, 'redis.js'), fs.F_OK)
   if (redisExist) {
     throw new Error('Redis plugin already configured')
   }
