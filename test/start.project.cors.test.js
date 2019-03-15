@@ -4,7 +4,7 @@ const t = require('tap')
 const { test } = t
 const server = require('./workdir/server')
 const path = require('path')
-const { run, ENTER, CTRL_C } = require('./helpers/inputify')
+const { run, ENTER } = require('./helpers/inputify')
 const { existsSync } = require('fs')
 
 test('add cors plugin and start server', (t) => {
