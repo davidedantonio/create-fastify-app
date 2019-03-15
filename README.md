@@ -97,7 +97,7 @@ And give some information such as:
 - **MongoDB User**: your MongoDB user.
 - **MongoDB Password**: your MongoDB password.
 
-At this point the command add the `fastify-mongodb` to you application and create or update an `.env` file with the given information for your [MongoDB](https://www.mongodb.com) connection.
+At this point the command add the `fastify-mongodb` to you application with the given information for your [MongoDB](https://www.mongodb.com) connection.
 
 ### `add:mysql`
 
@@ -115,7 +115,7 @@ And give some information such as:
 - **MySQL User**: your MySQL user.
 - **Mysql Password**: your MySQL password.
 
-At this point the command add the `fastify-mysql` to you application and create or update an `.env` file with the given information for your [MySQL](https://www.mysql.com) connection.
+At this point the command add the `fastify-mysql` to you application with the given information for your [MySQL](https://www.mysql.com) connection.
 
 ### `add:redis`
 
@@ -132,7 +132,7 @@ And give some information such as:
 - **Redis Password**: your redis password, if you have one.
 - **Redis Index**: your redis index
 
-exactly as the `add:mongo` and `add:mysql` command `add:redis` add the plugin into your application and create or update an `.env` file with the given information for your [Redis](https://redis.io) connection.
+exactly as the `add:mongo` and `add:mysql` command `add:redis` add the plugin into your application with the given information for your [Redis](https://redis.io) connection.
 
 ### `add:cors`
 
