@@ -25,4 +25,3 @@ test('generate project show help', (t) => {
     t.ok(out.indexOf('Generate Fastify projects and utilities') !== -1)
   })
 })
-

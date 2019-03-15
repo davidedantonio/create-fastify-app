@@ -64,7 +64,6 @@ test('generate service and start server', (t) => {
   })
 })
 
-
 test('generate service show help', (t) => {
   t.plan(1)
 
