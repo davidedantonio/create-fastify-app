@@ -53,6 +53,44 @@ test('fastify.redis should be the redis client', (t) => {
   })
 })
 
+test('add redis plugin and get error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:redis', '-d', `./test/workdir`],
+    [
+      `127.0.0.1${ENTER}`,
+      `6379${ENTER}`,
+      `${ENTER}`,
+      `${ENTER}`
+    ]
+  ).then(out => {
+    t.ok(out.indexOf('Redis plugin already configured') !== -1)
+  })
+})
+
+test('add redis show help', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:redis', '-h'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('Generate Fastify projects and utilities') !== -1)
+  })
+})
+
+test('add redis error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:redis'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('/app folder') !== -1)
+  })
+})
+
 test('redis promises support', t => {
   t.plan(2)
 

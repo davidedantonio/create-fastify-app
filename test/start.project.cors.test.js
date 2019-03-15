@@ -4,7 +4,7 @@ const t = require('tap')
 const { test } = t
 const server = require('./workdir/server')
 const path = require('path')
-const { run, ENTER } = require('./helpers/inputify')
+const { run, ENTER, CTRL_C } = require('./helpers/inputify')
 const { existsSync } = require('fs')
 
 test('add cors plugin and start server', (t) => {
@@ -40,6 +40,41 @@ test('add cors plugin and start server', (t) => {
         t.pass('server closed')
       })
     })
+  })
+})
+
+test('add cors plugin and get error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:cors', '-d', `./test/workdir`],
+    [
+      `a${ENTER}`
+    ]
+  ).then(out => {
+    t.ok(out.indexOf('CORS plugin already configured') !== -1)
+  })
+})
+
+test('add cors show help', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:cors', '-h'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('Generate Fastify projects and utilities') !== -1)
+  })
+})
+
+test('add cors error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:cors'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('/app folder') !== -1)
   })
 })
 

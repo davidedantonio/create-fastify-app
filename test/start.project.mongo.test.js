@@ -34,6 +34,45 @@ test('add mongo plugin and start server', (t) => {
   })
 })
 
+test('add mongodb plugin and get error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:mongo', '-d', `./test/workdir`],
+    [
+      `localhost${ENTER}`,
+      `27017${ENTER}`,
+      `config${ENTER}`,
+      `${ENTER}`,
+      `${ENTER}`
+    ]
+  ).then(out => {
+    t.ok(out.indexOf('MongoDB plugin already configured') !== -1)
+  })
+})
+
+test('add mongo show help', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:mongo', '-h'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('Generate Fastify projects and utilities') !== -1)
+  })
+})
+
+test('add mongo error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:mongo'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('/app folder') !== -1)
+  })
+})
+
 test('check mongo plugin files', (t) => {
   t.plan(3)
 

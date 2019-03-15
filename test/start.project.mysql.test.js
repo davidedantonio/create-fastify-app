@@ -31,6 +31,45 @@ test('add mysql plugin and start server', (t) => {
   })
 })
 
+test('add redis plugin and get error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:mysql', '-d', `./test/workdir`],
+    [
+      `localhost${ENTER}`,
+      `3306${ENTER}`,
+      `test${ENTER}`,
+      `root${ENTER}`,
+      `${ENTER}`
+    ]
+  ).then(out => {
+    t.ok(out.indexOf('MySQL plugin already configured') !== -1)
+  })
+})
+
+test('add mysql show help', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:mysql', '-h'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('Generate Fastify projects and utilities') !== -1)
+  })
+})
+
+test('add mysql error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'add:mysql'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('/app folder') !== -1)
+  })
+})
+
 test('check mysql plugin files', (t) => {
   t.plan(3)
 

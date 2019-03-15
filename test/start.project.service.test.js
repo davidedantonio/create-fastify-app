@@ -64,6 +64,44 @@ test('generate service and start server', (t) => {
   })
 })
 
+
+test('generate service show help', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'generate:service', '-h'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('Generate Fastify projects and utilities') !== -1)
+  })
+})
+
+test('generate service error', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'generate:service'],
+    []
+  ).then(out => {
+    t.ok(out.indexOf('/app folder') !== -1)
+  })
+})
+
+test('generate service and start server', (t) => {
+  t.plan(1)
+
+  run(
+    ['create-fastify-app.js', 'generate:service', '-d', `./test/workdir`],
+    [
+      `${ENTER}`,
+      `${ENTER}`,
+      `${ENTER}`
+    ]
+  ).then(out => {
+    t.ok(out.indexOf('already exist') !== -1)
+  })
+})
+
 test('check generated service files', (t) => {
   t.plan(4)
 
