@@ -1,7 +1,7 @@
 Usage: node server.js [opts]
 
-  -f
-  [env: FASTIFY_APP]
+  -f, --file
+  [env: FASTIFY_FILE]
       Fastify Appication start
 
   -p, --port
