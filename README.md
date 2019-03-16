@@ -63,7 +63,106 @@ If `-d`, or `--directory`, option is omitted the new project will be created in 
 - **License**: the application license.
 - **Swagger File**: a swagger file to start from (YAML or JSON).
 
-After providing these information the entire application skeleton will be created for you.
+After providing these information the entire application skeleton will be created for you. Simply run
+
+```
+cd /your/wonderful/application
+npm install
+npm run dev
+```
+
+#### Project structure
+
+By default `create-fastify-app` generate a project structured in this way:
+
+```
+/your/wonderful/application
+├── README.md
+├── app
+│   ├── app.js
+│   ├── plugins
+│   │   ├── README.md
+│   │   └── support.js
+│   └── services
+│       ├── README.md
+│       ├── hello
+│       │   └── index.js
+│       └── root.js
+├── args.js
+├── help
+│   └── start.txt
+├── package.json
+├── server.js
+└── test
+    ├── helper.js
+    ├── plugins
+    │   └── support.test.js
+    └── services
+        ├── example.test.js
+        └── root.test.js
+```
+
+The `app` folder contains all you need to develop your application. In particular, she contains the following directories:
+
+- `plugins`: here you can add all your plugins you need into you application.
+- `services`: here you can develop all the endpoint you need for your application, or the generated endpoint if you give a swagger file at project creation.
+- `test`: here you can declare all your test.
+
+
+The `package.json` file comes with three predefined npm task:
+
+```diff
+"scripts": {
+  "test": "tap test/**/*.test.js",
+  "start": "node server.js",
+  "dev": "node server.js -l info -P"
+}
+```
+
+* `npm test`: runs the test
+* `npm start`: start your application
+* `npm run dev`: start your application with [`pino-colada`](https://github.com/lrlna/pino-colada) pretty logging
+
+#### Options
+
+You can pass the following options via command line with `node server.js <options>`. Every options has the corresponding environment variable:
+
+|  Description | Short command | Full command | Environment variable |
+| ------------- | ------------- |-------------| ----- |
+| The application file to start | `-f` | `--file` | `FASTIFY_FILE` |
+| Port to listen on (default to 3000) | `-p` | `--port` | `FASTIFY_PORT or PORT` |
+| Address to listen on | `-a` | `--address` | `FASTIFY_ADDRESS` |
+| Log level (default to fatal) | `-l` | `--log-level` | `FASTIFY_LOG_LEVEL` |
+| Prints pretty logs | `-P` | `--pretty-logs` | `FASTIFY_PRETTY_LOGS` |
+| Use custom options | `-o` | `--options` | `FASTIFY_OPTIONS` |
+| Set the prefix | `-r` | `--prefix` | `FASTIFY_PREFIX` |
+| Set the plugin timeout | `-T` | `--plugin-timeout` | `FASTIFY_PLUGIN_TIMEOUT` |
+| Defines the maximum payload, in bytes,<br>the server is allowed to accept |  | `--body-limit` | `FASTIFY_BODY_LIMIT` |
+
+#### Generate a project from a swagger file
+
+When you generate a new project you can give in input a swagger file. In an api driven project this feature can be very important because `create-fastify-app` will generate all your project endpoints for you. You will only have to worry about the development of the various endpoints.
+
+If you give in input the [Petstore](https://editor.swagger.io/?_ga=2.5251579.932457202.1552732701-831465500.1549699944) swagger file given as example on [Swagger.io](https://swagger.io), you can see that `create-fastify-app` automatically generate a project with `fastify-swagger` already configured and ready to use in your project. If you take a look at `/documentation` endpoint you'll find something like that:
+
+![swagger-example](./swagger.png)
+
+In your `app/services` folder you'll find your endpoints folder
+
+```
+./app/services
+├── README.md
+├── pet
+│   ├── index.js
+│   └── routes.schema.js
+├── root.js
+├── store
+│   ├── index.js
+│   └── routes.schema.js
+└── user
+    ├── index.js
+    └── routes.schema.js
+```
 
 ### `generate:service`
 
@@ -132,7 +231,7 @@ And give some information such as:
 - **Redis Password**: your redis password, if you have one.
 - **Redis Index**: your redis index
 
-exactly as the `add:mongo` and `add:mysql` command `add:redis` add the plugin into your application with the given information for your [Redis](https://redis.io) connection.
+exactly as the `add:mongo` and `add:mysql` command `add:redis` add the plugin into your application plugins folder with the given information for your [Redis](https://redis.io) connection.
 
 ### `add:cors`
 
@@ -147,6 +246,14 @@ And give some information such as:
 - **Method**: at least one of DELETE, PATCH, POST, PUT, HEAD, OPTIONS
 
 after the choises `fastify-cors` plugin will be added in your application.
+
+## Contributing
+
+If you feel you can help in any way, be it with examples, extra testing, or new features please open a pull request or open an issue.
+
+The code follows the Standard code style.
+
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 ## Acknowledgements
 
