@@ -11,7 +11,6 @@ const inquirer = require('inquirer')
 const chalk = require('chalk')
 const parseArgs = require('./args')
 const { generateServices, generatePlugin } = require('./generator')
-const dependencies = require('./../../lib/dependencies')
 const { getAbsolutePath, fileExists } = require('../../lib/utils')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
@@ -96,8 +95,11 @@ async function generate (args, cb) {
     })
 
     if (answers.swagger) {
+      let rootPkg = await readFile(path.join(__dirname, '..', '..', '..', 'package.json'), 'utf8')
+      rootPkg = JSON.parse(rootPkg)
+
       Object.assign(pkg.dependencies, {
-        'fastify-swagger': dependencies['fastify-swagger']
+        'fastify-swagger': rootPkg.devDependencies['fastify-swagger']
       })
 
       try {

@@ -3,7 +3,6 @@
 const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
-const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const writeFile = promisify(fs.writeFile)
@@ -31,11 +30,13 @@ async function generatePlugin (pluginPath, answers) {
   }
 
   try {
+    let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
     let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
+    rootPkg = JSON.parse(rootPkg)
     pkg = JSON.parse(pkg)
 
     Object.assign(pkg.dependencies, {
-      'fastify-redis': dependencies['fastify-redis']
+      'fastify-redis': rootPkg.devDependencies['fastify-redis']
     })
 
     await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')

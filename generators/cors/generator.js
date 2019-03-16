@@ -4,7 +4,6 @@ const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
 const { getAbsolutePath, fileExists } = require('./../../lib/utils')
-const dependencies = require('./../../lib/dependencies')
 const Handlebars = require('./../../lib/handlebars')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
@@ -27,11 +26,13 @@ async function generatePlugin (pluginPath, answers) {
     let content = await createTemplate('cors.hbs', answers.methods)
     await writeFile(path.join(pluginPath, 'cors.js'), content, 'utf8')
 
+    let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
     let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
     pkg = JSON.parse(pkg)
+    rootPkg = JSON.parse(rootPkg)
 
     Object.assign(pkg.dependencies, {
-      'fastify-cors': dependencies['fastify-cors']
+      'fastify-cors': rootPkg.devDependencies['fastify-cors']
     })
 
     await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
