@@ -1,8 +1,8 @@
 {
-  "name": "generator-fastify",
+  "name": "create-fastify-app",
   "version": "1.0.0",
   "description": "A Fastify application generator",
-  "main": "fastify-generator.js",
+  "main": "create-fastify-app.js",
   "scripts": {
     "lint": "standard --verbose",
     "unit": "tap test/*.test.js",
