@@ -49,6 +49,10 @@ function start (args, cb) {
     return showHelp()
   }
 
+  if (opts.help) {
+    return showHelp()
+  }
+
   require('make-promises-safe')
   loadModules(opts)
   return run(args, cb)
