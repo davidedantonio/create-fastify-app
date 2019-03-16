@@ -95,7 +95,7 @@ async function generate (args, cb) {
     })
 
     if (answers.swagger) {
-      let rootPkg = await readFile(path.join(__dirname, '..', '..', '..', 'package.json'), 'utf8')
+      let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
       rootPkg = JSON.parse(rootPkg)
 
       Object.assign(pkg.dependencies, {
