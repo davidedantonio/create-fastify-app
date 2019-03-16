@@ -70,5 +70,10 @@
     "standard": "^12.0.1",
     "tap": "^12.5.3",
     "walker": "^1.0.7"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "request"
+    ]
   }
 }
