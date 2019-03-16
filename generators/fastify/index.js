@@ -70,7 +70,7 @@ async function generate (args, cb) {
       return cb(err)
     }
     let swaggerPath = getAbsolutePath(answers.swagger)
-    let projectPath = getAbsolutePath(dir)
+    let projectPath = dir
     let pkg
 
     try {
