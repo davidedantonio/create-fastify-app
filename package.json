@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A Fastify application generator",
   "main": "create-fastify-app.js",
+  "bin": {
+    "create-fastify-app": "create-fastify-app.js"
+  },
   "scripts": {
     "lint": "standard --verbose",
     "unit": "tap test/*.test.js",
