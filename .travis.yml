@@ -9,9 +9,11 @@ services:
   - mysql
   - redis
   - mongodb
+  - postgresql
 
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - psql -c 'create database travis_ci_test;'
 
 notifications:
   email:

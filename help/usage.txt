@@ -5,10 +5,11 @@ Generate Fastify projects and utilities:
 Command
   generate:project              Generate a ready to use Fastify project
   generate:service              Generate service skeleton source in given project
-  add:mysql                     Add MySQL plugin in given project folder
-  add:mongo                     Add MongoDB plugin in given project folder
-  add:cors                      Add CORS plugin in given project folder
-  add:redis                     Add Redis plugin in given project folder
+  add:mysql                     Add fastify-mysql plugin in given project folder
+  add:mongo                     Add fastify-mongodb plugin in given project folder
+  add:cors                      Add fastify-cors plugin in given project folder
+  add:redis                     Add fsatify-redis plugin in given project folder
+  add:postgres                  Add fastify-postgres plugin in given project folder
 
 Options
 

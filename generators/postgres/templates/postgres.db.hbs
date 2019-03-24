@@ -1,0 +1,16 @@
+'use strict'
+
+const fp = require('fastify-plugin')
+const pg = require('fastify-postgres')
+
+module.exports = fp(async (fastify, opts) => {
+  const postgresOpts = Object.assign({}, {
+    user: process.env.POSTGRES_USER || '{{pg_user}}',
+    host: process.env.POSTGRES_HOST || '{{pg_host}}',
+    database: process.env.POSTGRES_DATABASE || '{{pg_database}}',
+    password: process.env.POSTGRES_PASSWORD || '{{pg_password}}',
+    port: process.env.POSTGRES_PORT || '{{pg_port}}'
+  }, opts.pg)
+
+  fastify.register(pg, postgresOpts)
+})
