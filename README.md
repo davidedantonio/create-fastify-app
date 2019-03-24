@@ -26,12 +26,13 @@ Generate Fastify projects and utilities:
   create-fastify-app [command] <options>
 
 Command
-  generate:project      Generate a ready to use Fastify project
-  generate:service      Generate service skeleton source in given project
-  add:mongo             Add MongoDB plugin in given project folder
-  add:mysql             Add MySQL plugin in given project folder
-  add:cors              Add CORS plugin in given project folder
-  add:redis             Add Redis plugin in given project folder
+  generate:project     Generate a ready to use Fastify project
+  generate:service     Generate service skeleton source in given project
+  add:mysql            Add fastify-mysql plugin in given project folder
+  add:mongo            Add fastify-mongodb plugin in given project folder
+  add:cors             Add fastify-cors plugin in given project folder
+  add:redis            Add fsatify-redis plugin in given project folder
+  add:postgres         Add fastify-postgres plugin in given project folder
 
 Options
 
@@ -246,6 +247,24 @@ And give some information such as:
 - **Method**: at least one of DELETE, PATCH, POST, PUT, HEAD, OPTIONS
 
 after the choises `fastify-cors` plugin will be added in your application.
+
+### `add:postgres`
+
+If you want to easily add the [`fastify-postgres`](https://github.com/fastify/fastify-postgres) plugin to your application this command is all you need. Just simply run
+
+```
+create-fastify-app add:postgres -d <project-folder>
+```
+
+And give some information such as:
+
+- **Postgres Host**: your Postgres host.
+- **Postgres Port**: your Postgres port.
+- **Postgres Database**: your default database.
+- **Postgres User**: your Postgres user.
+- **Postgres Password**: your Postgres password.
+
+At this point the command add the `fastify-postgres` to you application with the given information for your [Postgres](https://www.postgresql.org/) connection.
 
 ## Contributing
 
