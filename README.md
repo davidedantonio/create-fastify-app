@@ -1,14 +1,15 @@
 # create-fastify-app
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Coverage Status](https://coveralls.io/repos/github/davidedantonio/create-fastify-app/badge.svg?branch=master)](https://coveralls.io/github/davidedantonio/create-fastify-app?branch=master) [![Build Status](https://travis-ci.com/davidedantonio/create-fastify-app.svg?branch=master)](https://travis-ci.com/davidedantonio/create-fastify-app) [![Greenkeeper badge](https://badges.greenkeeper.io/davidedantonio/create-fastify-app.svg)](https://greenkeeper.io/)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Coverage Status](https://coveralls.io/repos/github/davidedantonio/create-fastify-app/badge.svg?branch=master)](https://coveralls.io/github/davidedantonio/create-fastify-app?branch=master) [![Build Status](https://travis-ci.com/davidedantonio/create-fastify-app.svg?branch=master)](https://travis-ci.com/davidedantonio/create-fastify-app) [![Greenkeeper badge](https://badges.greenkeeper.io/davidedantonio/create-fastify-app.svg)](https://greenkeeper.io/) ![npm-version](https://img.shields.io/npm/v/create-fastify-app.svg)
 
 Create Fastify App is an utility that help you to generate or add plugin to your [Fastify](https://github.com/fastify/fastify) project. This mean that you can easily:
 
 - Generate a Fastify Project, also from a given swagger file.
 - Generate a service skeleton in existing Fastify Project.
-- Add Cors plugin in existing Fastify Project.
-- Add MongoDB plugin in existing Fastify Project.
-- Add Redis plugin in existing Fastify Project.
+- Add fastify-cors plugin in existing Fastify Project.
+- Add fastify-mongodb plugin in existing Fastify Project.
+- Add fastify-redis plugin in existing Fastify Project.
+- Add fastify-postgres plugin in existing Fastify Project.
 
 ## Install
 
@@ -31,7 +32,7 @@ Command
   add:mysql            Add fastify-mysql plugin in given project folder
   add:mongo            Add fastify-mongodb plugin in given project folder
   add:cors             Add fastify-cors plugin in given project folder
-  add:redis            Add fsatify-redis plugin in given project folder
+  add:redis            Add fastify-redis plugin in given project folder
   add:postgres         Add fastify-postgres plugin in given project folder
 
 Options
