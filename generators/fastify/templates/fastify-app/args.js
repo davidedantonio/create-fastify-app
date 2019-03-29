@@ -21,7 +21,7 @@ module.exports = function parseArgs (args) {
     },
     default: {
       'log-level': 'error',
-      'pretty-logs': true,
+      'pretty-logs': false,
       'options': false,
       'plugin-timeout': 10 * 1000,
       'file': 'app/app.js'
