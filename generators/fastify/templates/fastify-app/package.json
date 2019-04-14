@@ -11,7 +11,7 @@
   "dependencies": {
     "dotenv": "^7.0.0",
     "fastify": "^2.0.1",
-    "fastify-autoload": "^0.6.0",
+    "fastify-autoload": "^0.7.0",
     "fastify-plugin": "^1.5.0",
     "is-docker": "^1.1.0",
     "make-promises-safe": "^5.0.0",
