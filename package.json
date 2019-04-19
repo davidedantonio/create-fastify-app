@@ -61,7 +61,7 @@
     "fastify-postgres": "^2.0.0",
     "fastify-redis": "^3.0.0",
     "fastify-swagger": "^2.3.0",
-    "is-docker": "^1.1.0",
+    "is-docker": "^2.0.0",
     "mkdirp": "^0.5.1",
     "pg": "^7.9.0",
     "pino-colada": "^1.4.4",
