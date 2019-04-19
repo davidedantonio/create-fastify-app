@@ -13,7 +13,7 @@
     "fastify": "^2.0.1",
     "fastify-autoload": "^0.7.0",
     "fastify-plugin": "^1.5.0",
-    "is-docker": "^1.1.0",
+    "is-docker": "^2.0.0",
     "make-promises-safe": "^5.0.0",
     "pino-colada": "^1.4.4",
     "pump": "^3.0.0",
