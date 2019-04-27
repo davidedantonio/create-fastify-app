@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "standard --verbose",
-    "unit": "tap test/*.test.js",
+    "unit": "tap test/create*.test.js && tap test/generate.project.test.js && tap test/generate.project.swagger.test.js && tap test/start.project.cors.test.js && tap test/start.project.mysql.test.js && tap test/start.project.mongo.test.js && tap test/start.project.postgres.test.js && tap test/start.project.redis.test.js && tap test/start.project.service.test.js && tap test/start.project.test.js",
     "coverage": "tap test/*.test.js --coverage && tap --coverage-report=text-lcov | coveralls",
     "test": "npm run lint && npm run unit"
   },
