@@ -9,7 +9,7 @@
   "author": "author <author@email.com>",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "fastify": "^2.0.1",
     "fastify-autoload": "^0.7.0",
     "fastify-plugin": "^1.5.0",
