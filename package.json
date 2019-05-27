@@ -35,6 +35,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "chokidar": "^3.0.0",
+    "clui": "^0.3.6",
     "codecov": "^3.2.0",
     "command-exists": "^1.2.8",
     "commist": "^1.0.0",
@@ -48,6 +49,11 @@
     "json-schema-ref-parser": "^6.1.0",
     "lodash": "^4.17.11",
     "make-promises-safe": "^5.0.0",
+    "nodemon": "^1.19.1",
+    "pm2-axon": "^3.3.0",
+    "pm2-axon-rpc": "^0.5.1",
+    "portfinder": "^1.0.20",
+    "pretty-bytes": "^5.2.0",
     "swagger-parser": "^6.0.5",
     "yargs-parser": "^13.0.0"
   },

@@ -115,6 +115,10 @@ function run (args, cb) {
   }
 
   fastify.register(fp(file), pluginOptions)
+  console.log(opts)
+  if (opts.repl) {
+    fastify.register(require('./lib/repl'), {})
+  }
 
   if (opts.address) {
     fastify.listen(opts.port, opts.address, wrap)
