@@ -90,7 +90,7 @@ async function generate (args, cb) {
       scripts: {
         'test': 'tap test/**/*.test.js',
         'start': 'node server.js',
-        'dev': 'node server.js -l info -P'
+        'dev': 'node server.js -l info -P -w'
       }
     })
 

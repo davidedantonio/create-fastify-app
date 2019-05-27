@@ -2,7 +2,7 @@
 
 const Fastify = require('fastify')
 const fp = require('fastify-plugin')
-const App = require('../app/app')
+const App = require('../src')
 
 function config () {
   return {}

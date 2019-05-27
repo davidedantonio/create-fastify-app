@@ -77,14 +77,14 @@ function define (t) {
   })
 
   function verifyProjectFolder (t) {
-    t.ok(existsSync(path.join(workdir, 'app')))
-    t.ok(existsSync(path.join(workdir, 'app', 'plugins')))
-    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'support.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services')))
-    t.ok(existsSync(path.join(workdir, 'app', 'app.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'root.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src')))
+    t.ok(existsSync(path.join(workdir, 'src', 'plugins')))
+    t.ok(existsSync(path.join(workdir, 'src', 'plugins', 'support.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services')))
+    t.ok(existsSync(path.join(workdir, 'src', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'root.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'hello')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'hello', 'index.js')))
   }
 
   function verifyPkgJson (t) {

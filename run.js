@@ -9,6 +9,7 @@ const parseArgs = require('./args')
 const path = require('path')
 const PinoColada = require('pino-colada')
 const pump = require('pump')
+const watch = require('./lib/watch')
 
 let Fastify = null
 
@@ -45,7 +46,7 @@ function start (args, cb) {
   let opts = parseArgs(args)
 
   if (!fs.existsSync(opts.file)) {
-    console.error('Missing the required file app.js\n')
+    console.error('Missing the required file index.js\n')
     return showHelp()
   }
 
@@ -55,6 +56,10 @@ function start (args, cb) {
 
   require('make-promises-safe')
   loadModules(opts)
+  if (opts.watch) {
+    return watch(args)
+  }
+
   return run(args, cb)
 }
 
@@ -130,7 +135,7 @@ function cli (args) {
   start(args)
 }
 
-module.exports = { start, run, stop }
+module.exports = { cli, stop }
 
 if (require.main === module) {
   cli(process.argv.slice(2))

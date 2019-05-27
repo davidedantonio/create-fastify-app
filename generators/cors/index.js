@@ -34,7 +34,7 @@ async function generate (args, cb) {
   }
 
   const dir = opts.directory || process.cwd()
-  const pluginPath = path.join(dir, 'app', 'plugins')
+  const pluginPath = path.join(dir, 'src', 'plugins')
 
   try {
     await isValidFastifyProject(dir, null)

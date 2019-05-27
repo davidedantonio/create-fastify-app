@@ -19,7 +19,7 @@ async function createTemplate (template, data) {
 async function generatePlugin (filePath, projectFolder) {
   let fileContent = await swagger(filePath)
   let content = await createTemplate(path.join('plugins', 'swagger.hbs'), fileContent)
-  await writeFile(path.join(projectFolder, 'app', 'plugins', 'swagger.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
+  await writeFile(path.join(projectFolder, 'src', 'plugins', 'swagger.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
 }
 
 async function generateServices (filePath, projectFolder) {
@@ -34,7 +34,7 @@ async function generateServices (filePath, projectFolder) {
     files[prefix].push(fileContent.routes[i])
   }
 
-  const servicesPath = path.join(projectFolder, 'app', 'services')
+  const servicesPath = path.join(projectFolder, 'src', 'services')
   const basePath = fileContent.basePath || 'api'
 
   for (let prefix in files) {

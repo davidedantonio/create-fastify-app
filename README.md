@@ -152,7 +152,7 @@ If you give in input the [Petstore](https://editor.swagger.io/?_ga=2.5251579.932
 In your `app/services` folder you'll find your endpoints folder
 
 ```
-./app/services
+./src/services
 ├── README.md
 ├── pet
 │   ├── index.js

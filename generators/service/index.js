@@ -102,7 +102,7 @@ async function generate (args, cb) {
     serviceName: serviceName
   })
 
-  const servicesPath = path.join(dir, 'app', 'services')
+  const servicesPath = path.join(dir, 'src', 'services')
   const testPath = path.join(dir, 'test', 'services')
 
   try {

@@ -16,7 +16,7 @@ test('add cors plugin and start server', (t) => {
       `a${ENTER}`
     ]
   ).then(_ => {
-    server.start(['-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
+    server.start(['-f', path.join(__dirname, 'workdir', 'src', 'index.js')], function (err, fastify) {
       t.error(err)
 
       fastify.inject({
@@ -74,14 +74,14 @@ test('add cors error', (t) => {
     ['create-fastify-app.js', 'add:cors'],
     []
   ).then(out => {
-    t.ok(out.indexOf('/app folder') !== -1)
+    t.ok(out.indexOf('/src folder') !== -1)
   })
 })
 
 test('check cors plugin files', (t) => {
   t.plan(3)
 
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'plugins')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'plugins', 'cors.js')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src', 'plugins')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src', 'plugins', 'cors.js')))
 })

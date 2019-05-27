@@ -10,7 +10,7 @@ function config () {
 function build (t) {
   const app = Fastify()
 
-  app.register(fp(require('../workdir/app/app.js')), config())
+  app.register(fp(require('../workdir/src')), config())
   t.tearDown(app.close.bind(app))
 
   return app
