@@ -114,11 +114,12 @@ function run (args, cb) {
     pluginOptions._routePrefix = opts.prefix || ''
   }
 
-  fastify.register(fp(file), pluginOptions)
-  console.log(opts)
   if (opts.repl) {
-    fastify.register(require('./lib/repl'), {})
+    fastify.register(require('./lib/repl'), { address: opts.address+1 })
+    fastify.register(require('./lib/routes'))
   }
+
+  fastify.register(fp(file), pluginOptions)
 
   if (opts.address) {
     fastify.listen(opts.port, opts.address, wrap)
