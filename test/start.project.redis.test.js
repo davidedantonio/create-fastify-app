@@ -2,7 +2,7 @@
 
 const t = require('tap')
 const { test } = t
-const server = require('./workdir/server')
+const server = require('../run')
 const path = require('path')
 const { run, ENTER } = require('./helpers/inputify')
 const { existsSync } = require('fs')

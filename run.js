@@ -140,7 +140,7 @@ function cli (args) {
   start(args)
 }
 
-module.exports = { cli, stop }
+module.exports = { start, cli, stop }
 
 if (require.main === module) {
   cli(process.argv.slice(2))

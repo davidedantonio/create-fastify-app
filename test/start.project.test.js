@@ -2,7 +2,7 @@
 
 const t = require('tap')
 const { test } = t
-const server = require('./workdir/server')
+const server = require('../run')
 const sget = require('simple-get').concat
 const path = require('path')
 

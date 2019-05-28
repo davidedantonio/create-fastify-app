@@ -100,6 +100,6 @@ function define (t) {
     t.equal(pkg.license, APPLICATION_LICENSE)
     t.equal(pkg.scripts.test, 'tap test/**/*.test.js')
     t.equal(pkg.scripts.start, 'node server.js')
-    t.equal(pkg.scripts.dev, 'node server.js -l info -P')
+    t.equal(pkg.scripts.dev, 'node server.js -l info -P -w')
   }
 }
