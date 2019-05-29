@@ -89,8 +89,8 @@ async function generate (args, cb) {
       license: answers.license,
       scripts: {
         'test': 'tap test/**/*.test.js',
-        'start': 'node server.js',
-        'dev': 'node server.js -l info -P -w'
+        'start': 'fastify-app run',
+        'dev': 'fastify-app run -l info -P -w'
       }
     })
 
