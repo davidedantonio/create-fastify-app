@@ -5,8 +5,9 @@ const parseArgs = require('./args/run')
 const path = require('path')
 const { isValidFastifyProject } = require('./lib/utils')
 const { promisify } = require('util')
-const fs = require('fs')
 const mkdir = promisify(fs.mkdir)
+const generify = require('generify')
+const log = require('./lib/log')
 
 function showHelp () {
   fs.readFile(path.join(__dirname, 'help', 'eject.txt'), 'utf8', (err, data) => {
@@ -27,7 +28,7 @@ function stop (error) {
   process.exit()
 }
 
-function eject (args, cb) {
+async function eject (args, cb) {
   let opts = parseArgs(args)
 
   if (!fs.existsSync(opts.file)) {
@@ -47,10 +48,10 @@ function eject (args, cb) {
   }
 
   try {
-    await mkdir(path.join(__dir, 'lib'))
+    await mkdir(path.join(dir, 'lib'))
     await mkdir(path.join(dir, 'args'))
 
-    generify(path.join(__dir, 'lib'), path.join(__dirname, 'lib', 'watch'), {}, function (file) {
+    generify(path.join(__dirname, 'lib', 'watch'), path.join(dir, 'lib'), {}, function (file) {
       log('debug', `generated ${file}`)
     })
   } catch (e) {
