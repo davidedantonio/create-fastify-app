@@ -1,8 +1,9 @@
 Generate Fastify projects and utilities:
 
-  create-fastify-app [command] <options>
+  fastify-app [command] <options>
 
 Command
+  run                           Execute a fastify app
   generate:project              Generate a ready to use Fastify project
   generate:service              Generate service skeleton source in given project
   add:mysql                     Add fastify-mysql plugin in given project folder

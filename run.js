@@ -116,7 +116,7 @@ function run (args, cb) {
 
   if (opts.repl) {
     fastify.register(require('./lib/repl'), { address: opts.address + 1 })
-    fastify.register(require('./lib/routes'))
+    fastify.register(require('./lib/plugins/routes'))
   }
 
   fastify.register(fp(file), pluginOptions)
