@@ -1,0 +1,7 @@
+  REPL command interface for fastify:
+
+  Commands
+    .info                         Get generic information on System
+    .network                      Get all the information about Network interfaces
+    .routes                       Print all the available routes registered in fastify
+    .cpus                         Get the information about the CPUs

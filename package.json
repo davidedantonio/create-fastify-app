@@ -4,7 +4,8 @@
   "description": "A Fastify application generator",
   "main": "create-fastify-app.js",
   "bin": {
-    "create-fastify-app": "create-fastify-app.js"
+    "fastify-app": "create-fastify-app.js",
+    "fastify-repl": "./lib/repl/repl-client.js"
   },
   "scripts": {
     "lint": "standard --verbose",
