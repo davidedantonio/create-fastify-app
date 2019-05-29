@@ -16,6 +16,7 @@ const postgresGenerator = require('./generators/postgres')
 const commist = require('commist')()
 const log = require('./lib/log')
 const run = require('./run')
+const eject = require('./eject')
 
 require('make-promises-safe')
 
@@ -38,6 +39,7 @@ async function showHelp () {
 }
 
 commist.register('run', run.cli)
+commist.register('eject', eject.cli)
 commist.register('generate:project', appGenerator.cli)
 commist.register('generate:service', serviceGenerator.cli)
 commist.register('add:mysql', mysqlGenerator.cli)

@@ -1,0 +1,11 @@
+Generate Fastify projects and utilities:
+
+  fastify-app eject <options>
+
+Options
+
+  -d, --directory
+      Fastify project folder
+
+  -h, --help
+      Show this help message
