@@ -54,7 +54,6 @@ function start (args, cb) {
     return showHelp()
   }
 
-  require('make-promises-safe')
   loadModules(opts)
   if (opts.watch) {
     return watch(args)
@@ -140,7 +139,7 @@ function cli (args) {
   start(args)
 }
 
-module.exports = { start, cli, stop }
+module.exports = { start, cli, stop, run }
 
 if (require.main === module) {
   cli(process.argv.slice(2))

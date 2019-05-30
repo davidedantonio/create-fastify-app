@@ -3,6 +3,7 @@
 const fs = require('fs')
 const parseArgs = require('./args/run')
 const path = require('path')
+const chalk = require('chalk')
 const { isValidFastifyProject } = require('./lib/utils')
 const { promisify } = require('util')
 const mkdir = promisify(fs.mkdir)
@@ -55,15 +56,15 @@ async function eject (args, cb) {
     await mkdir(path.join(dir, 'args'))
 
     generify(path.join(__dirname, 'lib', 'watch'), path.join(dir, 'lib', 'watch'), {}, function (file) {
-      log('debug', `generated ${file}`)
+      log('debug', `generated ${path.join(dir, 'lib', 'watch')}`)
     })
 
     generify(path.join(__dirname, 'lib', 'repl'), path.join(dir, 'lib', 'repl'), {}, function (file) {
-      log('debug', `generated ${file}`)
+      log('debug', `generated ${path.join(dir, 'lib', 'repl')}`)
     })
 
     generify(path.join(__dirname, 'lib', 'plugins'), path.join(dir, 'lib', 'plugins'), {}, function (file) {
-      log('debug', `generated ${file}`)
+      log('debug', `generated ${path.join(dir, 'lib', 'plugins')}`)
     })
 
     await copyFile(path.join(__dirname, 'args', 'run.js'), path.join(dir, 'args', 'run.js'))
@@ -89,6 +90,9 @@ async function eject (args, cb) {
     })
 
     await writeFile(path.join(dir, 'package.json'), JSON.stringify(pkgApp, null, 2), 'utf8')
+    log('debug', 'package.json modified')
+    log('success', `run '${chalk.bold('npm install')}'`)
+    log('success', `run '${chalk.bold('npm run dev')}' to start the application`)
   } catch (e) {
     module.exports.stop(e)
   }
