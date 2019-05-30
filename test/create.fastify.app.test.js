@@ -11,7 +11,7 @@ test('generate project error', (t) => {
     ['create-fastify-app.js', 'generate:project'],
     []
   ).then(out => {
-    t.ok(out.indexOf('Project folder already exist') !== -1)
+    t.ok(out.indexOf(`Project folder ${process.cwd()} already exist`) !== -1)
   })
 })
 
