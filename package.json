@@ -27,6 +27,13 @@
     "url": "git+https://github.com/davidedantonio/fastify-generator.git"
   },
   "author": "Davide D'Antonio <davide.dantonio@webeetle.com>",
+  "contributors": [
+    {
+      "name": "Simone Gentili",
+      "email": "sensorario@gmail.com",
+      "url": "https://github.com/sensorario"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/davidedantonio/fastify-generator/issues"
