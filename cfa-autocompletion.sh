@@ -10,13 +10,6 @@ _create-fastify-app()
         1)
             COMPREPLY=($(compgen -W "generate:project generate:service add:mysql add:mongo add:cors add:redis add:postgres" -- ${cur}))
             ;;
-        #2)
-            #case ${prev} in
-                #config)
-                    #COMPREPLY=($(compgen -W "tagAfterMerge disableUndoCommand stopAskingForTags applyFirstTag enableGitCommandLog forceOnPublish pushTagsOnPublish removeRemotelyMerged" -- ${cur}))
-                    #;;
-            #esac
-            #;;
         *)
             COMPREPLY=()
             ;;
