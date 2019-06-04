@@ -79,9 +79,12 @@ async function eject (args, cb) {
     pkgApp = JSON.parse(pkgApp)
 
     Object.assign(pkgApp, {
-      'clui': pkgLocal.dependencies['clui'],
-      'tiny-human-time': pkgLocal.dependencies['tiny-human-time'],
-      'chalk': pkgLocal.dependencies['chalk'],
+      dependencies: {
+        ...pkgApp.dependencies,
+        'clui': pkgLocal.dependencies['clui'],
+        'tiny-human-time': pkgLocal.dependencies['tiny-human-time'],
+        'chalk': pkgLocal.dependencies['chalk'],
+      },
       scripts: {
         'test': 'tap test/**/*.test.js',
         'start': 'node run.js',
