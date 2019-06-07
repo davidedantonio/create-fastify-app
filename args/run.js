@@ -16,7 +16,7 @@ module.exports = function parseArgs (args) {
       options: ['o'],
       prefix: ['r'],
       watch: ['w'],
-      repl: ['-R'],
+      repl: ['-RP'],
       'log-level': ['l'],
       'pretty-logs': ['P'],
       'plugin-timeout': ['T']
