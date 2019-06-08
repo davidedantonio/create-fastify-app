@@ -286,7 +286,7 @@ fastify-app run -l info -P -R
 
 In the console appear something like this
 
-![Repl Server started](./images/swagger.png)
+![Repl Server started](./images/repl_server.png)
 
 You can connect ti REPL server via `fastify-repl` command with this simple commmand:
 
