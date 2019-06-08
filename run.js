@@ -114,7 +114,7 @@ function run (args, cb) {
   }
 
   if (opts.repl) {
-    fastify.register(require('./lib/repl'), { address: opts.address + 1 })
+    fastify.register(require('./lib/repl'), { port: process.env.FASTIFY_REPL_PORT || opts.port + 1 })
     fastify.register(require('./lib/plugins/routes'))
   }
 
