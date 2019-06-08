@@ -148,7 +148,7 @@ You can pass the following options via command line with `fastify run <options>`
 | Set the plugin timeout | `-T` | `--plugin-timeout` | `FASTIFY_PLUGIN_TIMEOUT` |
 | Defines the maximum payload, in bytes,<br>the server is allowed to accept |  | `--body-limit` | `FASTIFY_BODY_LIMIT` |
 | Start the application in watching mode on your file changes | `-w` | `--watch` | |
-| Start a REPL server for your application and yes, you can interact with him | `-RP` | `--repl` |  |
+| Start a REPL server for your application and yes, you can interact with him | `-R` | `--repl` | `FASTIFY_REPL_PORT` |
 
 #### Generate a project from a swagger file
 
@@ -156,7 +156,7 @@ When you generate a new project you can give in input a swagger file. In an api 
 
 If you give in input the [Petstore](https://editor.swagger.io/?_ga=2.5251579.932457202.1552732701-831465500.1549699944) swagger file given as example on [Swagger.io](https://swagger.io), you can see that `fastify-app` automatically generate a project with `fastify-swagger` already configured and ready to use in your project. If you take a look at `/documentation` endpoint you'll find something like that:
 
-![swagger-example](./swagger.png)
+![swagger-example](./images/swagger.png)
 
 In your `src/services` folder you'll find your endpoints folder
 
@@ -275,6 +275,42 @@ And give some information such as:
 - **Postgres Password**: your Postgres password.
 
 At this point the command add the `fastify-postgres` to you application with the given information for your [Postgres](https://www.postgresql.org/) connection.
+
+## REPL command
+
+With version `2.0` we have introduced a REPL interface command that you can decide to start when you run your fastify application. To do that you can start your application with the `--repl`, or `-R` option:
+
+```
+fastify-app run -l info -P -R
+```
+
+In the console appear something like this
+
+![Repl Server started](./images/swagger.png)
+
+You can connect ti REPL server via `fastify-repl` command with this simple commmand:
+
+```
+fastify-repl <address>:<port>
+```
+
+And now you're connected on fastify repl istance. You will have the following commands available:
+
+### `.info`: Get generic information on System.
+
+![Info](./images/info.png)
+
+### `.network`: Get all the information about Network interfaces.
+
+![Network](./images/network.png)
+
+### `.routes`: Print all the available routes registered in fastify.
+
+![Network](./images/routes.png)
+
+### `.cpus`: Get the information about the CPUs
+
+![CPU](./images/cpus.png)
 
 ## Eject your application
 
