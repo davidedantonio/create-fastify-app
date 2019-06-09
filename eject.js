@@ -83,7 +83,7 @@ async function eject (args, cb) {
         ...pkgApp.dependencies,
         'clui': pkgLocal.dependencies['clui'],
         'tiny-human-time': pkgLocal.dependencies['tiny-human-time'],
-        'chalk': pkgLocal.dependencies['chalk'],
+        'chalk': pkgLocal.dependencies['chalk']
       },
       scripts: {
         'test': 'tap test/**/*.test.js',

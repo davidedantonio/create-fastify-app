@@ -47,5 +47,4 @@ module.exports = function parseArgs (args) {
     watch: parsedArgs.watch,
     prettyLogs: parsedArgs.prettyLogs
   })
-
 }
