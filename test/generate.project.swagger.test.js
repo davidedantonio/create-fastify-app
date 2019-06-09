@@ -108,7 +108,7 @@ function define (t) {
     t.equal(pkg.keywords.join(','), APPLICATION_KEYWORDS)
     t.equal(pkg.license, APPLICATION_LICENSE)
     t.equal(pkg.scripts.test, 'tap test/**/*.test.js')
-    t.equal(pkg.scripts.start, 'node server.js')
-    t.equal(pkg.scripts.dev, 'node server.js -l info -P -w')
+    t.equal(pkg.scripts.start, 'fastify-app run')
+    t.equal(pkg.scripts.dev, 'fastify-app run -l info -P -w')
   }
 }
