@@ -16,7 +16,7 @@ Create Fastify App is an utility that help you to generate or add plugin to your
 If you want to use `fastify-app` you must first install globally on your machine
 
 ```
-npm install -g fastify-app
+npm install -g create-fastify-app
 ```
 
 ## Usage
@@ -116,7 +116,6 @@ The `src` folder contains all you need to develop your application. In particula
 - `plugins`: here you can add all your plugins you need into you application.
 - `services`: here you can develop all the endpoint you need for your application, or the generated endpoint if you give a swagger file at project creation.
 - `hooks`: here you can declare all the hooks you need for your fastify application
-
 
 The `package.json` file comes with three predefined npm task:
 
