@@ -405,6 +405,15 @@ The code follows the Standard code style.
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
+### Running Tests
+
+To perform the tests you need to have, up and running, the following docker images available:
+
+- `mysql:latest`
+- `redis:latest`
+- `postrges:latest`
+- `mongo:latest`
+
 ## Acknowledgements
 
 It is inspired by the [fastify-cli](https://github.com/fastify/fastify-cli) project. Some part have been extracted from it.
