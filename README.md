@@ -413,6 +413,8 @@ To perform the tests you need to have, up and running, the following docker imag
 - `postrges:latest`
 - `mongo:latest`
 
+In order to run MySQL and Postgres test you need to create a database named `test`.
+
 ## Acknowledgements
 
 It is inspired by the [fastify-cli](https://github.com/fastify/fastify-cli) project. Some part have been extracted from it.
