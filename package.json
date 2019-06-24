@@ -21,7 +21,9 @@
     "nodejs-library",
     "redis",
     "cors",
-    "mongodb"
+    "mongodb",
+    "mysql",
+    "postgres"
   ],
   "repository": {
     "type": "git",
