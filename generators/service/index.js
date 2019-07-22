@@ -44,7 +44,7 @@ async function createTemplate (template, data) {
 }
 
 async function generate (args, cb) {
-  let opts = parseArgs(args)
+  const opts = parseArgs(args)
   if (opts.help) {
     return showHelp()
   }
@@ -98,7 +98,7 @@ async function generate (args, cb) {
 
   const serviceName = _.camelCase(answers.serviceName)
 
-  let data = Object.assign(answers, {
+  const data = Object.assign(answers, {
     serviceName: serviceName
   })
 

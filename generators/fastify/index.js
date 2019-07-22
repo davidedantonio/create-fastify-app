@@ -34,14 +34,14 @@ async function showHelp () {
 }
 
 async function generate (args, cb) {
-  let opts = parseArgs(args)
+  const opts = parseArgs(args)
   if (opts.help) {
     return showHelp()
   }
 
   const dir = opts.directory || process.cwd()
   try {
-    let dirExist = await fileExists(dir)
+    const dirExist = await fileExists(dir)
     if (dirExist) {
       log('error', `Project folder ${dir} already exist\n`)
       module.exports.stop()
@@ -69,8 +69,8 @@ async function generate (args, cb) {
     if (err) {
       return cb(err)
     }
-    let swaggerPath = getAbsolutePath(answers.swagger)
-    let projectPath = dir
+    const swaggerPath = getAbsolutePath(answers.swagger)
+    const projectPath = dir
     let pkg
 
     try {
@@ -88,9 +88,9 @@ async function generate (args, cb) {
       keywords: answers.keywords ? answers.keywords.split(',') : [],
       license: answers.license,
       scripts: {
-        'test': 'tap test/**/*.test.js',
-        'start': 'node server.js',
-        'dev': 'node server.js -l info -P'
+        test: 'tap test/**/*.test.js',
+        start: 'node server.js',
+        dev: 'node server.js -l info -P'
       }
     })
 

@@ -17,13 +17,13 @@ async function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  let redisExist = await fileExists(path.join(pluginPath, 'redis.js'), fs.F_OK)
+  const redisExist = await fileExists(path.join(pluginPath, 'redis.js'), fs.F_OK)
   if (redisExist) {
     throw new Error('Redis plugin already configured')
   }
 
   try {
-    let content = await createTemplate('redis.hbs', answers)
+    const content = await createTemplate('redis.hbs', answers)
     await writeFile(path.join(pluginPath, 'redis.js'), content, 'utf8')
   } catch (e) {
     throw new Error(e)

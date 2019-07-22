@@ -17,19 +17,19 @@ async function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  let corsExist = await fileExists(path.join(pluginPath, 'cors.js'))
+  const corsExist = await fileExists(path.join(pluginPath, 'cors.js'))
   if (corsExist) {
     throw new Error('CORS plugin already configured')
   }
 
   try {
-    let content = await createTemplate('cors.hbs', answers.methods)
+    const content = await createTemplate('cors.hbs', answers.methods)
     await writeFile(path.join(pluginPath, 'cors.js'), content, 'utf8')
 
-    let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
-    let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
-    pkg = JSON.parse(pkg)
-    rootPkg = JSON.parse(rootPkg)
+    const rootPkgFile = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
+    const pkgFile = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
+    const rootPkg = JSON.parse(rootPkgFile)
+    const pkg = JSON.parse(pkgFile)
 
     Object.assign(pkg.dependencies, {
       'fastify-cors': rootPkg.devDependencies['fastify-cors']

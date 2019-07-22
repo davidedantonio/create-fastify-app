@@ -23,13 +23,13 @@ async function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  let mySqlExist = await fileExists(path.join(pluginPath, 'mysql.db.js'))
+  const mySqlExist = await fileExists(path.join(pluginPath, 'mysql.db.js'))
   if (mySqlExist) {
     throw new Error('MySQL plugin already configured')
   }
 
   try {
-    let content = await createTemplate('mysql.db.hbs', answers)
+    const content = await createTemplate('mysql.db.hbs', answers)
     await writeFile(path.join(pluginPath, 'mysql.db.js'), content, 'utf8')
 
     let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')

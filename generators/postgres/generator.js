@@ -23,13 +23,13 @@ async function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  let postgresExist = await fileExists(path.join(pluginPath, 'postgres.db.js'))
+  const postgresExist = await fileExists(path.join(pluginPath, 'postgres.db.js'))
   if (postgresExist) {
     throw new Error('Postgres plugin already configured')
   }
 
   try {
-    let content = await createTemplate('postgres.db.hbs', answers)
+    const content = await createTemplate('postgres.db.hbs', answers)
     await writeFile(path.join(pluginPath, 'postgres.db.js'), content, 'utf8')
 
     let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
@@ -39,7 +39,7 @@ async function generatePlugin (pluginPath, answers) {
 
     Object.assign(pkg.dependencies, {
       'fastify-postgres': rootPkg.devDependencies['fastify-postgres'],
-      'pg': rootPkg.devDependencies['pg']
+      pg: rootPkg.devDependencies['pg']
     })
 
     await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
