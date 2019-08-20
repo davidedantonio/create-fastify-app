@@ -11,7 +11,7 @@ test('add mysql plugin and start server', (t) => {
   t.plan(3)
 
   run(
-    ['create-fastify-app.js', 'add:mysql', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:mysql', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
       `3306${ENTER}`,
@@ -35,7 +35,7 @@ test('add redis plugin and get error', (t) => {
   t.plan(1)
 
   run(
-    ['create-fastify-app.js', 'add:mysql', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:mysql', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
       `3306${ENTER}`,

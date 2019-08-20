@@ -39,7 +39,7 @@ async function generatePlugin (pluginPath, answers) {
 
     Object.assign(pkg.dependencies, {
       'fastify-postgres': rootPkg.devDependencies['fastify-postgres'],
-      pg: rootPkg.devDependencies['pg']
+      pg: rootPkg.devDependencies.pg
     })
 
     await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')

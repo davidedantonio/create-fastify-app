@@ -11,7 +11,7 @@ test('generate service and start server', (t) => {
   t.plan(14)
 
   run(
-    ['create-fastify-app.js', 'generate:service', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'generate:service', '-d', './test/workdir'],
     [
       `${ENTER}`,
       `${ENTER}`,
@@ -90,7 +90,7 @@ test('generate service and start server', (t) => {
   t.plan(1)
 
   run(
-    ['create-fastify-app.js', 'generate:service', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'generate:service', '-d', './test/workdir'],
     [
       `${ENTER}`,
       `${ENTER}`,

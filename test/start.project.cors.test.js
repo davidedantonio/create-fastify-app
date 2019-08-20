@@ -11,7 +11,7 @@ test('add cors plugin and start server', (t) => {
   t.plan(6)
 
   run(
-    ['create-fastify-app.js', 'add:cors', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:cors', '-d', './test/workdir'],
     [
       `a${ENTER}`
     ]
@@ -47,7 +47,7 @@ test('add cors plugin and get error', (t) => {
   t.plan(1)
 
   run(
-    ['create-fastify-app.js', 'add:cors', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:cors', '-d', './test/workdir'],
     [
       `a${ENTER}`
     ]
