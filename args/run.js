@@ -16,7 +16,6 @@ module.exports = function parseArgs (args) {
       options: ['o'],
       prefix: ['r'],
       watch: ['w'],
-      repl: ['R'],
       'log-level': ['l'],
       'pretty-logs': ['P'],
       'plugin-timeout': ['T']
@@ -24,10 +23,9 @@ module.exports = function parseArgs (args) {
     default: {
       'log-level': 'error',
       'pretty-logs': false,
-      watch: false,
-      repl: false,
-      options: false,
       'plugin-timeout': 10 * 1000,
+      watch: false,
+      options: false,
       file: 'src/index.js'
     }
   })
