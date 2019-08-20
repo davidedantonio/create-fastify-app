@@ -38,7 +38,6 @@ module.exports = function parseArgs (args) {
     file: parsedArgs.file,
     logLevel: parsedArgs.logLevel,
     options: parsedArgs.options,
-    repl: parsedArgs.repl,
     pluginTimeout: parsedArgs.pluginTimeout,
     port: parsedArgs.port,
     prefix: parsedArgs.prefix,
