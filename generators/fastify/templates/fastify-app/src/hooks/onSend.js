@@ -10,7 +10,7 @@ module.exports = fp(async (fastify, opts) => {
     // of handlers.
   })
 
-  // fastify.addHook('onSend', (request, reply, next) => {
+  // fastify.addHook('onSend', (request, reply, payload, done) => {
   //   next()
   // })
 })
