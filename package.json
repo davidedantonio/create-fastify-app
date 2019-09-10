@@ -1,6 +1,10 @@
 {
   "name": "create-fastify-app",
+<<<<<<< HEAD
   "version": "1.6.10",
+=======
+  "version": "1.6.11",
+>>>>>>> 343f2356fa2d36a886056aeeca09a4acbc4a5bc1
   "description": "A Fastify application generator",
   "main": "create-fastify-app.js",
   "bin": {
@@ -63,7 +67,7 @@
     "dotenv": "^8.0.0",
     "fastify-autoload": "^1.0.0",
     "fastify-cors": "^2.1.1",
-    "fastify-mongodb": "^1.0.1",
+    "fastify-mongodb": "^2.0.0",
     "fastify-mysql": "^0.3.0",
     "fastify-postgres": "^2.0.0",
     "fastify-redis": "^3.0.0",
