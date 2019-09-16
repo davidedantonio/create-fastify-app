@@ -17,13 +17,13 @@ async function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  let corsExist = await fileExists(path.join(pluginPath, 'cors.js'))
+  const corsExist = await fileExists(path.join(pluginPath, 'cors.js'))
   if (corsExist) {
     throw new Error('CORS plugin already configured')
   }
 
   try {
-    let content = await createTemplate('cors.hbs', answers.methods)
+    const content = await createTemplate('cors.hbs', answers.methods)
     await writeFile(path.join(pluginPath, 'cors.js'), content, 'utf8')
 
     let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')

@@ -58,7 +58,7 @@ function define (t) {
     }
 
     await run(
-      ['create-fastify-app.js', 'generate:project', '-d', `./test/workdirSwagger`],
+      ['create-fastify-app.js', 'generate:project', '-d', './test/workdirSwagger'],
       [
         `${APPLICATION_NAME}${ENTER}`,
         `${APPLICATION_DESCRIPTION}${ENTER}`,

@@ -17,13 +17,13 @@ async function createTemplate (template, data) {
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
 
-  let mongoDBExist = await fileExists(path.join(pluginPath, 'mongo.db.js'))
+  const mongoDBExist = await fileExists(path.join(pluginPath, 'mongo.db.js'))
   if (mongoDBExist) {
     throw new Error('MongoDB plugin already configured')
   }
 
   try {
-    let content = await createTemplate('mongo.db.hbs', answers)
+    const content = await createTemplate('mongo.db.hbs', answers)
     await writeFile(path.join(pluginPath, 'mongo.db.js'), content, 'utf8')
 
     let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')

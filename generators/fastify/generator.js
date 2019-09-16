@@ -17,17 +17,17 @@ async function createTemplate (template, data) {
 }
 
 async function generatePlugin (filePath, projectFolder) {
-  let fileContent = await swagger(filePath)
-  let content = await createTemplate(path.join('plugins', 'swagger.hbs'), fileContent)
+  const fileContent = await swagger(filePath)
+  const content = await createTemplate(path.join('plugins', 'swagger.hbs'), fileContent)
   await writeFile(path.join(projectFolder, 'src', 'plugins', 'swagger.js'), beautify(content, { indent_size: 2, space_in_empty_paren: true }), 'utf8')
 }
 
 async function generateServices (filePath, projectFolder) {
-  let fileContent = await swagger(filePath)
+  const fileContent = await swagger(filePath)
   const files = {}
 
-  for (let i in fileContent.routes) {
-    let prefix = fileContent.routes[i].routePrefix
+  for (const i in fileContent.routes) {
+    const prefix = fileContent.routes[i].routePrefix
     if (files[prefix] === undefined) {
       files[prefix] = []
     }
@@ -37,9 +37,9 @@ async function generateServices (filePath, projectFolder) {
   const servicesPath = path.join(projectFolder, 'src', 'services')
   const basePath = fileContent.basePath || 'api'
 
-  for (let prefix in files) {
-    let serviceContent = await createTemplate(path.join('services', 'service.hbs'), { basePath: basePath, prefix: prefix, data: files[prefix] })
-    let schemaContent = await createTemplate(path.join('services', 'schema.hbs'), { prefix: prefix, data: files[prefix] })
+  for (const prefix in files) {
+    const serviceContent = await createTemplate(path.join('services', 'service.hbs'), { basePath: basePath, prefix: prefix, data: files[prefix] })
+    const schemaContent = await createTemplate(path.join('services', 'schema.hbs'), { prefix: prefix, data: files[prefix] })
 
     await mkdir(path.join(servicesPath, prefix))
     await writeFile(path.join(servicesPath, prefix, 'routes.schema.js'), beautify(schemaContent, { indent_size: 2, space_in_empty_paren: true }), 'utf8')

@@ -43,7 +43,7 @@ function loadModules (opts) {
 }
 
 function start (args, cb) {
-  let opts = parseArgs(args)
+  const opts = parseArgs(args)
 
   if (!fs.existsSync(opts.file)) {
     console.error('Missing the required file index.js\n')
@@ -64,7 +64,7 @@ function start (args, cb) {
 
 function run (args, cb) {
   require('dotenv').config()
-  let opts = parseArgs(args)
+  const opts = parseArgs(args)
 
   opts.port = opts.port || process.env.PORT || 3000
   cb = cb || assert.ifError

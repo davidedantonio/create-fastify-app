@@ -33,7 +33,7 @@ function stop (error) {
 }
 
 async function eject (args, cb) {
-  let opts = parseArgs(args)
+  const opts = parseArgs(args)
 
   if (!fs.existsSync(opts.file)) {
     console.error('Missing the required file index.js\n')
@@ -81,14 +81,14 @@ async function eject (args, cb) {
     Object.assign(pkgApp, {
       dependencies: {
         ...pkgApp.dependencies,
-        'clui': pkgLocal.dependencies['clui'],
+        clui: pkgLocal.dependencies.clui,
         'tiny-human-time': pkgLocal.dependencies['tiny-human-time'],
-        'chalk': pkgLocal.dependencies['chalk']
+        chalk: pkgLocal.dependencies.chalk
       },
       scripts: {
-        'test': 'tap test/**/*.test.js',
-        'start': 'node run.js',
-        'dev': 'node run.js -l info -P -w'
+        test: 'tap test/**/*.test.js',
+        start: 'node run.js',
+        dev: 'node run.js -l info -P -w'
       }
     })
 

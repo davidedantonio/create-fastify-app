@@ -28,7 +28,7 @@ async function showHelp () {
 }
 
 async function generate (args, cb) {
-  let opts = parseArgs(args)
+  const opts = parseArgs(args)
   if (opts.help) {
     return showHelp()
   }

@@ -11,7 +11,7 @@ test('add redis plugin and start server', (t) => {
   t.plan(3)
 
   run(
-    ['create-fastify-app.js', 'add:redis', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:redis', '-d', './test/workdir'],
     [
       `127.0.0.1${ENTER}`,
       `6379${ENTER}`,
@@ -57,7 +57,7 @@ test('add redis plugin and get error', (t) => {
   t.plan(1)
 
   run(
-    ['create-fastify-app.js', 'add:redis', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:redis', '-d', './test/workdir'],
     [
       `127.0.0.1${ENTER}`,
       `6379${ENTER}`,

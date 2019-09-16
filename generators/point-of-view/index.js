@@ -44,7 +44,7 @@ async function createTemplate (template, data) {
 }
 
 async function generate (args, cb) {
-  let opts = parseArgs(args)
+  const opts = parseArgs(args)
   if (opts.help) {
     return showHelp()
   }
@@ -84,18 +84,14 @@ async function generate (args, cb) {
 
   const viewDirectrory = _.camelCase(answers.views_directory)
 
-  let data = Object.assign(answers, {
-    serviceName: serviceName
-  })
-
-  const servicesPath = path.join(dir, 'src', 'services')
+  const servicesPath = path.join(dir, 'src', viewDirectrory)
   const testPath = path.join(dir, 'test', 'services')
 
   try {
     await mkdir(path.join(servicesPath, serviceName))
 
     let content = await createTemplate('service.hbs', data)
-    await writeFile(path.join(servicesPath, serviceName, 'index.js'), content, 'utf8')
+    await writeFile(path.join(servicesPath, viewDirectrory, 'index.js'), content, 'utf8')
     log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'index.js'))} generated successfully with ${data.methods.join(', ')} methods`)
 
     content = await createTemplate('README.md', data)

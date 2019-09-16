@@ -11,7 +11,7 @@ test('add mongo plugin and start server', (t) => {
   t.plan(6)
 
   run(
-    ['create-fastify-app.js', 'add:mongo', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:mongo', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
       `27017${ENTER}`,
@@ -38,7 +38,7 @@ test('add mongodb plugin and get error', (t) => {
   t.plan(1)
 
   run(
-    ['create-fastify-app.js', 'add:mongo', '-d', `./test/workdir`],
+    ['create-fastify-app.js', 'add:mongo', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
       `27017${ENTER}`,
