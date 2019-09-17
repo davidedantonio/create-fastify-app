@@ -14,10 +14,10 @@ test('add mysql plugin and start server', (t) => {
     ['create-fastify-app.js', 'add:mysql', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
-      `3306${ENTER}`,
+      `3307${ENTER}`,
       `test${ENTER}`,
-      `root${ENTER}`,
-      `${ENTER}`
+      `davide${ENTER}`,
+      `davide${ENTER}`
     ]
   ).then(_ => {
     server.start(['-f', path.join(__dirname, 'workdir', 'src', 'index.js')], function (err, fastify) {
@@ -38,10 +38,10 @@ test('add redis plugin and get error', (t) => {
     ['create-fastify-app.js', 'add:mysql', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
-      `3306${ENTER}`,
+      `3307${ENTER}`,
       `test${ENTER}`,
-      `root${ENTER}`,
-      `${ENTER}`
+      `davide${ENTER}`,
+      `davide${ENTER}`
     ]
   ).then(out => {
     t.ok(out.indexOf('MySQL plugin already configured') !== -1)

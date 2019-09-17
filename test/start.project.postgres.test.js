@@ -14,10 +14,10 @@ test('add postgres plugin and start server', (t) => {
     ['create-fastify-app.js', 'add:postgres', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
-      `3306${ENTER}`,
+      `3211${ENTER}`,
       `test${ENTER}`,
-      `root${ENTER}`,
-      `${ENTER}`
+      `davide${ENTER}`,
+      `davide${ENTER}`
     ]
   ).then(_ => {
     server.start(['-f', path.join(__dirname, 'workdir', 'src', 'index.js')], function (err, fastify) {
@@ -31,7 +31,7 @@ test('add postgres plugin and start server', (t) => {
   })
 })
 
-test('add redis plugin and get error', (t) => {
+test('add postgres plugin and get error', (t) => {
   t.plan(1)
 
   run(
@@ -40,8 +40,8 @@ test('add redis plugin and get error', (t) => {
       `localhost${ENTER}`,
       `3211${ENTER}`,
       `test${ENTER}`,
-      `${ENTER}`,
-      `${ENTER}`
+      `davide${ENTER}`,
+      `davide${ENTER}`
     ]
   ).then(out => {
     t.ok(out.indexOf('Postgres plugin already configured') !== -1)

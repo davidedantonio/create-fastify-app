@@ -3,16 +3,10 @@
 const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
-const Handlebars = require('./../../lib/handlebars')
+const { createTemplate } = require('./../../lib/utils')
 const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const writeFile = promisify(fs.writeFile)
 const readFile = promisify(fs.readFile)
-
-async function createTemplate (template, data) {
-  const file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
-  const pluginTemplate = Handlebars.compile(file)
-  return pluginTemplate(data)
-}
 
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
@@ -23,7 +17,7 @@ async function generatePlugin (pluginPath, answers) {
   }
 
   try {
-    const content = await createTemplate('redis.hbs', answers)
+    const content = await createTemplate(path.join(__dirname, 'templates', 'redis.hbs'), answers)
     await writeFile(path.join(pluginPath, 'redis.js'), content, 'utf8')
   } catch (e) {
     throw new Error(e)

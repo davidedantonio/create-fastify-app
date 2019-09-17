@@ -3,22 +3,10 @@
 const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
-const Handlebars = require('./../../lib/handlebars')
+const { createTemplate } = require('./../../lib/utils')
 const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
-
-async function createTemplate (template, data) {
-  let file
-  try {
-    file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
-  } catch (e) {
-    throw new Error(e)
-  }
-
-  const pluginTemplate = Handlebars.compile(file)
-  return pluginTemplate(data)
-}
 
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
@@ -29,7 +17,7 @@ async function generatePlugin (pluginPath, answers) {
   }
 
   try {
-    const content = await createTemplate('postgres.db.hbs', answers)
+    const content = await createTemplate(path.join(__dirname, 'templates', 'postgres.db.hbs'), answers)
     await writeFile(path.join(pluginPath, 'postgres.db.js'), content, 'utf8')
 
     let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')

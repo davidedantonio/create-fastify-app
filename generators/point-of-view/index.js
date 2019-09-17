@@ -5,13 +5,13 @@ const { promisify } = require('util')
 const log = require('../../lib/log')
 const path = require('path')
 const inquirer = require('inquirer')
-const Handlebars = require('./../../lib/handlebars')
 const _ = require('lodash')
 const chalk = require('chalk')
 const { parseArgs, isValidFastifyProject } = require('../../lib/utils')
-const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
 const mkdir = promisify(fs.mkdir)
+const readFile = promisify(fs.readFile)
+const { createTemplate } = require('./../../lib/utils')
 
 function stop (err) {
   if (err) {
@@ -29,18 +29,6 @@ async function showHelp () {
     return module.exports.stop(e)
   }
   return module.exports.stop()
-}
-
-async function createTemplate (template, data) {
-  let file
-  try {
-    file = await readFile(path.join(__dirname, 'templates', template), 'utf8')
-  } catch (e) {
-    module.exports.stop(e)
-  }
-
-  const serviceTemplate = Handlebars.compile(file)
-  return serviceTemplate(data)
 }
 
 async function generate (args, cb) {
@@ -82,25 +70,15 @@ async function generate (args, cb) {
     }
   ])
 
-  const viewDirectrory = _.camelCase(answers.views_directory)
-
-  const servicesPath = path.join(dir, 'src', viewDirectrory)
-  const testPath = path.join(dir, 'test', 'services')
+  const viewDirectrory = path.join(dir, 'src', _.camelCase(answers.views_directory))
+  const servicesPath = path.join(dir, 'src', 'plugins')
 
   try {
-    await mkdir(path.join(servicesPath, serviceName))
+    await mkdir(viewDirectrory)
 
-    let content = await createTemplate('service.hbs', data)
-    await writeFile(path.join(servicesPath, viewDirectrory, 'index.js'), content, 'utf8')
-    log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'index.js'))} generated successfully with ${data.methods.join(', ')} methods`)
-
-    content = await createTemplate('README.md', data)
-    await writeFile(path.join(servicesPath, serviceName, 'README.md'), content, 'utf8')
-    log('success', `File ${chalk.bold(path.join(servicesPath, serviceName, 'README.md'))} generated successfully`)
-
-    content = await createTemplate('service.test.hbs', data)
-    await writeFile(path.join(testPath, `${serviceName}.test.js`), content, 'utf8')
-    log('success', `File ${chalk.bold(path.join(testPath, `${serviceName}.test.js`))} generated successfully`)
+    const content = await createTemplate(path.join(__dirname, 'templates', 'point-of-view.hbs'), answers)
+    await writeFile(path.join(servicesPath, 'point-of-view.js'), content, 'utf8')
+    log('success', `File ${chalk.bold(path.join(servicesPath, 'point-of-view.js'))} generated successfully`)
   } catch (e) {
     return cb(e)
   }
