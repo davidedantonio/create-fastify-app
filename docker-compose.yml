@@ -1,34 +1,42 @@
-version: "3.7"
+version: '3.7'
 services: 
   mongodb: 
     image: mongo:latest
     container_name: mongodbCFA
     ports: 
-      - 27018:27018
+      - '27018:27017'
+    expose:
+      - '27018'
     environment:
-      - MONGODB_USER="davide"
-      - MONGODB_PASS="davide"
+      MONGODB_USER: 'davide'
+      MONGODB_PASS: 'davide'
   mysql:
     image: mysql:5.7
     container_name: mysqlCFA
+    restart: always
     ports:
-      - 3307:3307
+      - '3307:3306'
     environment:
-      - MYSQL_DATABASE="test"
-      - MYSQL_USER="davide"
-      - MYSQL_PASSWORD="davide"
-      - MYSQL_ROOT_PASSWORD="davide"
+      MYSQL_DATABASE: 'test'
+      MYSQL_USER: 'davide'
+      MYSQL_PASSWORD: 'davide'
+      MYSQL_ROOT_PASSWORD: 'davide'
   redis:
     image: redis:latest
     container_name: redisCFA
     ports:
-      - 6378:6378
-  postgres: 
+      - '6378:6378'
+    expose:
+      - '6378'
+  postgres:
+    restart: always
     image: postgres:10.4
     container_name: postgresCFA
     ports: 
-      - 5432:5432
+      - '5432:5432'
+    expose: 
+      - '5432'
     environment:
-      - POSTGRES_USER="davide"
-      - POSTGRES_PASSWORD="davide"
-      - POSTGRES_DATABASE="test"
+      POSTGRES_USER: 'davide'
+      POSTGRES_PASSWORD: 'davide'
+      POSTGRES_DATABASE: 'test'
