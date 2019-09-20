@@ -338,19 +338,7 @@ So when you eject your application your project structure is something like this
 │   │   ├── cpu.js
 │   │   ├── health.js
 │   │   └── routes.js
-│   ├── repl
-│   │   ├── client.js
-│   │   ├── commands
-│   │   │   ├── cpus.js
-│   │   │   ├── help.js
-│   │   │   ├── index.js
-│   │   │   ├── info.js
-│   │   │   ├── network.js
-│   │   │   └── routes.js
-│   │   ├── help.txt
-│   │   ├── index.js
-│   │   ├── repl-client.js
-│   │   └── repl.js
+│   │   
 │   └── watch
 │       ├── constants.js
 │       ├── fork.js

@@ -4,8 +4,7 @@
   "description": "A Fastify application generator",
   "main": "create-fastify-app.js",
   "bin": {
-    "fastify-app": "create-fastify-app.js",
-    "fastify-repl": "./lib/repl/repl-client.js"
+    "fastify-app": "create-fastify-app.js"
   },
   "scripts": {
     "lint": "standard --verbose",
@@ -82,6 +81,7 @@
     "nunjucks": "^3.2.0",
     "pg": "^7.9.0",
     "pino-colada": "^1.4.4",
+    "point-of-view": "^3.5.0",
     "pug": "^2.0.4",
     "pump": "^3.0.0",
     "resolve-from": "^5.0.0",

@@ -31,7 +31,7 @@ test('add mysql plugin and start server', (t) => {
   })
 })
 
-test('add redis plugin and get error', (t) => {
+test('add mysql plugin and get error', (t) => {
   t.plan(1)
 
   run(

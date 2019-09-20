@@ -27,7 +27,6 @@ test('add cors plugin and start server', (t) => {
         delete res.headers.date
         t.strictEqual(res.statusCode, 204)
         t.strictEqual(res.payload, '')
-        console.log(res.headers)
         t.deepEqual({
           'access-control-allow-origin': '*',
           'access-control-allow-methods': 'DELETE, GET, HEAD, PATCH, POST, PUT, OPTIONS',

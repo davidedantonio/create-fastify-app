@@ -11,6 +11,7 @@ Command
   add:cors                      Add fastify-cors plugin in given project folder
   add:redis                     Add fsatify-redis plugin in given project folder
   add:postgres                  Add fastify-postgres plugin in given project folder
+  add:pov                       Add Point-Of-View plugin in given project folder
 
 Options
 

@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-    {{>header}}
+    <include-html('./templates/header.html')/>
     <main role="main" class="container">
 
       <div class="starter-template">
@@ -22,6 +22,6 @@
       </div>
 
     </main><!-- /.container -->
-    {{>footer}}
+    <include-html('./templates/footer.html')/>
   </body>
 </html>
