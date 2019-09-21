@@ -14,7 +14,7 @@ test('add redis plugin and start server', (t) => {
     ['create-fastify-app.js', 'add:redis', '-d', './test/workdir'],
     [
       `127.0.0.1${ENTER}`,
-      `6379${ENTER}`,
+      `6378${ENTER}`,
       `${ENTER}`,
       `${ENTER}`
     ]
@@ -60,7 +60,7 @@ test('add redis plugin and get error', (t) => {
     ['create-fastify-app.js', 'add:redis', '-d', './test/workdir'],
     [
       `127.0.0.1${ENTER}`,
-      `6379${ENTER}`,
+      `6378${ENTER}`,
       `${ENTER}`,
       `${ENTER}`
     ]
