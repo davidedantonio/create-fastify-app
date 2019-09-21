@@ -33,9 +33,9 @@ services:
     image: postgres:10.4
     container_name: postgresCFA
     ports: 
-      - '5432:5432'
+      - '5433:5432'
     expose:
-      - '5432'
+      - '5433'
     environment:
       POSTGRES_USER: 'davide'
       POSTGRES_PASSWORD: 'davide'
