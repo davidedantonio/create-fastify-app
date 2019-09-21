@@ -25,9 +25,9 @@ services:
     image: redis:latest
     container_name: redisCFA
     ports:
-      - '6378:6378'
+      - '6379:6378'
     expose:
-      - '6378'
+      - '6379'
   postgres:
     restart: always
     image: postgres:10.4
