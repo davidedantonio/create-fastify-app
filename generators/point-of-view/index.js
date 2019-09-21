@@ -75,7 +75,7 @@ async function generate (args, cb) {
   const viewDirectrory = path.join(dir, 'src', _.camelCase(answers.views_directory))
   const pluginPath = path.join(dir, 'src', 'plugins')
   const servicePath = path.join(dir, 'src', 'services')
-  
+
   try {
     await mkdir(viewDirectrory)
     await mkdir(path.join(servicePath, 'pov'))

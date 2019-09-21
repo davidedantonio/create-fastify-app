@@ -62,7 +62,11 @@ async function generate (args, cb) {
     { type: 'input', name: 'keywords', message: 'Keywords: ', default: 'fastify,nodejs' },
     { type: 'input', name: 'license', message: 'License: ', default: 'MIT' },
     { type: 'input', name: 'swagger', message: 'Swagger File: ' },
-    { type: 'input', name: 'docker', message: 'Do you want generate Dockerfile and docker-compose.yml (y/n): ', default: 'Y', 
+    {
+      type: 'input',
+      name: 'docker',
+      message: 'Do you want generate Dockerfile and docker-compose.yml (y/n): ',
+      default: 'Y',
       validate: answer => {
         if ((answer.toLowerCase() !== 'y') && (answer.toLowerCase() !== 'n')) {
           return `${answer} is not a valid answer.`
@@ -124,17 +128,17 @@ async function generate (args, cb) {
       if (answers.docker.toLowerCase() === 'y') {
         await generateDockerFile(projectPath)
         await generateDockerCompose(projectPath, answers.name, answers.version)
-      }      
+      }
     } catch (err) {
       return cb(err)
     }
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
-    
+
     if (answers.docker.toLowerCase() === 'y') {
-      log('success', `Dockerfile generated successfully`)
-      log('success', `docker-compose.yml generated successfully`)
+      log('success', 'Dockerfile generated successfully')
+      log('success', 'docker-compose.yml generated successfully')
     }
 
     log('success', `run 'cd ${chalk.bold(dir)}'`)
