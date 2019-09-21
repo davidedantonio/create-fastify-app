@@ -57,6 +57,7 @@ function define (t) {
       execSync(`rm -R ${workdir}`)
     }
 
+    t.plan(30)
     await run(
       ['create-fastify-app.js', 'generate:project', '-d', './test/workdirSwagger'],
       [
@@ -67,7 +68,8 @@ function define (t) {
         `${APPLICATION_VERSION}${ENTER}`,
         `${APPLICATION_KEYWORDS}${ENTER}`,
         `${APPLICATION_LICENSE}${ENTER}`,
-        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`
+        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`,
+        `${ENTER}`
       ]
     )
 
@@ -94,6 +96,8 @@ function define (t) {
     t.ok(existsSync(path.join(workdir, 'src', 'services', 'user')))
     t.ok(existsSync(path.join(workdir, 'src', 'services', 'user', 'index.js')))
     t.ok(existsSync(path.join(workdir, 'src', 'services', 'user', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'Dockerfile')))
+    t.ok(existsSync(path.join(workdir, 'docker-compose.yml')))
   }
 
   function verifyPkgJson (t) {
