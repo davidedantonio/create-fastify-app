@@ -6,15 +6,17 @@ node_js:
   - "10"
   - "8"
 
-services:
-  - mysql
-  - redis
-  - mongodb
-  - postgresql
+env: 
+  DOCKER_COMPOSE_VERSION: 1.24.1
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
-  - psql -c 'create database test;'
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose up -d
 
 notifications:
   email:
