@@ -34,6 +34,7 @@ Command
   add:cors             Add fastify-cors plugin in given project folder
   add:redis            Add fastify-redis plugin in given project folder
   add:postgres         Add fastify-postgres plugin in given project folder
+  add:pov              Add Point-Of-View plugin in given project folder
 
 Options
 
@@ -306,6 +307,19 @@ And give some information such as:
 
 At this point the command add the `fastify-postgres` to you application with the given information for your [Postgres](https://www.postgresql.org/) connection.
 
+### `add:pov`
+
+This option add `point-of-view` plugin to you fastify project. `point-of-view` decorates the reply interface with the view method for manage view engines that can be used to render templates responses. You can decide to install one of the following template engines:
+
+- ejs
+- ejs-mate
+- nunjucks
+- pug
+- handlebars
+- marko
+- mustache
+- art-template
+
 ## Eject your application
 
 **Note: this is a one-way operation. Once you eject, you can’t go back!**
@@ -386,8 +400,7 @@ The code follows the Standard code style.
 
 ### Running Tests
 
-In version 2.0.0 of this utility, comes with a `docker-compose.yml` with all the necessary to run tests.
-Simply install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) and run `docker-compose up -d`. After do that simply run `npm run test`.
+The version `2.0` comes with a `docker-compose.yml` with all the necessary to run tests. Simply install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) and run `docker-compose up -d`. After do that simply run `npm run test`.
 
 ## Acknowledgements
 
