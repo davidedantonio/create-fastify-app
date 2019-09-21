@@ -79,10 +79,12 @@ By default `fastify-app` generate a project structured in this way:
 
 ```
 /your/wonderful/application
-├── README.md
+├── docker-compose.yml
+├── Dockerfile
 ├── help
 │   └── start.txt
 ├── package.json
+├── README.md
 ├── src
 │   ├── hooks
 │   │   ├── onError.js
@@ -98,9 +100,9 @@ By default `fastify-app` generate a project structured in this way:
 │   │   ├── README.md
 │   │   └── support.js
 │   └── services
-│       ├── README.md
 │       ├── hello
 │       │   └── index.js
+│       ├── README.md
 │       └── root.js
 └── test
     ├── helper.js
@@ -115,7 +117,7 @@ The `src` folder contains all you need to develop your application. In particula
 
 - `plugins`: here you can add all your plugins you need into you application.
 - `services`: here you can develop all the endpoint you need for your application, or the generated endpoint if you give a swagger file at project creation.
-- `hooks`: here you can declare all the hooks you need for your fastify application
+- `hooks`: here you can declare all the hooks you need for your fastify application.
 
 The `package.json` file comes with three predefined npm task:
 
@@ -130,6 +132,36 @@ The `package.json` file comes with three predefined npm task:
 * `npm test`: runs the test
 * `npm start`: start your application
 * `npm run dev`: start your application with [`pino-colada`](https://github.com/lrlna/pino-colada) pretty logging and in watching mode
+
+The `Dockerfile` and the `docker-compose.yml` files allow you to dockerize your application. When you add a plugin, for example with `add:mongo`, the `docker-compose.yml` will automatically updated with given information. Here the `Dockerfile` generated:
+
+```
+FROM node:latest
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
+RUN npm install
+COPY . /usr/src/app
+EXPOSE 3000
+CMD [ "npm", "install", "-g", "create-fastify-app" ]
+CMD [ “npm”, "start" ]
+```
+
+and the `docker-compose.yml`:
+
+```
+version: '3.7'
+services:
+  fastify-app:
+    container_name: fastify-app
+    restart: always
+    build: .
+    image: fastify-app:1.0.0
+    ports:
+      - '3000:3000'
+    expose:
+      - '3000'
+```
 
 #### Options
 
@@ -147,7 +179,6 @@ You can pass the following options via command line with `fastify run <options>`
 | Set the plugin timeout | `-T` | `--plugin-timeout` | `FASTIFY_PLUGIN_TIMEOUT` |
 | Defines the maximum payload, in bytes,<br>the server is allowed to accept |  | `--body-limit` | `FASTIFY_BODY_LIMIT` |
 | Start the application in watching mode on your file changes | `-w` | `--watch` | |
-| Start a REPL server for your application and yes, you can interact with him | `-R` | `--repl` | `FASTIFY_REPL_PORT` |
 
 #### Generate a project from a swagger file
 
@@ -287,28 +318,25 @@ To do this you can run
 fastify-app eject
 ```
 
-from your application root. This command will copy all the files that `fastify-app` use to run your application (the watch module, the repl module etc.). All the command, except the `eject` obviously, will still work, but they will point to the copied script in your root folder, and yes you can hack them.
+from your application root. This command will copy all the files that `fastify-app` use to run your application (the watch module for example). All the command, except the `eject` obviously, will still work, but they will point to the copied script in your root folder, and yes you can hack them.
 
 So when you eject your application your project structure is something like this:
 
 ```
-├── README.md
 ├── args
 │   └── run.js
+├── docker-compose.yml
+├── Dockerfile
 ├── help
 │   └── start.txt
 ├── lib
-│   ├── plugins
-│   │   ├── cpu.js
-│   │   ├── health.js
-│   │   └── routes.js
-│   │   
 │   └── watch
 │       ├── constants.js
 │       ├── fork.js
 │       ├── index.js
 │       └── utils.js
 ├── package.json
+├── README.md
 ├── run.js
 ├── src
 │   ├── hooks
@@ -325,9 +353,9 @@ So when you eject your application your project structure is something like this
 │   │   ├── README.md
 │   │   └── support.js
 │   └── services
-│       ├── README.md
 │       ├── hello
 │       │   └── index.js
+│       ├── README.md
 │       └── root.js
 └── test
     ├── helper.js
@@ -358,20 +386,14 @@ The code follows the Standard code style.
 
 ### Running Tests
 
-To perform the tests you need to have, up and running, the following docker images available:
-
-- `mysql:latest`
-- `redis:latest`
-- `postrges:latest`
-- `mongo:latest`
-
-In order to run MySQL and Postgres test you need to create a database named `test`.
+In version 2.0.0 of this utility, comes with a `docker-compose.yml` with all the necessary to run tests.
+Simply install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) and run `docker-compose up -d`. After do that simply run `npm run test`.
 
 ## Acknowledgements
 
 It is inspired by the [fastify-cli](https://github.com/fastify/fastify-cli) project. Some part have been extracted from it.
 
-This project is kindly sponsored by [Webeetle s.r.l.](http://webeetle.com)
+This project is kindly sponsored by [Webeetle s.r.l.](https://www.webeetle.com)
 
 ## License
 

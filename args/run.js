@@ -5,7 +5,7 @@ const argv = require('yargs-parser')
 module.exports = function parseArgs (args) {
   const parsedArgs = argv(args, {
     number: ['port', 'body-limit', 'plugin-timeout'],
-    boolean: ['pretty-logs', 'options', 'help', 'watch', 'repl'],
+    boolean: ['pretty-logs', 'options', 'help', 'watch'],
     string: ['log-level', 'address', 'prefix', 'file'],
     envPrefix: 'FASTIFY_',
     alias: {
