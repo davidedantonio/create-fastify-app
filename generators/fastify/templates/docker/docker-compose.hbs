@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  {{appName}}:
+    container_name: {{appName}}
+    restart: always
+    build: .
+    image: {{appName}}:{{version}}
+    ports:
+      - '{{port}}:{{port}}'
+    expose:
+      - '{{port}}'
+    

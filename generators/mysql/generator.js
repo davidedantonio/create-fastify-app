@@ -3,10 +3,11 @@
 const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
-const { getAbsolutePath, fileExists } = require('./../../lib/utils')
+const { getAbsolutePath, fileExists, createTemplate } = require('./../../lib/utils')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
-const { createTemplate } = require('./../../lib/utils')
+const { updateDockerCompose } = require('./../../lib/docker')
+const slugify = require('slugify')
 
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
@@ -30,6 +31,22 @@ async function generatePlugin (pluginPath, answers) {
     })
 
     await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
+    const dockerComposePart = Object.assign({}, {
+      mysql: {
+        image: 'mysql:5.7',
+        container_name: slugify(pkg.name.concat(' mysql')),
+        ports: [`${answers.mysql_port}:3306`],
+        expose: [`${answers.mysql_port}`],
+        environment: {
+          MYSQL_DATABASE: answers.mysql_database,
+          MYSQL_USER: answers.mysql_user,
+          MYSQL_PASSWORD: answers.mysql_password,
+          MYSQL_ROOT_PASSWORD: answers.mysql_password
+        }
+      }
+    })
+
+    await updateDockerCompose(rootProjectPath, dockerComposePart)
   } catch (err) {
     throw new Error(err)
   }

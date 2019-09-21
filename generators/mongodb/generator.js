@@ -7,6 +7,8 @@ const { getAbsolutePath, fileExists } = require('./../../lib/utils')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
 const { createTemplate } = require('./../../lib/utils')
+const slugify = require('slugify')
+const { updateDockerCompose } = require('./../../lib/docker')
 
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
@@ -30,6 +32,20 @@ async function generatePlugin (pluginPath, answers) {
     })
 
     await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
+    const dockerComposePart = Object.assign({}, {
+      mongodb: {
+        image: 'mongo:latest',
+        container_name: slugify(pkg.name.concat(' mongodb')),
+        ports: [`${answers.mongodb_port}:27017`],
+        expose: [`${answers.mongodb_port}`],
+        environment: {
+          MONGODB_USER: answers.mongodb_user,
+          MONGODB_PASSWORD: answers.mongodb_password
+        }
+      }
+    })
+
+    await updateDockerCompose(rootProjectPath, dockerComposePart)
   } catch (err) {
     throw new Error(err)
   }

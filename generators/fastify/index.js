@@ -14,6 +14,7 @@ const { generateServices, generatePlugin } = require('./generator')
 const { getAbsolutePath, fileExists } = require('../../lib/utils')
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
+const { generateDockerFile, generateDockerCompose } = require('../../lib/docker')
 
 function stop (err) {
   if (err) {
@@ -60,7 +61,15 @@ async function generate (args, cb) {
     { type: 'input', name: 'version', message: 'Version: ', default: '1.0.0' },
     { type: 'input', name: 'keywords', message: 'Keywords: ', default: 'fastify,nodejs' },
     { type: 'input', name: 'license', message: 'License: ', default: 'MIT' },
-    { type: 'input', name: 'swagger', message: 'Swagger File: ' }
+    { type: 'input', name: 'swagger', message: 'Swagger File: ' },
+    { type: 'input', name: 'docker', message: 'Do you want generate Dockerfile and docker-compose.yml (y/n): ', default: 'Y', 
+      validate: answer => {
+        if ((answer.toLowerCase() !== 'y') && (answer.toLowerCase() !== 'n')) {
+          return `${answer} is not a valid answer.`
+        }
+        return true
+      }
+    }
   ])
 
   generify(path.join(__dirname, 'templates', 'fastify-app'), dir, {}, function (file) {
@@ -112,12 +121,22 @@ async function generate (args, cb) {
 
     try {
       await writeFile(path.join(projectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
+      if (answers.docker.toLowerCase() === 'y') {
+        await generateDockerFile(projectPath)
+        await generateDockerCompose(projectPath, answers.name, answers.version)
+      }      
     } catch (err) {
       return cb(err)
     }
 
     log('success', `${chalk.bold('package.json')} generated successfully with given information`)
     log('success', `project ${chalk.bold(pkg.name)} generated successfully`)
+    
+    if (answers.docker.toLowerCase() === 'y') {
+      log('success', `Dockerfile generated successfully`)
+      log('success', `docker-compose.yml generated successfully`)
+    }
+
     log('success', `run 'cd ${chalk.bold(dir)}'`)
     log('success', `run '${chalk.bold('npm install')}'`)
     log('success', `run '${chalk.bold('npm run dev')}' to start the application`)

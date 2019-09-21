@@ -3,10 +3,11 @@
 const fs = require('fs')
 const { promisify } = require('util')
 const path = require('path')
-const { createTemplate } = require('./../../lib/utils')
-const { getAbsolutePath, fileExists } = require('./../../lib/utils')
+const { getAbsolutePath, fileExists, createTemplate } = require('./../../lib/utils')
 const writeFile = promisify(fs.writeFile)
 const readFile = promisify(fs.readFile)
+const { updateDockerCompose } = require('./../../lib/docker')
+const slugify = require('slugify')
 
 async function generatePlugin (pluginPath, answers) {
   const rootProjectPath = getAbsolutePath(path.join(pluginPath, '..', '..'))
@@ -34,6 +35,19 @@ async function generatePlugin (pluginPath, answers) {
     })
 
     await writeFile(path.join(rootProjectPath, 'package.json'), JSON.stringify(pkg, null, 2), 'utf8')
+    const dockerComposePart = Object.assign({}, {
+      redis: {
+        image: 'redis:latest',
+        container_name: slugify(pkg.name.concat(' redis')),
+        ports: [`${answers.redis_port}:6379`],
+        expose: [`${answers.redis_port}`],
+        environment: {
+          REDIS_PASSWORD: answers.redis_password
+        }
+      }
+    })
+
+    await updateDockerCompose(rootProjectPath, dockerComposePart)
   } catch (err) {
     throw new Error(err)
   }
