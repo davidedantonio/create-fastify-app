@@ -275,42 +275,6 @@ And give some information such as:
 
 At this point the command add the `fastify-postgres` to you application with the given information for your [Postgres](https://www.postgresql.org/) connection.
 
-## REPL command
-
-With version `2.0` we have introduced a REPL interface command that you can decide to start when you run your fastify application. To do that you can start your application with the `--repl`, or `-R` option:
-
-```
-fastify-app run -l info -P -R
-```
-
-In the console appear something like this
-
-![Repl Server started](./images/repl_server.png)
-
-You can connect ti REPL server via `fastify-repl` command with this simple commmand:
-
-```
-fastify-repl <address>:<port>
-```
-
-And now you're connected on fastify repl istance. You will have the following commands available:
-
-### `.info`: Get generic information on System.
-
-![Info](./images/info.png)
-
-### `.network`: Get all the information about Network interfaces.
-
-![Network](./images/network.png)
-
-### `.routes`: Print all the available routes registered in fastify.
-
-![Network](./images/routes.png)
-
-### `.cpus`: Get the information about the CPUs
-
-![CPU](./images/cpus.png)
-
 ## Eject your application
 
 **Note: this is a one-way operation. Once you eject, you can’t go back!**
