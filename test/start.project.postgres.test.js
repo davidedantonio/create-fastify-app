@@ -14,7 +14,7 @@ test('add postgres plugin and start server', (t) => {
     ['create-fastify-app.js', 'add:postgres', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
-      `3211${ENTER}`,
+      `5433${ENTER}`,
       `test${ENTER}`,
       `davide${ENTER}`,
       `davide${ENTER}`
@@ -38,7 +38,7 @@ test('add postgres plugin and get error', (t) => {
     ['create-fastify-app.js', 'add:postgres', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
-      `3211${ENTER}`,
+      `5433${ENTER}`,
       `test${ENTER}`,
       `davide${ENTER}`,
       `davide${ENTER}`
