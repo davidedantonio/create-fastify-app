@@ -11,7 +11,7 @@ const { parseArgs, isValidFastifyProject } = require('../../lib/utils')
 const writeFile = promisify(fs.writeFile)
 const mkdir = promisify(fs.mkdir)
 const readFile = promisify(fs.readFile)
-const { createTemplate } = require('./../../lib/utils')
+const { createTemplate, fileExists } = require('./../../lib/utils')
 const generify = require('generify')
 
 function stop (err) {
@@ -39,6 +39,11 @@ async function generate (args, cb) {
   }
 
   const dir = opts.directory || process.cwd()
+
+  const povExist = await fileExists(path.join(dir, 'src', 'plugins', 'point-of-view.js'), fs.F_OK)
+  if (povExist) {
+    return cb(new Error('point-of-view plugin already configured'))
+  }
 
   try {
     await isValidFastifyProject(dir, null)

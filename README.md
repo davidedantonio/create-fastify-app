@@ -1,6 +1,6 @@
 # create-fastify-app
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Coverage Status](https://coveralls.io/repos/github/davidedantonio/fastify-app/badge.svg?branch=master)](https://coveralls.io/github/davidedantonio/create-fastify-app?branch=master) [![Build Status](https://travis-ci.com/davidedantonio/fastify-app.svg?branch=master)](https://travis-ci.com/davidedantonio/fastify-app) [![Greenkeeper badge](https://badges.greenkeeper.io/davidedantonio/create-fastify-app.svg)](https://greenkeeper.io/) ![npm-version](https://img.shields.io/npm/v/create-fastify-app.svg)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Coverage Status](https://coveralls.io/repos/github/davidedantonio/create-fastify-app/badge.svg?branch=master)](https://coveralls.io/github/davidedantonio/create-fastify-app?branch=master) [![Build Status](https://travis-ci.com/davidedantonio/fastify-app.svg?branch=master)](https://travis-ci.com/davidedantonio/create-fastify-app) [![Greenkeeper badge](https://badges.greenkeeper.io/davidedantonio/create-fastify-app.svg)](https://greenkeeper.io/) ![npm-version](https://img.shields.io/npm/v/create-fastify-app.svg)
 
 Create Fastify App is an utility that help you to generate or add plugin to your [Fastify](https://github.com/fastify/fastify) project. This mean that you can easily:
 
@@ -309,7 +309,7 @@ At this point the command add the `fastify-postgres` to you application with the
 
 ### `add:pov`
 
-This option add `point-of-view` plugin to you fastify project. `point-of-view` decorates the reply interface with the view method for manage view engines that can be used to render templates responses. You can decide to install one of the following template engines:
+This option add [`point-of-view`](https://github.com/fastify/point-of-view) plugin to you fastify project. `point-of-view` decorates the reply interface with the view method for manage view engines that can be used to render templates responses. You can decide to install one of the following template engines:
 
 - ejs
 - ejs-mate
@@ -319,6 +319,12 @@ This option add `point-of-view` plugin to you fastify project. `point-of-view` d
 - marko
 - mustache
 - art-template
+
+Just simply run
+
+```
+fastify-app add:pov -d <project-folder>
+```
 
 ## Eject your application
 
