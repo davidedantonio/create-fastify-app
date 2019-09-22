@@ -5,5 +5,5 @@ COPY package.json /usr/src/app/
 RUN npm install
 COPY . /usr/src/app
 EXPOSE {{port}}
-CMD [ "npm", "install", "-g", "create-fastify-app" ]
+RUN npm -g install create-fastify-app
 CMD [ "fastify-app", "run" ]
