@@ -1,6 +1,6 @@
 {
   "name": "create-fastify-app",
-  "version": "1.5.12",
+  "version": "1.6.12",
   "description": "A Fastify application generator",
   "main": "create-fastify-app.js",
   "bin": {
@@ -29,6 +29,13 @@
     "url": "git+https://github.com/davidedantonio/create-fastify-app.git"
   },
   "author": "Davide D'Antonio <davide.dantonio@webeetle.com>",
+  "contributors": [
+    {
+      "name": "Simone Gentili",
+      "email": "sensorario@gmail.com",
+      "url": "https://github.com/sensorario"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/davidedantonio/create-fastify-app/issues"

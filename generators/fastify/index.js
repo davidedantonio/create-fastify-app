@@ -44,7 +44,7 @@ async function generate (args, cb) {
   try {
     const dirExist = await fileExists(dir)
     if (dirExist) {
-      log('error', 'Project folder already exist\n')
+      log('error', `Project folder ${dir} already exist\n`)
       module.exports.stop()
     }
   } catch (err) {

@@ -20,10 +20,10 @@ async function generatePlugin (pluginPath, answers) {
     const content = await createTemplate(path.join(__dirname, 'templates', 'cors.hbs'), answers.methods)
     await writeFile(path.join(pluginPath, 'cors.js'), content, 'utf8')
 
-    let rootPkg = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
-    let pkg = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
-    pkg = JSON.parse(pkg)
-    rootPkg = JSON.parse(rootPkg)
+    const rootPkgFile = await readFile(path.join(__dirname, '..', '..', 'package.json'), 'utf8')
+    const pkgFile = await readFile(path.join(rootProjectPath, 'package.json'), 'utf8')
+    const rootPkg = JSON.parse(rootPkgFile)
+    const pkg = JSON.parse(pkgFile)
 
     Object.assign(pkg.dependencies, {
       'fastify-cors': rootPkg.devDependencies['fastify-cors']

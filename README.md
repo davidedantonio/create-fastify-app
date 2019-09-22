@@ -19,6 +19,14 @@ If you want to use `fastify-app` you must first install globally on your machine
 npm install -g create-fastify-app
 ```
 
+## Enable autocompletion
+
+run the following command from your terminal. Pay attention to the `. ./` or the autocompletion feature won't start.
+
+```
+. ./cfa-autocompletion.sh
+```
+
 ## Usage
 
 ```
