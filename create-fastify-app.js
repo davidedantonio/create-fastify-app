@@ -13,8 +13,12 @@ const mysqlGenerator = require('./generators/mysql')
 const corsGenerator = require('./generators/cors')
 const redisGenerator = require('./generators/redis')
 const postgresGenerator = require('./generators/postgres')
+const povGenerator = require('./generators/point-of-view')
 const commist = require('commist')()
 const log = require('./lib/log')
+const run = require('./run')
+const eject = require('./eject')
+
 require('make-promises-safe')
 
 function stop (err) {
@@ -35,6 +39,8 @@ async function showHelp () {
   return stop()
 }
 
+commist.register('run', run.cli)
+commist.register('eject', eject.cli)
 commist.register('generate:project', appGenerator.cli)
 commist.register('generate:service', serviceGenerator.cli)
 commist.register('add:mysql', mysqlGenerator.cli)
@@ -42,6 +48,7 @@ commist.register('add:mongo', mongoGenerator.cli)
 commist.register('add:cors', corsGenerator.cli)
 commist.register('add:redis', redisGenerator.cli)
 commist.register('add:postgres', postgresGenerator.cli)
+commist.register('add:pov', povGenerator.cli)
 
 const res = commist.parse(process.argv.splice(2))
 

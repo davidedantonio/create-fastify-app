@@ -1,0 +1,28 @@
+'use strict'
+
+const fp = require('fastify-plugin')
+const pov = require('point-of-view')
+const path = require('path')
+
+module.exports = fp(async function (fastify, opts) {
+  const templateFolder = path.join(process.cwd(), 'src', '{{views_directory}}')
+
+  fastify.register(pov, {
+    engine: {
+      '{{engine}}': require('{{engine}}')
+    },
+    includeViewExtension: true,
+    templates: templateFolder,
+    options: {
+      {{#if partials}}
+      filename: templateFolder,
+      partials: {
+        header: path.join('templates', 'header.{{extension}}'),
+        footer: path.join('templates', 'footer.{{extension}}')
+      }
+      {{else}}
+      filename: templateFolder
+      {{/if}}
+    }
+  })
+})

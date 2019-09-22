@@ -57,6 +57,7 @@ function define (t) {
       execSync(`rm -R ${workdir}`)
     }
 
+    t.plan(30)
     await run(
       ['create-fastify-app.js', 'generate:project', '-d', './test/workdirSwagger'],
       [
@@ -67,7 +68,8 @@ function define (t) {
         `${APPLICATION_VERSION}${ENTER}`,
         `${APPLICATION_KEYWORDS}${ENTER}`,
         `${APPLICATION_LICENSE}${ENTER}`,
-        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`
+        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`,
+        `${ENTER}`
       ]
     )
 
@@ -76,24 +78,26 @@ function define (t) {
   })
 
   function verifyProjectSwaggerFolder (t) {
-    t.ok(existsSync(path.join(workdir, 'app')))
-    t.ok(existsSync(path.join(workdir, 'app', 'plugins')))
-    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'support.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'swagger.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services')))
-    t.ok(existsSync(path.join(workdir, 'app', 'app.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'root.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello', 'index.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet', 'index.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'pet', 'routes.schema.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store', 'index.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'store', 'routes.schema.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user', 'index.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'user', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'src')))
+    t.ok(existsSync(path.join(workdir, 'src', 'plugins')))
+    t.ok(existsSync(path.join(workdir, 'src', 'plugins', 'support.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'plugins', 'swagger.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services')))
+    t.ok(existsSync(path.join(workdir, 'src', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'root.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'hello')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'hello', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'pet')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'pet', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'pet', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'store')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'store', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'store', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'user')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'user', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'user', 'routes.schema.js')))
+    t.ok(existsSync(path.join(workdir, 'Dockerfile')))
+    t.ok(existsSync(path.join(workdir, 'docker-compose.yml')))
   }
 
   function verifyPkgJson (t) {
@@ -108,7 +112,7 @@ function define (t) {
     t.equal(pkg.keywords.join(','), APPLICATION_KEYWORDS)
     t.equal(pkg.license, APPLICATION_LICENSE)
     t.equal(pkg.scripts.test, 'tap test/**/*.test.js')
-    t.equal(pkg.scripts.start, 'node server.js')
-    t.equal(pkg.scripts.dev, 'node server.js -l info -P')
+    t.equal(pkg.scripts.start, 'fastify-app run')
+    t.equal(pkg.scripts.dev, 'fastify-app run -l info -P -w')
   }
 }

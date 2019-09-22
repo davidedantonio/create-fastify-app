@@ -2,7 +2,7 @@
 
 const t = require('tap')
 const { test } = t
-const server = require('./workdir/server')
+const server = require('../run')
 const path = require('path')
 const { run, ENTER } = require('./helpers/inputify')
 const { existsSync } = require('fs')
@@ -14,13 +14,13 @@ test('add postgres plugin and start server', (t) => {
     ['create-fastify-app.js', 'add:postgres', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
-      `3306${ENTER}`,
+      `5433${ENTER}`,
       `test${ENTER}`,
-      `root${ENTER}`,
-      `${ENTER}`
+      `davide${ENTER}`,
+      `davide${ENTER}`
     ]
   ).then(_ => {
-    server.start(['-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
+    server.start(['-f', path.join(__dirname, 'workdir', 'src', 'index.js')], function (err, fastify) {
       t.error(err)
       t.ok(fastify.pg)
 
@@ -31,17 +31,17 @@ test('add postgres plugin and start server', (t) => {
   })
 })
 
-test('add redis plugin and get error', (t) => {
+test('add postgres plugin and get error', (t) => {
   t.plan(1)
 
   run(
     ['create-fastify-app.js', 'add:postgres', '-d', './test/workdir'],
     [
       `localhost${ENTER}`,
-      `3211${ENTER}`,
+      `5433${ENTER}`,
       `test${ENTER}`,
-      `${ENTER}`,
-      `${ENTER}`
+      `davide${ENTER}`,
+      `davide${ENTER}`
     ]
   ).then(out => {
     t.ok(out.indexOf('Postgres plugin already configured') !== -1)
@@ -66,14 +66,14 @@ test('add postgres error', (t) => {
     ['create-fastify-app.js', 'add:postgres'],
     []
   ).then(out => {
-    t.ok(out.indexOf('/app folder') !== -1)
+    t.ok(out.indexOf('/src folder') !== -1)
   })
 })
 
 test('check postgres plugin files', (t) => {
   t.plan(3)
 
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'plugins')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'plugins', 'postgres.db.js')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src', 'plugins')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src', 'plugins', 'postgres.db.js')))
 })

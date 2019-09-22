@@ -2,7 +2,7 @@
 
 const t = require('tap')
 const { test } = t
-const server = require('./workdir/server')
+const server = require('../run')
 const path = require('path')
 const { run, ENTER } = require('./helpers/inputify')
 const { existsSync } = require('fs')
@@ -18,7 +18,7 @@ test('generate service and start server', (t) => {
       `${ENTER}`
     ]
   ).then(_ => {
-    server.start(['-f', path.join(__dirname, 'workdir', 'app', 'app.js')], function (err, fastify) {
+    server.start(['-f', path.join(__dirname, 'workdir', 'src', 'index.js')], function (err, fastify) {
       t.error(err)
 
       fastify.inject({
@@ -82,7 +82,7 @@ test('generate service error', (t) => {
     ['create-fastify-app.js', 'generate:service'],
     []
   ).then(out => {
-    t.ok(out.indexOf('/app folder') !== -1)
+    t.ok(out.indexOf('/src folder') !== -1)
   })
 })
 
@@ -104,8 +104,8 @@ test('generate service and start server', (t) => {
 test('check generated service files', (t) => {
   t.plan(4)
 
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'serviceName')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'serviceName', 'index.js')))
-  t.ok(existsSync(path.join(__dirname, 'workdir', 'app', 'services', 'serviceName', 'README.md')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src', 'services', 'serviceName')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src', 'services', 'serviceName', 'index.js')))
+  t.ok(existsSync(path.join(__dirname, 'workdir', 'src', 'services', 'serviceName', 'README.md')))
   t.ok(existsSync(path.join(__dirname, 'workdir', 'test', 'services', 'serviceName.test.js')))
 })

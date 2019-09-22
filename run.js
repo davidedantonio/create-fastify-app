@@ -5,10 +5,11 @@ const fp = require('fastify-plugin')
 const fs = require('fs')
 const isDocker = require('is-docker')
 const resolveFrom = require('resolve-from')
-const parseArgs = require('./args')
+const parseArgs = require('./args/run')
 const path = require('path')
 const PinoColada = require('pino-colada')
 const pump = require('pump')
+const watch = require('./lib/watch')
 
 let Fastify = null
 
@@ -45,7 +46,7 @@ function start (args, cb) {
   const opts = parseArgs(args)
 
   if (!fs.existsSync(opts.file)) {
-    console.error('Missing the required file app.js\n')
+    console.error('Missing the required file index.js\n')
     return showHelp()
   }
 
@@ -53,8 +54,11 @@ function start (args, cb) {
     return showHelp()
   }
 
-  require('make-promises-safe')
   loadModules(opts)
+  if (opts.watch) {
+    return watch(args)
+  }
+
   return run(args, cb)
 }
 
@@ -130,7 +134,7 @@ function cli (args) {
   start(args)
 }
 
-module.exports = { start, run, stop }
+module.exports = { start, cli, stop, run }
 
 if (require.main === module) {
   cli(process.argv.slice(2))

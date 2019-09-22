@@ -19,5 +19,11 @@ module.exports = function (fastify, opts, next) {
     options: Object.assign({}, opts)
   })
 
+  // This loads all hooks defined in hooks
+  fastify.register(AutoLoad, {
+    dir: path.join(__dirname, 'hooks'),
+    options: Object.assign({}, opts)
+  })
+
   next()
 }

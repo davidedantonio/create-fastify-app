@@ -57,7 +57,7 @@ function define (t) {
       execSync(`rm -R ${workdir}`)
     }
 
-    t.plan(18)
+    t.plan(20)
     await run(
       ['create-fastify-app.js', 'generate:project', '-d', './test/workdir'],
       [
@@ -68,7 +68,8 @@ function define (t) {
         `${APPLICATION_VERSION}${ENTER}`,
         `${APPLICATION_KEYWORDS}${ENTER}`,
         `${APPLICATION_LICENSE}${ENTER}`,
-        `${SWAGGER_FILE_EMPTY}${ENTER}`
+        `${SWAGGER_FILE_EMPTY}${ENTER}`,
+        `${ENTER}`
       ]
     )
 
@@ -77,14 +78,16 @@ function define (t) {
   })
 
   function verifyProjectFolder (t) {
-    t.ok(existsSync(path.join(workdir, 'app')))
-    t.ok(existsSync(path.join(workdir, 'app', 'plugins')))
-    t.ok(existsSync(path.join(workdir, 'app', 'plugins', 'support.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services')))
-    t.ok(existsSync(path.join(workdir, 'app', 'app.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'root.js')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello')))
-    t.ok(existsSync(path.join(workdir, 'app', 'services', 'hello', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src')))
+    t.ok(existsSync(path.join(workdir, 'src', 'plugins')))
+    t.ok(existsSync(path.join(workdir, 'src', 'plugins', 'support.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services')))
+    t.ok(existsSync(path.join(workdir, 'src', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'root.js')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'hello')))
+    t.ok(existsSync(path.join(workdir, 'src', 'services', 'hello', 'index.js')))
+    t.ok(existsSync(path.join(workdir, 'Dockerfile')))
+    t.ok(existsSync(path.join(workdir, 'docker-compose.yml')))
   }
 
   function verifyPkgJson (t) {
@@ -99,7 +102,7 @@ function define (t) {
     t.equal(pkg.keywords.join(','), APPLICATION_KEYWORDS)
     t.equal(pkg.license, APPLICATION_LICENSE)
     t.equal(pkg.scripts.test, 'tap test/**/*.test.js')
-    t.equal(pkg.scripts.start, 'node server.js')
-    t.equal(pkg.scripts.dev, 'node server.js -l info -P')
+    t.equal(pkg.scripts.start, 'fastify-app run')
+    t.equal(pkg.scripts.dev, 'fastify-app run -l info -P -w')
   }
 }
