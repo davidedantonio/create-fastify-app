@@ -10,6 +10,7 @@ Create Fastify App is an utility that help you to generate or add plugin to your
 - Add fastify-mongodb plugin in existing Fastify Project.
 - Add fastify-redis plugin in existing Fastify Project.
 - Add fastify-postgres plugin in existing Fastify Project.
+- Add point-of-view plugin in existing Fastify Project.
 
 ## Install
 
