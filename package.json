@@ -70,7 +70,7 @@
     "swagger-parser": "^6.0.5",
     "table": "^5.4.6",
     "tiny-human-time": "^1.2.0",
-    "yargs-parser": "^13.1.1"
+    "yargs-parser": "^15.0.0"
   },
   "devDependencies": {
     "art-template": "^4.13.2",
