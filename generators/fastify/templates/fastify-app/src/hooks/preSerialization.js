@@ -8,6 +8,8 @@ module.exports = fp(async (fastify, opts) => {
     // or returning a Promise. If you do invoke a next callback in this
     // situation unexpected behavior may occur, e.g. duplicate invocation
     // of handlers.
+    fastify.log.trace('request.body > ', {reqId: request.raw.id, body: request.body}); //log request body 
+    fastify.log.trace('response.body >', {reqId:request.raw.id, payload}); //log response body
   })
 
   // fastify.addHook('preSerialization', (request, reply, next) => {
