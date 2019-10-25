@@ -43,7 +43,7 @@
   "homepage": "https://github.com/davidedantonio/create-fastify-app#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "chokidar": "^3.1.1",
+    "chokidar": "^3.2.2",
     "clui": "^0.3.6",
     "codecov": "^3.6.1",
     "command-exists": "^1.2.8",
@@ -52,7 +52,7 @@
     "fastify": "^2.8.0",
     "fastify-plugin": "^1.6.0",
     "generify": "^3.0.3",
-    "handlebars": "^4.4.2",
+    "handlebars": "^4.4.5",
     "inquirer": "^6.5.2",
     "is-docker": "^2.0.0",
     "js-beautify": "^1.10.2",
