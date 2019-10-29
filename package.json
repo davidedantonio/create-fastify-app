@@ -43,7 +43,7 @@
   "homepage": "https://github.com/davidedantonio/create-fastify-app#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "chokidar": "^3.2.2",
+    "chokidar": "^3.2.3",
     "clui": "^0.3.6",
     "codecov": "^3.6.1",
     "command-exists": "^1.2.8",
@@ -85,7 +85,7 @@
     "fastify-postgres": "^2.0.0",
     "fastify-redis": "^3.1.1",
     "fastify-swagger": "^2.4.0",
-    "marko": "^4.18.14",
+    "marko": "^4.18.19",
     "mkdirp": "^0.5.1",
     "mustache": "^3.1.0",
     "nunjucks": "^3.2.0",
