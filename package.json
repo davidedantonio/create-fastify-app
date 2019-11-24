@@ -76,7 +76,7 @@
     "art-template": "^4.13.2",
     "concat-stream": "^2.0.0",
     "coveralls": "^3.0.6",
-    "ejs": "^2.7.1",
+    "ejs": "^3.0.1",
     "ejs-mate": "^3.0.0",
     "fastify-autoload": "^0.8.0",
     "fastify-cors": "^2.1.3",
