@@ -96,7 +96,7 @@
     "rimraf": "^3.0.0",
     "simple-get": "^3.1.0",
     "standard": "^14.3.1",
-    "tap": "^14.10.2",
+    "tap": "^14.10.5",
     "walker": "^1.0.7"
   },
   "greenkeeper": {
