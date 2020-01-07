@@ -30,7 +30,7 @@ test('add cors plugin and start server', (t) => {
         t.deepEqual({
           'access-control-allow-origin': '*',
           'access-control-allow-methods': 'DELETE, GET, HEAD, PATCH, POST, PUT, OPTIONS',
-          vary: 'Access-Control-Request-Headers',
+          vary: 'Origin, Access-Control-Request-Headers',
           'content-length': '0',
           connection: 'keep-alive'
         }, res.headers)
