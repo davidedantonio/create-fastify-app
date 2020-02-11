@@ -1,6 +1,6 @@
 {
   "name": "create-fastify-app",
-  "version": "2.0.21",
+  "version": "2.0.22",
   "description": "A Fastify application generator",
   "main": "create-fastify-app.js",
   "bin": {
