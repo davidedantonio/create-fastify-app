@@ -6,6 +6,7 @@ const MongoDB = require('fastify-mongodb')
 module.exports = fp(async (fastify, opts) => {
   let mongoOpts = Object.assign({}, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
     url: process.env.MONGODB_URL || 'mongodb://{{mongodb_host}}:{{mongodb_port}}/{{mongodb_collection}}',
   }, opts.mongodb)
 
