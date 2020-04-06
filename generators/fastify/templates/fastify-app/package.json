@@ -9,20 +9,20 @@
   "author": "author <author@email.com>",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.0.0",
-    "fastify": "^2.4.1",
-    "fastify-plugin": "^1.6.0",
-    "fastify-autoload": "^1.1.0",
+    "dotenv": "^8.2.0",
+    "fastify": "^2.13.0",
+    "fastify-plugin": "^1.6.1",
+    "fastify-autoload": "^1.2.2",
     "is-docker": "^2.0.0",
-    "make-promises-safe": "^5.0.0",
+    "make-promises-safe": "^5.1.0",
     "pino-colada": "^1.6.1",
     "pump": "^3.0.0",
     "resolve-from": "^5.0.0",
-    "yargs-parser": "^18.0.0"
+    "yargs-parser": "^18.1.2"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2",
-    "standard": "^14.0.0",
-    "tap": "^14.8.2"
+    "standard": "^14.3.3",
+    "tap": "^14.10.7"
   }
 }
