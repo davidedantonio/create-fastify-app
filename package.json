@@ -10,7 +10,9 @@
     "lint": "standard --verbose",
     "unit": "tap test/*.test.js --no-coverage-report --jobs=1",
     "coverage": "tap test/*.test.js --coverage && tap --coverage-report=text-lcov | coveralls",
-    "test": "npm run lint && npm run unit"
+    "test": "npm run lint && npm run unit",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [
     "fastify",
@@ -71,7 +73,8 @@
     "swagger-parser": "^9.0.1",
     "table": "^5.4.6",
     "tiny-human-time": "^1.2.0",
-    "yargs-parser": "^18.1.2"
+    "yargs-parser": "^18.1.2",
+    "snyk": "^1.320.3"
   },
   "devDependencies": {
     "art-template": "^4.13.2",
@@ -103,5 +106,6 @@
     "ignore": [
       "request"
     ]
-  }
+  },
+  "snyk": true
 }
