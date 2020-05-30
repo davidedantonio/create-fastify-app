@@ -1,6 +1,6 @@
 # create-fastify-app
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Coverage Status](https://coveralls.io/repos/github/davidedantonio/create-fastify-app/badge.svg?branch=master)](https://coveralls.io/github/davidedantonio/create-fastify-app?branch=master) [![Build Status](https://travis-ci.com/davidedantonio/create-fastify-app.svg?branch=master)](https://travis-ci.com/davidedantonio/create-fastify-app) [![Greenkeeper badge](https://badges.greenkeeper.io/davidedantonio/create-fastify-app.svg)](https://greenkeeper.io/) ![npm-version](https://img.shields.io/npm/v/create-fastify-app.svg)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Coverage Status](https://coveralls.io/repos/github/davidedantonio/create-fastify-app/badge.svg?branch=master)](https://coveralls.io/github/davidedantonio/create-fastify-app?branch=master) [![Build Status](https://travis-ci.com/davidedantonio/create-fastify-app.svg?branch=master)](https://travis-ci.com/davidedantonio/create-fastify-app) [![Known Vulnerabilities](https://snyk.io/test/github/davidedantonio/create-fastify-app/badge.svg)](https://snyk.io/test/github/davidedantonio/create-fastify-app) ![npm-version](https://img.shields.io/npm/v/create-fastify-app.svg)
 
 Create Fastify App is an utility that help you to generate or add plugin to your [Fastify](https://github.com/fastify/fastify) project. This mean that you can easily:
 
