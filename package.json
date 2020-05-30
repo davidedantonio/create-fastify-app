@@ -100,10 +100,5 @@
     "tap": "^14.10.7",
     "walker": "^1.0.7"
   },
-  "greenkeeper": {
-    "ignore": [
-      "request"
-    ]
-  },
   "snyk": true
 }
