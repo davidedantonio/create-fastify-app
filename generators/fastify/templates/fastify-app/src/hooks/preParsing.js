@@ -2,7 +2,7 @@
 
 const fp = require('fastify-plugin')
 
-module.exports = fp(async function preParsing(fastify, opts) {
+module.exports = fp(async function preParsing (fastify, opts) {
   fastify.addHook('preParsing', async (request, reply) => {
     // Notice: the next callback is not available when using async/await
     // or returning a Promise. If you do invoke a next callback in this
