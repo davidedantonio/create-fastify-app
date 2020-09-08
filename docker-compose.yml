@@ -1,9 +1,9 @@
 version: '3.7'
-services: 
-  mongodb: 
+services:
+  mongodb:
     image: mongo:latest
     container_name: mongodbCFA
-    ports: 
+    ports:
       - '27018:27017'
     expose:
       - '27018'
@@ -32,7 +32,7 @@ services:
     restart: always
     image: postgres:10.4
     container_name: postgresCFA
-    ports: 
+    ports:
       - '5433:5432'
     expose:
       - '5433'
