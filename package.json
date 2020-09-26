@@ -55,7 +55,7 @@
     "fastify-plugin": "^1.6.1",
     "generify": "^4.1.0",
     "handlebars": "^4.7.6",
-    "inquirer": "^7.3.1",
+    "inquirer": "^7.3.3",
     "is-docker": "^2.0.0",
     "js-beautify": "^1.11.0",
     "js-yaml": "^3.14.0",
