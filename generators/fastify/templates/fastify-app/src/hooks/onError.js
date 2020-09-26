@@ -3,7 +3,7 @@
 const fp = require('fastify-plugin')
 
 module.exports = fp(async function onError (fastify, opts) {
-  fastify.addHook('onError', async (request, reply) => {
+  fastify.addHook('onError', async (request, reply, error) => {
     // Notice: the next callback is not available when using async/await
     // or returning a Promise. If you do invoke a next callback in this
     // situation unexpected behavior may occur, e.g. duplicate invocation
