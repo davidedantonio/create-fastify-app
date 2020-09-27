@@ -49,30 +49,30 @@ const {
   define(t)
 })
 
-function define (t) {
+async function define (t) {
   const { test } = t
 
+  if (existsSync(workdir)) {
+    execSync(`rm -R ${workdir}`)
+  }
+
+  await run(
+    ['create-fastify-app.js', 'generate:project', '-d', './test/workdirSwagger'],
+    [
+      `${APPLICATION_NAME}${ENTER}`,
+      `${APPLICATION_DESCRIPTION}${ENTER}`,
+      `${APPLICATION_AUTHOR}${ENTER}`,
+      `${APPLICATION_EMAIL}${ENTER}`,
+      `${APPLICATION_VERSION}${ENTER}`,
+      `${APPLICATION_KEYWORDS}${ENTER}`,
+      `${APPLICATION_LICENSE}${ENTER}`,
+      `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`,
+      `${ENTER}`
+    ]
+  )
+
   test('should create project succesfully with given swagger file', async t => {
-    if (existsSync(workdir)) {
-      execSync(`rm -R ${workdir}`)
-    }
-
     t.plan(30)
-    await run(
-      ['create-fastify-app.js', 'generate:project', '-d', './test/workdirSwagger'],
-      [
-        `${APPLICATION_NAME}${ENTER}`,
-        `${APPLICATION_DESCRIPTION}${ENTER}`,
-        `${APPLICATION_AUTHOR}${ENTER}`,
-        `${APPLICATION_EMAIL}${ENTER}`,
-        `${APPLICATION_VERSION}${ENTER}`,
-        `${APPLICATION_KEYWORDS}${ENTER}`,
-        `${APPLICATION_LICENSE}${ENTER}`,
-        `${process.cwd()}/test/${SWAGGER_FILE}${ENTER}`,
-        `${ENTER}`
-      ]
-    )
-
     await verifyPkgJson(t)
     await verifyProjectSwaggerFolder(t)
   })

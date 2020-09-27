@@ -49,30 +49,30 @@ const {
   define(t)
 })
 
-function define (t) {
+async function define (t) {
   const { test } = t
 
+  if (existsSync(workdir)) {
+    execSync(`rm -R ${workdir}`)
+  }
+
+  await run(
+    ['create-fastify-app.js', 'generate:project', '-d', './test/workdir'],
+    [
+      `${APPLICATION_NAME}${ENTER}`,
+      `${APPLICATION_DESCRIPTION}${ENTER}`,
+      `${APPLICATION_AUTHOR}${ENTER}`,
+      `${APPLICATION_EMAIL}${ENTER}`,
+      `${APPLICATION_VERSION}${ENTER}`,
+      `${APPLICATION_KEYWORDS}${ENTER}`,
+      `${APPLICATION_LICENSE}${ENTER}`,
+      `${SWAGGER_FILE_EMPTY}${ENTER}`,
+      `${ENTER}`
+    ]
+  )
+
   test('should create project succesfully', async (t) => {
-    if (existsSync(workdir)) {
-      execSync(`rm -R ${workdir}`)
-    }
-
     t.plan(20)
-    await run(
-      ['create-fastify-app.js', 'generate:project', '-d', './test/workdir'],
-      [
-        `${APPLICATION_NAME}${ENTER}`,
-        `${APPLICATION_DESCRIPTION}${ENTER}`,
-        `${APPLICATION_AUTHOR}${ENTER}`,
-        `${APPLICATION_EMAIL}${ENTER}`,
-        `${APPLICATION_VERSION}${ENTER}`,
-        `${APPLICATION_KEYWORDS}${ENTER}`,
-        `${APPLICATION_LICENSE}${ENTER}`,
-        `${SWAGGER_FILE_EMPTY}${ENTER}`,
-        `${ENTER}`
-      ]
-    )
-
     verifyPkgJson(t)
     verifyProjectFolder(t)
   })
