@@ -97,7 +97,7 @@
     "rimraf": "^3.0.2",
     "simple-get": "^4.0.0",
     "standard": "^14.3.4",
-    "tap": "^14.10.7",
+    "tap": "^14.10.8",
     "walker": "^1.0.7"
   },
   "snyk": true
