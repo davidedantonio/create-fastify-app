@@ -47,7 +47,7 @@
     "chalk": "^4.1.0",
     "chokidar": "^3.4.1",
     "clui": "^0.3.6",
-    "codecov": "^3.7.1",
+    "codecov": "^3.7.2",
     "command-exists": "^1.2.9",
     "commist": "^1.1.0",
     "dotenv": "^8.2.0",
