@@ -67,7 +67,7 @@
     "portfinder": "^1.0.28",
     "pretty-bytes": "^5.4.1",
     "resolve-from": "^5.0.0",
-    "slugify": "^1.4.4",
+    "slugify": "^1.4.5",
     "swagger-parser": "^9.0.1",
     "table": "^5.4.6",
     "tiny-human-time": "^1.2.0",
