@@ -64,7 +64,7 @@ Generate a new Fastify project run following command
 fastify-app generate:project -d <project-folder>
 ```
 
-If `-d`, or `--directory`, option is omitted the new project will be created in curret folder. At this point further information will be asked:
+If `-d`, or `--directory`, option is omitted the new project will be created in current folder. At this point further information will be asked:
 
 - **Application Name**: the application name.
 - **Description**: a short description non how the application do.
