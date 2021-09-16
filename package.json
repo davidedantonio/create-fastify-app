@@ -69,7 +69,7 @@
     "resolve-from": "^5.0.0",
     "slugify": "^1.4.4",
     "swagger-parser": "^9.0.1",
-    "table": "^5.4.6",
+    "table": "^6.0.0",
     "tiny-human-time": "^1.2.0",
     "yargs-parser": "^18.1.2",
     "snyk": "^1.685.0"
